@@ -1,0 +1,13 @@
+.playerBoards {
+    max-width: 100%;
+}
+.player1Board {
+    width: 50%;
+    float: left;
+    border: 1px black solid
+}
+.player2Board {
+    width: 50%;
+    float: right;
+    border: 1px black solid
+}
