@@ -22,10 +22,10 @@ const warSlice = createSlice({
       state.p2Battle.push(action.payload);
     },
     removeP1Attack: (state, action) => {
-      state.p1Attack.push(action.payload);
+      state.p1Attack.pop();
     },
-    addP2Attack: (state, action) => {
-      state.p2Attack.push(action.payload);
+    removeP2Attack: (state, action) => {
+      state.p2Attack.pop();
     },
     removeP1Battle: (state, action) => {
       state.p1Battle.push(action.payload);

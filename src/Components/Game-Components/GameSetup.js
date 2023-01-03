@@ -20,6 +20,8 @@ function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
   const player1Cards = useSelector((state) => state.player1.cards);
   const player2Cards = useSelector((state) => state.player2.cards);
+  const player1Collection = useSelector((state) => state.player1.collection);
+  const player2Collection = useSelector((state) => state.player2.collection);
   const player1Attack = useSelector((state) => state.war.p1Attack);
   const player2Attack = useSelector((state) => state.war.p2Attack);
   const player1Battle = useSelector((state) => state.war.p1Battle);
@@ -36,9 +38,40 @@ function GameSetup() {
           dispatch(player2Actions.addCards(cards[0][card]));
         }
       }
-      // console.log(test);
     }
   }, [cards]);
+
+  // Check for winner of war
+  const checkForWin = () => {
+    if (player1Attack[0].game_value > player2Attack[0].game_value) {
+      dispatch(player1Actions.addCollection(player1Attack[0]));
+      dispatch(player1Actions.addCollection(player2Attack[0]));
+      dispatch(warActions.removeP1Attack());
+      dispatch(warActions.removeP2Attack());
+      console.log(player1Collection);
+    } else if (player1Attack[0].game_value < player2Attack[0].game_value) {
+      dispatch(player2Actions.addCollection(player1Attack[0]));
+      dispatch(player2Actions.addCollection(player2Attack[0]));
+      dispatch(warActions.removeP1Attack());
+      dispatch(warActions.removeP2Attack());
+      console.log(player2Collection);
+    }
+  };
+
+  // const player1Wins = () => {
+  //   dispatch(player1Actions.addCollection(player1Attack[0]));
+  //   dispatch(player1Actions.addCollection(player2Attack[0]));
+  //   dispatch(warActions.removeP1Attack());
+  //   dispatch(warActions.removeP2Attack());
+  //   console.log(player1Collection);
+  // };
+  // const player2Wins = () => {
+  //   dispatch(player2Actions.addCollection(player1Attack[0]));
+  //   dispatch(player2Actions.addCollection(player2Attack[0]));
+  //   dispatch(warActions.removeP1Attack());
+  //   dispatch(warActions.removeP2Attack());
+  //   console.log(player2Collection);
+  // };
 
   const removePlayers = () => {
     dispatch(playersActions.removePlayers());
@@ -234,6 +267,7 @@ function GameSetup() {
                 backgroundImage: `url(${cardBack})`,
               }}
             ></button>
+            <h5>Player 1 Attack</h5>
             {player1Attack.length > 0 ? (
               <div
                 className="playerCard"
@@ -244,17 +278,18 @@ function GameSetup() {
             ) : (
               <h4>No card drawn yet</h4>
             )}
-
-            {/* {player1Cards.map((c) => (
-              <div className="grid-item">
-                <button
-                  className="playerCard"
-                  style={{
-                    backgroundImage: `url(${c.image_url})`,
-                  }}
-                ></button>
-              </div>
-            ))} */}
+            <h5>Player 1 collection: {player1Collection.length}</h5>
+            {player1Collection.length > 0 ? (
+              // console.log(player1Collection)
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player1Collection[0].image_url})`,
+                }}
+              ></div>
+            ) : (
+              <h4>No card in collection yet</h4>
+            )}
             <h5>Player 2 Cards</h5>
             <button
               onClick={player2Card}
@@ -263,26 +298,31 @@ function GameSetup() {
                 backgroundImage: `url(${cardBack})`,
               }}
             ></button>
+            <h5>Player 2 Attack</h5>
             {player2Attack.length > 0 ? (
               <div
                 className="playerCard"
                 style={{
                   backgroundImage: `url(${player2Attack[0].image_url})`,
                 }}
-              ></div>
+              >
+                <button onClick={checkForWin}>Check for win</button>
+              </div>
             ) : (
               <h4>No card drawn yet</h4>
             )}
-            {/* {player2Cards.map((c) => (
-              <div className="grid-item">
-                <button
-                  className="playerCard"
-                  style={{
-                    backgroundImage: `url(${c.image_url})`,
-                  }}
-                ></button>
-              </div>
-            ))} */}
+            <h5>Player 2 collection: {player2Collection.length}</h5>
+            {player2Collection.length > 0 ? (
+              // console.log(player2Collection)
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player2Collection[0].image_url})`,
+                }}
+              ></div>
+            ) : (
+              <h4>No card in collection yet</h4>
+            )}
           </div>
         ) : (
           <button onClick={deal}>Deal Cards</button>

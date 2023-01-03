@@ -11,6 +11,9 @@ const player1Slice = createSlice({
     addCards: (state, action) => {
       state.cards.push(action.payload);
     },
+    addCollection: (state, action) => {
+      state.collection.push(action.payload);
+    },
     updateScore: (state, action) => {
       state.score = action.payload;
     },
