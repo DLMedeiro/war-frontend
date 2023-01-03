@@ -12,6 +12,7 @@ import LoginForm from "./Components/LoginForm";
 // import NewAccount from "./Components/NewAccount";
 // import Main from "./Components/Game-Components/Main";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Main from "./Components/Game-Components/Main";
 import GameSetup from "./Components/Game-Components/GameSetup";
 
 function App() {

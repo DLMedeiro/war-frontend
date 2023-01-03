@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
+import { selectAllCards } from "../../store/cards-slice";
+import { fetchCards } from "../../store/cards-slice";
+import WarApi from "../../warApi";
+import Card from "./Card";
 
 import PlayerBoard from "./PlayerBoard";
 import CenterBoard from "./CenterBoard";
 import PlayerCountForm from "./PlayerCountForm";
-import CardsApi from "../../cardsApi";
 import SkyjoApi from "../../skyjoApi";
 import Main from "./Main";
 
@@ -13,11 +16,48 @@ import "./Main.css";
 
 function GameSetup() {
   const players = useSelector((state) => state.players.players);
-
+  const cards = useSelector((state) => state.cardDeck.cardDeck);
+  // const [cards, setCards] = useState([]);
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchCards());
+  // }, []);
 
   const removePlayers = () => {
     dispatch(playersActions.removePlayers());
+  };
+
+  console.log(cards);
+  // useEffect(() => {
+  //   async function getId() {
+  //     if (playersReady) {
+  // let id = await CardsApi.getDeckId();
+  // setDeckId(id);
+  // console.log(players[0]);
+  // console.log(players[1]);
+  // let res1 = await CardsApi.getPlayerCards(deckId);
+  // let res2 = await CardsApi.getPlayerCards(deckId);
+  // setPlayerHand([[{ [player1]: "test" }], [{ [player2]: "test" }]]);
+  //     }
+  //   }
+  //   getId();
+  // }, [playersReady]);
+
+  // useEffect(() => {
+  //   async function setupCards() {
+  //     if (cards.length > 0) {
+  //       WarApi.removeCards();
+  //       setCards([]);
+  //     }
+  //   }
+  //   setupCards();
+  // }, []);
+
+  const deal = () => {
+    // let cards = await WarApi.getCards();
+    console.log(cards);
+    // setCards(cards);
   };
 
   // const [player1, setPlayer1] = useState("");
@@ -36,8 +76,6 @@ function GameSetup() {
 
   // const [drawCards, setDrawCards] = useState([]);
   // const [discardCards, setDiscardCards] = useState([]);
-
-  // const [cards, setCards] = useState(false);
 
   // const [currentPlayer, setCurrentPlayer] = useState(player1);
 
@@ -176,21 +214,6 @@ function GameSetup() {
     //                Available functions after replaceCard: none, change current player
   };
 
-  // useEffect(() => {
-  //   async function getId() {
-  //     if (playersReady) {
-  // let id = await CardsApi.getDeckId();
-  // setDeckId(id);
-  // console.log(players[0]);
-  // console.log(players[1]);
-  // let res1 = await CardsApi.getPlayerCards(deckId);
-  // let res2 = await CardsApi.getPlayerCards(deckId);
-  // setPlayerHand([[{ [player1]: "test" }], [{ [player2]: "test" }]]);
-  //     }
-  //   }
-  //   getId();
-  // }, [playersReady]);
-
   return (
     <>
       <div>
@@ -201,6 +224,25 @@ function GameSetup() {
         <h6>Player 2 is {players[0].player2}</h6>
 
         <button onClick={removePlayers}>Reset Players</button>
+
+        {cards.length > 0 ? (
+          <div>
+            <h5>Show Cards Here</h5>
+            {console.log(cards[0][0])}
+            {cards[0].map((c) => (
+              <div className="grid-item">
+                <button
+                  className="playerCard"
+                  style={{
+                    backgroundImage: `url(${c.image_url})`,
+                  }}
+                ></button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <button onClick={deal}>Deal Cards</button>
+        )}
       </div>
     </>
   );
