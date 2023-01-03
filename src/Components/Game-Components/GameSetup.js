@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
 import { fetchCards, cardsActions } from "../../store/cards-slice";
-import WarApi from "../../warApi";
-import Card from "./Card";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
+import { warActions } from "../../store/war-slice";
+import cardBack from "./back.png";
 
 import PlayerBoard from "./PlayerBoard";
 import CenterBoard from "./CenterBoard";
@@ -20,7 +20,11 @@ function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
   const player1Cards = useSelector((state) => state.player1.cards);
   const player2Cards = useSelector((state) => state.player2.cards);
-  const [test, setTest] = useState([]);
+  const player1Attack = useSelector((state) => state.war.p1Attack);
+  const player2Attack = useSelector((state) => state.war.p2Attack);
+  const player1Battle = useSelector((state) => state.war.p1Battle);
+  const player2Battle = useSelector((state) => state.war.p2Battle);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,35 +44,19 @@ function GameSetup() {
     dispatch(playersActions.removePlayers());
   };
 
-  // useEffect(() => {
-  //   async function getId() {
-  //     if (playersReady) {
-  // let id = await CardsApi.getDeckId();
-  // setDeckId(id);
-  // console.log(players[0]);
-  // console.log(players[1]);
-  // let res1 = await CardsApi.getPlayerCards(deckId);
-  // let res2 = await CardsApi.getPlayerCards(deckId);
-  // setPlayerHand([[{ [player1]: "test" }], [{ [player2]: "test" }]]);
-  //     }
-  //   }
-  //   getId();
-  // }, [playersReady]);
-
-  // useEffect(() => {
-  //   async function setupCards() {
-  //     if (cards.length > 0) {
-  //       WarApi.removeCards();
-  //       setCards([]);
-  //     }
-  //   }
-  //   setupCards();
-  // }, []);
-
   const deal = () => {
     dispatch(fetchCards());
+  };
 
-    // dispatch(player1Actions.addCards());
+  const player1Card = () => {
+    let card = player1Cards[0];
+    dispatch(warActions.addP1Attack(card));
+    dispatch(player1Actions.removeFromCards());
+  };
+  const player2Card = () => {
+    let card = player2Cards[0];
+    dispatch(warActions.addP2Attack(card));
+    dispatch(player2Actions.removeFromCards());
   };
 
   // const [player1, setPlayer1] = useState("");
@@ -239,7 +227,25 @@ function GameSetup() {
         {cards.length > 0 ? (
           <div>
             <h5>Player 1 Cards</h5>
-            {player1Cards.map((c) => (
+            <button
+              onClick={player1Card}
+              className="playerCard"
+              style={{
+                backgroundImage: `url(${cardBack})`,
+              }}
+            ></button>
+            {player1Attack.length > 0 ? (
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player1Attack[0].image_url})`,
+                }}
+              ></div>
+            ) : (
+              <h4>No card drawn yet</h4>
+            )}
+
+            {/* {player1Cards.map((c) => (
               <div className="grid-item">
                 <button
                   className="playerCard"
@@ -248,9 +254,26 @@ function GameSetup() {
                   }}
                 ></button>
               </div>
-            ))}
+            ))} */}
             <h5>Player 2 Cards</h5>
-            {player2Cards.map((c) => (
+            <button
+              onClick={player2Card}
+              className="playerCard"
+              style={{
+                backgroundImage: `url(${cardBack})`,
+              }}
+            ></button>
+            {player2Attack.length > 0 ? (
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player2Attack[0].image_url})`,
+                }}
+              ></div>
+            ) : (
+              <h4>No card drawn yet</h4>
+            )}
+            {/* {player2Cards.map((c) => (
               <div className="grid-item">
                 <button
                   className="playerCard"
@@ -259,7 +282,7 @@ function GameSetup() {
                   }}
                 ></button>
               </div>
-            ))}
+            ))} */}
           </div>
         ) : (
           <button onClick={deal}>Deal Cards</button>

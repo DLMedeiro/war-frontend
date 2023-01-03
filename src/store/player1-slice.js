@@ -15,7 +15,7 @@ const player1Slice = createSlice({
       state.score = action.payload;
     },
     removeFromCards: (state, action) => {
-      state.cards.pop();
+      state.cards.shift();
     },
     shuffleCollection: (state, action) => {},
     moveCollection: (state, action) => {
