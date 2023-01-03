@@ -24,7 +24,6 @@ const PlayerCountForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(playersActions.addPlayer(formData));
-    dispatch(fetchCards());
     setFormData(INITIAL_STATE);
   };
   async function clearCards() {

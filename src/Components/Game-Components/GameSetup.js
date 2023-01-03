@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
-import { selectAllCards } from "../../store/cards-slice";
-import { fetchCards } from "../../store/cards-slice";
+import { fetchCards, cardsActions } from "../../store/cards-slice";
 import WarApi from "../../warApi";
 import Card from "./Card";
+import { player1Actions } from "../../store/player1-slice";
+import { player2Actions } from "../../store/player2-slice";
 
 import PlayerBoard from "./PlayerBoard";
 import CenterBoard from "./CenterBoard";
@@ -17,18 +18,28 @@ import "./Main.css";
 function GameSetup() {
   const players = useSelector((state) => state.players.players);
   const cards = useSelector((state) => state.cardDeck.cardDeck);
-  // const [cards, setCards] = useState([]);
+  const player1Cards = useSelector((state) => state.player1.cards);
+  const player2Cards = useSelector((state) => state.player2.cards);
+  const [test, setTest] = useState([]);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchCards());
-  // }, []);
+  useEffect(() => {
+    if (cards.length > 0) {
+      for (let card in cards[0]) {
+        if (cards[0][card].player == 1) {
+          dispatch(player1Actions.addCards(cards[0][card]));
+        } else if (cards[0][card].player == 2) {
+          dispatch(player2Actions.addCards(cards[0][card]));
+        }
+      }
+      // console.log(test);
+    }
+  }, [cards]);
 
   const removePlayers = () => {
     dispatch(playersActions.removePlayers());
   };
 
-  console.log(cards);
   // useEffect(() => {
   //   async function getId() {
   //     if (playersReady) {
@@ -55,9 +66,9 @@ function GameSetup() {
   // }, []);
 
   const deal = () => {
-    // let cards = await WarApi.getCards();
-    console.log(cards);
-    // setCards(cards);
+    dispatch(fetchCards());
+
+    // dispatch(player1Actions.addCards());
   };
 
   // const [player1, setPlayer1] = useState("");
@@ -227,9 +238,19 @@ function GameSetup() {
 
         {cards.length > 0 ? (
           <div>
-            <h5>Show Cards Here</h5>
-            {console.log(cards[0][0])}
-            {cards[0].map((c) => (
+            <h5>Player 1 Cards</h5>
+            {player1Cards.map((c) => (
+              <div className="grid-item">
+                <button
+                  className="playerCard"
+                  style={{
+                    backgroundImage: `url(${c.image_url})`,
+                  }}
+                ></button>
+              </div>
+            ))}
+            <h5>Player 2 Cards</h5>
+            {player2Cards.map((c) => (
               <div className="grid-item">
                 <button
                   className="playerCard"

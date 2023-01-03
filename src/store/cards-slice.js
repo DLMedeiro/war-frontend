@@ -9,8 +9,10 @@ export const fetchCards = createAsyncThunk("game/setup", async () => {
 
 const cardSlice = createSlice({
   name: "cardDeck",
-  initialState: { cardDeck: [], loading: false },
-  reducers: {},
+  initialState: {
+    cardDeck: [],
+    loading: false,
+  },
   extraReducers: {
     [fetchCards.pending]: (state, action) => {
       state.loading = true;
