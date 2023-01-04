@@ -7,7 +7,6 @@ const player1Slice = createSlice({
     war: [],
     battle: [],
     collection: [],
-    score: 26,
   },
   reducers: {
     addCard: (state, action) => {
@@ -34,8 +33,11 @@ const player1Slice = createSlice({
     removeFromCollection: (state, action) => {
       state.collection = [];
     },
-    updateScore: (state, action) => {
-      state.score = action.payload;
+    endGame: (state, action) => {
+      state.cards = [];
+      state.war = [];
+      state.battle = [];
+      state.collection = [];
     },
   },
 });

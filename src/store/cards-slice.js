@@ -6,6 +6,11 @@ export const fetchCards = createAsyncThunk("game/setup", async () => {
   console.log(cards);
   return cards;
 });
+export const clearCards = createAsyncThunk("game/teardown", async () => {
+  const cards = await WarApi.removeCards();
+  console.log(cards);
+  return cards;
+});
 
 const cardSlice = createSlice({
   name: "cardDeck",
@@ -20,6 +25,7 @@ const cardSlice = createSlice({
     },
     endGame: (state, action) => {
       state.gameReady = false;
+      state.cardDeck = [];
     },
   },
   extraReducers: {
@@ -31,6 +37,16 @@ const cardSlice = createSlice({
       state.cardDeck.push(action.payload);
     },
     [fetchCards.rejected]: (state, action) => {
+      state.loading = false;
+    },
+    [clearCards.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [clearCards.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.cardDeck = [];
+    },
+    [clearCards.rejected]: (state, action) => {
       state.loading = false;
     },
   },

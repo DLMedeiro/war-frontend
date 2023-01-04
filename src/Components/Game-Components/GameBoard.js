@@ -8,10 +8,10 @@ import cardBack from "./back.png";
 import "./Card.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
-import WarApi from "../../warApi";
 
 function GameBoard() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
+  const cards = useSelector((state) => state.cardDeck.cardDeck);
   const player1Cards = useSelector((state) => state.player1.cards);
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
@@ -26,11 +26,6 @@ function GameBoard() {
   const [collection, setCollection] = useState([]);
 
   const dispatch = useDispatch();
-
-  async function clearCards() {
-    await WarApi.removeCards();
-    dispatch(cardsActions.endGame());
-  }
 
   const shuffle = (cards) => {
     let index = cards.length;
@@ -473,7 +468,6 @@ function GameBoard() {
           </div>
         )}
       </div>
-      <button onClick={clearCards}>New Game</button>
     </div>
   );
 }

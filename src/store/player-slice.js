@@ -8,7 +8,7 @@ const playersSlice = createSlice({
       state.players.push(action.payload);
     },
     removePlayers: (state, action) => {
-      state.players.pop();
+      state.players = [];
     },
     addWinner: (state, action) => {
       state.winner.push(action.payload);
