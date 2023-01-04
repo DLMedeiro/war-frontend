@@ -271,7 +271,7 @@ function GameSetup() {
       {start ? (
         <div>
           <h1>Player 1 Cards</h1>
-          <h2>Total cards left in pile: {player1Cards.length}</h2>
+          <h2>Card Total: {player1Cards.length + player1Collection.length}</h2>
           <button
             onClick={p1War}
             className="playerCard"
@@ -315,7 +315,7 @@ function GameSetup() {
           )}
 
           <h1>Player 2 Cards</h1>
-          <h2>Total cards left in pile: {player2Cards.length}</h2>
+          <h2>Card Total: {player2Cards.length + player2Collection.length}</h2>
           <button
             onClick={p2War}
             className="playerCard"
