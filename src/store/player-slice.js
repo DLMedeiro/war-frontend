@@ -14,7 +14,7 @@ const playersSlice = createSlice({
       state.winner.push(action.payload);
     },
     removeWinner: (state, action) => {
-      state.winner.pop();
+      state.winner = [];
     },
   },
 });

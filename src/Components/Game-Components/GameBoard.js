@@ -201,7 +201,7 @@ function GameBoard() {
       player1Cards.length + player1Collection.length < 4
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner("player 2"));
+      dispatch(playersActions.addWinner(players[0].player2));
     } else if (
       p1Compare > 0 &&
       p2Compare > 0 &&
@@ -209,17 +209,17 @@ function GameBoard() {
       player2Cards.length + player2Collection.length < 4
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner("player 1"));
+      dispatch(playersActions.addWinner(players[0].player1));
     }
     if (gameStatus && player1Cards.length + player1Collection.length <= 0) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner("player 1"));
+      dispatch(playersActions.addWinner(players[0].player1));
     } else if (
       gameStatus &&
       player2Cards.length + player2Collection.length <= 0
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner("player 2"));
+      dispatch(playersActions.addWinner(players[0].player2));
     }
   };
 

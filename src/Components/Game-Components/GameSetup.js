@@ -11,6 +11,7 @@ import { playersActions } from "../../store/player-slice";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
+  const players = useSelector((state) => state.players.players);
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const player1Cards = useSelector((state) => state.player1.cards);
 
@@ -27,11 +28,11 @@ function GameSetup() {
   };
 
   const newGame = () => {
-    dispatch(playersActions.removePlayers());
     dispatch(player1Actions.endGame());
     dispatch(player2Actions.endGame());
     dispatch(cardsActions.endGame());
     dispatch(playersActions.removeWinner());
+    dispatch(playersActions.removePlayers());
   };
 
   // player 1 and 2 cards assigned and state updated
@@ -54,6 +55,8 @@ function GameSetup() {
       dispatch(cardsActions.endGame());
     }
   }, [player1Cards, player2Cards]);
+
+  console.log(winner);
 
   return (
     <>
