@@ -12,6 +12,15 @@ const cardSlice = createSlice({
   initialState: {
     cardDeck: [],
     loading: false,
+    gameReady: false,
+  },
+  reducers: {
+    startGame: (state, action) => {
+      state.gameReady = true;
+    },
+    endGame: (state, action) => {
+      state.gameReady = false;
+    },
   },
   extraReducers: {
     [fetchCards.pending]: (state, action) => {

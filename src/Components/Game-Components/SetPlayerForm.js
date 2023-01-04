@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
 import { fetchCards } from "../../store/cards-slice";
 import WarApi from "../../warApi";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const PlayerCountForm = () => {
+const SetPlayerForm = () => {
   const players = useSelector((state) => state.players.players);
   const dispatch = useDispatch();
 
@@ -25,20 +26,38 @@ const PlayerCountForm = () => {
     e.preventDefault();
     dispatch(playersActions.addPlayer(formData));
     setFormData(INITIAL_STATE);
+    clearCards();
   };
   async function clearCards() {
     await WarApi.removeCards();
   }
   return (
     <form>
-      <label htmlFor="player1">Player 1</label>
-      <input onChange={handleChange} name="player1" />
-      <label htmlFor="player2">Player 2</label>
-      <input onChange={handleChange} name="player2" />
-      <button onClick={handleSubmit}>Let's Play!</button>
-      <button onClick={clearCards}>Clear Cards</button>
+      <div className="form-group">
+        <label htmlFor="player1">Player 1</label>
+        <input
+          className="form-control"
+          onChange={handleChange}
+          name="player1"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="player2">Player 2</label>
+        <input
+          className="form-control"
+          onChange={handleChange}
+          name="player2"
+        />
+      </div>
+      <button
+        type="button"
+        className="btn btn-primary btn-lg btn-block"
+        onClick={handleSubmit}
+      >
+        Let's Play!
+      </button>
     </form>
   );
 };
 
-export default PlayerCountForm;
+export default SetPlayerForm;

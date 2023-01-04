@@ -4,7 +4,6 @@ import playersSlice from "./player-slice";
 import cardSlice from "./cards-slice";
 import player1Slice from "./player1-slice";
 import player2Slice from "./player2-slice";
-import warSlice from "./war-slice";
 
 const store = configureStore({
   reducer: {
@@ -13,7 +12,6 @@ const store = configureStore({
     cardDeck: cardSlice.reducer,
     player1: player1Slice.reducer,
     player2: player2Slice.reducer,
-    // war: warSlice.reducer,
   },
 });
 

@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 import { useSelector } from "react-redux";
 import NavBar from "./Components/Navbar";
-import PlayerCountForm from "./Components/Game-Components/PlayerCountForm";
+import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
 
 import LoginForm from "./Components/LoginForm";
 
@@ -20,7 +20,7 @@ function App() {
       {isLoggedIn && players.length === 0 && (
         <div>
           <NavBar />
-          <PlayerCountForm />
+          <SetPlayerForm />
         </div>
       )}
       {!isLoggedIn && <LoginForm />}
