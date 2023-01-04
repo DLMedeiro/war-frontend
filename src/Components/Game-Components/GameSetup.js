@@ -27,15 +27,18 @@ function GameSetup() {
   const player2Battle = useSelector((state) => state.player2.battle);
   const player2Collection = useSelector((state) => state.player2.collection);
 
-  const [p1Compare, setP1Compare] = useState([]);
-  const [p2Compare, setP2Compare] = useState([]);
+  const [p1Compare, setP1Compare] = useState(0);
+  const [p2Compare, setP2Compare] = useState(0);
   const [collection, setCollection] = useState([]);
+  const [start, setStart] = useState(false);
+  const [winner, setWinner] = useState("");
 
   const dispatch = useDispatch();
 
   // Pull cards from API, assign cards to players in backend
   // updates state of "cards" to card table information from backend
   const deal = () => {
+    setWinner("");
     dispatch(fetchCards());
   };
 
@@ -52,12 +55,25 @@ function GameSetup() {
     }
   }, [cards]);
 
-  console.log(player1War);
-  console.log(player2War);
+  useEffect(() => {
+    if (player1Cards.length > 0 && player2Cards.length > 0) {
+      setStart(true);
+    } else {
+      setStart(false);
+    }
+  }, [player1Cards, player2Cards]);
+
+  // console.log(player1War);
+  // console.log(player2War);
 
   const shuffle = (cards) => {
     let index = cards.length;
     let randomIndex;
+
+    if (cards.length < 2) {
+      setCollection(cards);
+      return cards;
+    }
 
     while (index != 0) {
       randomIndex = Math.floor(Math.random() * index);
@@ -95,7 +111,7 @@ function GameSetup() {
   // console.log(arr);
 
   useEffect(() => {
-    if (player1Cards.length < 4 && player1Collection.length > 0) {
+    if (player1Cards.length <= 4 && player1Collection.length > 0) {
       setCollection(player1Collection);
       shuffle(collection);
       dispatch(player1Actions.removeFromCollection());
@@ -106,7 +122,7 @@ function GameSetup() {
       dispatch(player1Actions.removeFromCollection());
       setCollection([]);
     }
-    if (player2Cards.length < 4 && player2Collection.length > 0) {
+    if (player2Cards.length <= 4 && player2Collection.length > 0) {
       setCollection(player2Collection);
       shuffle(collection);
       dispatch(player2Actions.removeFromCollection());
@@ -119,6 +135,8 @@ function GameSetup() {
     }
   }, [player1Cards, player2Cards]);
 
+  console.log(player1Cards);
+  console.log(player2Cards);
   const p1War = () => {
     dispatch(player1Actions.addToWar(player1Cards[0]));
     dispatch(player1Actions.removeCard());
@@ -135,10 +153,12 @@ function GameSetup() {
     }
   }, [player1War, player2War]);
 
-  console.log(p1Compare, p2Compare);
+  // console.log(p1Compare, p2Compare);
 
   useEffect(() => {
-    checkForWin();
+    if (p1Compare > 0 && p2Compare > 0) {
+      checkForWin();
+    }
     // setTimeout(checkForWin, 2000);
   }, [p2Compare, p1Compare]);
 
@@ -159,8 +179,8 @@ function GameSetup() {
           dispatch(player1Actions.addToCollection(player2Battle[card]));
         }
       }
-      setP1Compare([]);
-      setP2Compare([]);
+      setP1Compare(0);
+      setP2Compare(0);
       dispatch(player1Actions.removeFromWar());
       dispatch(player2Actions.removeFromWar());
       dispatch(player1Actions.removeFromBattle());
@@ -181,13 +201,14 @@ function GameSetup() {
           dispatch(player2Actions.addToCollection(player2Battle[card]));
         }
       }
-      setP1Compare([]);
-      setP2Compare([]);
+      setP1Compare(0);
+      setP2Compare(0);
       dispatch(player1Actions.removeFromWar());
       dispatch(player2Actions.removeFromWar());
       dispatch(player1Actions.removeFromBattle());
       dispatch(player2Actions.removeFromBattle());
     } else if (p1Compare === p2Compare) {
+      checkEndGame();
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.addToBattle(player1Cards[1]));
       dispatch(player1Actions.addToBattle(player1Cards[2]));
@@ -204,20 +225,50 @@ function GameSetup() {
       dispatch(player2Actions.removeCard());
       dispatch(player2Actions.removeCard());
       dispatch(player2Actions.removeCard());
-      setP1Compare([player1War[player1War.length - 1]]);
-      setP2Compare([[player2War[player2War.length - 1]]]);
+      setP1Compare(player1War[player1War.length - 1]);
+      setP2Compare([player2War[player2War.length - 1]]);
     }
   };
 
-  console.log(player1Collection);
-  console.log(player2Collection);
+  useEffect(() => {
+    if (start) {
+      checkEndGame();
+    }
+  }, [player1Cards, player1Collection, player2Cards, player2Collection]);
+
+  const checkEndGame = () => {
+    if (
+      p1Compare > 0 &&
+      p2Compare > 0 &&
+      p1Compare === p2Compare &&
+      player1Cards.length + player1Collection.length < 4
+    ) {
+      setStart(false);
+      setWinner("Player 2");
+    } else if (
+      p1Compare > 0 &&
+      p2Compare > 0 &&
+      p1Compare === p2Compare &&
+      player2Cards.length + player2Collection.length < 4
+    ) {
+      setStart(false);
+      setWinner("Player 1");
+    }
+    if (start && player1Cards.length + player1Collection.length <= 0) {
+      setStart(false);
+      setWinner("Player 1");
+    } else if (start && player2Cards.length + player2Collection.length <= 0) {
+      setStart(false);
+      setWinner("Player 2");
+    }
+  };
+
+  // console.log(player1Collection);
+  // console.log(player2Collection);
 
   return (
     <>
-      {/* <h1>TEst</h1>
-      <button onClick={deal}>Deal</button> */}
-
-      {player1Cards.length > 0 && player2Cards.length > 0 ? (
+      {start ? (
         <div>
           <h1>Player 1 Cards</h1>
           <h2>Total cards left in pile: {player1Cards.length}</h2>
@@ -308,7 +359,13 @@ function GameSetup() {
           )}
         </div>
       ) : (
-        <button onClick={deal}>Deal</button>
+        <div>
+          {winner.length > 0 ? (
+            <h1>The winner is: {winner}</h1>
+          ) : (
+            <button onClick={deal}>Deal</button>
+          )}
+        </div>
       )}
     </>
   );
