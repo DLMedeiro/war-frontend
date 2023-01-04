@@ -13,7 +13,7 @@ const store = configureStore({
     cardDeck: cardSlice.reducer,
     player1: player1Slice.reducer,
     player2: player2Slice.reducer,
-    war: warSlice.reducer,
+    // war: warSlice.reducer,
   },
 });
 
