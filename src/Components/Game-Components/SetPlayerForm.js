@@ -7,7 +7,6 @@ import WarApi from "../../warApi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const SetPlayerForm = () => {
-  const players = useSelector((state) => state.players.players);
   const dispatch = useDispatch();
 
   const INITIAL_STATE = {};

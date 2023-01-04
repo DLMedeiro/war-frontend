@@ -8,6 +8,7 @@ import cardBack from "./back.png";
 import "./Card.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
+import WarApi from "../../warApi";
 
 function GameBoard() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
@@ -26,8 +27,10 @@ function GameBoard() {
 
   const dispatch = useDispatch();
 
-  // console.log(player1War);
-  // console.log(player2War);
+  async function clearCards() {
+    await WarApi.removeCards();
+    dispatch(cardsActions.endGame());
+  }
 
   const shuffle = (cards) => {
     let index = cards.length;
@@ -98,8 +101,8 @@ function GameBoard() {
     }
   }, [player1Cards, player2Cards]);
 
-  console.log(player1Cards);
-  console.log(player2Cards);
+  console.log(player1Cards, player1Collection);
+  console.log(player2Cards, player2Collection);
   const p1War = () => {
     dispatch(player1Actions.addToWar(player1Cards[0]));
     dispatch(player1Actions.removeCard());
@@ -121,10 +124,7 @@ function GameBoard() {
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
       //   checkForWin();
-      if (player1Battle.length > 0) {
-        setTimeout(checkForWin, 3000);
-      }
-      setTimeout(checkForWin, 2000);
+      setTimeout(checkForWin, 3000);
     }
   }, [p2Compare, p1Compare]);
 
@@ -473,6 +473,7 @@ function GameBoard() {
           </div>
         )}
       </div>
+      <button onClick={clearCards}>New Game</button>
     </div>
   );
 }
