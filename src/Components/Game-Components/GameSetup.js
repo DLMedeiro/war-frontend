@@ -56,8 +56,6 @@ function GameSetup() {
     }
   }, [player1Cards, player2Cards]);
 
-  console.log(winner);
-
   return (
     <>
       {gameStatus == true ? (
