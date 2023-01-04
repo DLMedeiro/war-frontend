@@ -11,7 +11,7 @@ import "./GameBoard.css";
 
 function GameBoard() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
-  const cards = useSelector((state) => state.cardDeck.cardDeck);
+  const players = useSelector((state) => state.players.players);
   const player1Cards = useSelector((state) => state.player1.cards);
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
@@ -96,8 +96,6 @@ function GameBoard() {
     }
   }, [player1Cards, player2Cards]);
 
-  console.log(player1Cards, player1Collection);
-  console.log(player2Cards, player2Collection);
   const p1War = () => {
     dispatch(player1Actions.addToWar(player1Cards[0]));
     dispatch(player1Actions.removeCard());
@@ -113,8 +111,6 @@ function GameBoard() {
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
   }, [player1War, player2War]);
-
-  // console.log(p1Compare, p2Compare);
 
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
@@ -227,13 +223,10 @@ function GameBoard() {
     }
   };
 
-  // console.log(player1Collection);
-  // console.log(player2Collection);
-
   return (
     <div className="Outer-container">
       <div className="inner-container">
-        <h1>Player 1 Cards</h1>
+        <h1>{players[0].player1}'s Cards</h1>
         <h2>Card Total: {player1Cards.length + player1Collection.length}</h2>
 
         <div className="outer-container">
@@ -352,7 +345,7 @@ function GameBoard() {
       </div>
 
       <div className="inner-container">
-        <h1>Player 2 Cards</h1>
+        <h1>{players[0].player2}'s Cards</h1>
         <h2>Card Total: {player2Cards.length + player2Collection.length}</h2>
         <div className="outer-container">
           <div className="inner-container">

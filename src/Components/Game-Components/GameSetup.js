@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCards, cardsActions, clearCards } from "../../store/cards-slice";
+import { fetchCards, cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import "./GameSetup.css";
@@ -8,11 +8,9 @@ import "./Card.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GameBoard from "./GameBoard";
 import { playersActions } from "../../store/player-slice";
-import WarApi from "../../warApi";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
-  const players = useSelector((state) => state.players.players);
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const player1Cards = useSelector((state) => state.player1.cards);
 
@@ -36,12 +34,6 @@ function GameSetup() {
     dispatch(playersActions.removeWinner());
   };
 
-  // const clearCards = async () => {
-  //   console.log("screen should change");
-  //   dispatch(cardsActions.endGame());
-  //   dispatch(clearCards());
-  // };
-
   // player 1 and 2 cards assigned and state updated
   useEffect(() => {
     if (cards.length > 0) {
@@ -53,9 +45,6 @@ function GameSetup() {
         }
       }
     }
-    // else {
-
-    // }
   }, [cards]);
 
   useEffect(() => {
@@ -71,14 +60,19 @@ function GameSetup() {
       {gameStatus == true ? (
         <div>
           <GameBoard />
-          <button onClick={newGame}>New Game</button>
+          <button
+            className="btn btn-primary btn-lg btn-block"
+            onClick={newGame}
+          >
+            New Game
+          </button>
         </div>
       ) : (
         <div>
           {winner.length > 0 ? (
-            <h1 className="deal">The winner is: {winner[0]}</h1>
+            <h1>The winner is: {winner[0]}</h1>
           ) : (
-            <button className="deal" onClick={deal}>
+            <button className="btn btn-primary btn-lg btn-block" onClick={deal}>
               Deal
             </button>
           )}

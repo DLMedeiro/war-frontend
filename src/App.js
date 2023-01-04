@@ -13,7 +13,6 @@ import GameSetup from "./Components/Game-Components/GameSetup";
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const players = useSelector((state) => state.players.players);
-  console.log(players);
 
   return (
     <div className="App">

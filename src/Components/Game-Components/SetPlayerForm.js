@@ -1,8 +1,6 @@
-import { Modal } from "bootstrap";
 import { React, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { playersActions } from "../../store/player-slice";
-import { fetchCards } from "../../store/cards-slice";
 import WarApi from "../../warApi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -19,7 +17,6 @@ const SetPlayerForm = () => {
       [name]: value,
     }));
   };
-  //   console.log(formData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
