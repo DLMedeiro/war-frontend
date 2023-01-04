@@ -31,9 +31,7 @@ const player1Slice = createSlice({
     addToCollection: (state, action) => {
       state.collection.push(action.payload);
     },
-    shuffleCollection: (state, action) => {},
-    moveCollection: (state, action) => {
-      state.cards.push(state.collection);
+    removeFromCollection: (state, action) => {
       state.collection = [];
     },
     updateScore: (state, action) => {

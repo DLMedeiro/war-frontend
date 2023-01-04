@@ -29,6 +29,7 @@ function GameSetup() {
 
   const [p1Compare, setP1Compare] = useState([]);
   const [p2Compare, setP2Compare] = useState([]);
+  const [collection, setCollection] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -54,6 +55,70 @@ function GameSetup() {
   console.log(player1War);
   console.log(player2War);
 
+  const shuffle = (cards) => {
+    let index = cards.length;
+    let randomIndex;
+
+    while (index != 0) {
+      randomIndex = Math.floor(Math.random() * index);
+      index--;
+    }
+
+    [cards[index], cards[randomIndex]] = [cards[randomIndex], cards[index]];
+
+    setCollection(cards);
+
+    return cards;
+  };
+
+  // https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
+
+  // function randomize(values) {
+  //   let index = values.length,
+  //     randomIndex;
+
+  //   // While there remain elements to shuffle.
+  //   while (index != 0) {
+  //     // Pick a remaining element.
+  //     randomIndex = Math.floor(Math.random() * index);
+  //     index--;
+
+  //     // And swap it with the current element.
+  //     [values[index], values[randomIndex]] = [values[randomIndex], values[index]];
+  //   }
+
+  //   return values;
+  // }
+
+  // var arr = ["a", "b", "c", "d", "e"];
+  // randomize(arr);
+  // console.log(arr);
+
+  useEffect(() => {
+    if (player1Cards.length < 4 && player1Collection.length > 0) {
+      setCollection(player1Collection);
+      shuffle(collection);
+      dispatch(player1Actions.removeFromCollection());
+      dispatch(player1Actions.addToCollection(collection));
+      for (let card in player1Collection) {
+        dispatch(player1Actions.addCard(player1Collection[card]));
+      }
+      dispatch(player1Actions.removeFromCollection());
+      setCollection([]);
+    }
+    if (player2Cards.length < 4 && player2Collection.length > 0) {
+      setCollection(player2Collection);
+      shuffle(collection);
+      dispatch(player2Actions.removeFromCollection());
+      dispatch(player2Actions.addToCollection(collection));
+      for (let card in player2Collection) {
+        dispatch(player2Actions.addCard(player2Collection[card]));
+      }
+      dispatch(player2Actions.removeFromCollection());
+      setCollection([]);
+    }
+  }, [player1Cards, player2Cards]);
+
   const p1War = () => {
     dispatch(player1Actions.addToWar(player1Cards[0]));
     dispatch(player1Actions.removeCard());
@@ -73,7 +138,8 @@ function GameSetup() {
   console.log(p1Compare, p2Compare);
 
   useEffect(() => {
-    setTimeout(checkForWin, 2000);
+    checkForWin();
+    // setTimeout(checkForWin, 2000);
   }, [p2Compare, p1Compare]);
 
   const checkForWin = () => {
