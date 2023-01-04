@@ -1,72 +1,19 @@
 import "./App.css";
-// import UserContext from "./Components/UserContext";
 import React from "react";
 import { useSelector } from "react-redux";
-// import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
-// import SkyjoApi from "./skyjoApi.js";
-// import CardsApi from "./cardsApi";
 import NavBar from "./Components/Navbar";
 import PlayerCountForm from "./Components/Game-Components/PlayerCountForm";
-// import Home from "./Components/Home";
+
 import LoginForm from "./Components/LoginForm";
-// import NewAccount from "./Components/NewAccount";
-// import Main from "./Components/Game-Components/Main";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import Main from "./Components/Game-Components/Main";
+
 import GameSetup from "./Components/Game-Components/GameSetup";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const players = useSelector((state) => state.players.players);
   console.log(players);
-  // const [currentPlayer, setCurrentPlayer] = useState({});
-  // const [token, setToken] = useState({});
-  // const [playerCards, setPlayerCards] = useState({});
-  // const [deckId, setDeckId] = useState("");
-
-  // Login function
-  // async function login(data, username) {
-  //   let res = await SkyjoApi.loginPlayer(data);
-  //   if (res) {
-  //     // player variable not getting response
-  //     let player = await SkyjoApi.loggedInPlayer(username);
-  //     setToken(res);
-  //     localStorage.setItem("player", JSON.stringify(player));
-  //     localStorage.setItem("token", JSON.stringify(res));
-  //   }
-  // }
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("player"))) {
-  //     setCurrentPlayer(JSON.parse(localStorage.getItem("player")));
-  //   }
-  // }, [token]);
-
-  // async function registerNewPlayer(data) {
-  //   let newPlayerToken = await SkyjoApi.registerPlayer(data);
-  //   if (newPlayerToken) {
-  //     let newPlayer = {
-  //       username: data.username,
-  //       password: data.password,
-  //     };
-  //     login(newPlayer, data.username);
-  //   }
-  // }
-
-  // async function logout() {
-  //   localStorage.clear();
-  //   setCurrentPlayer({});
-  // }
-
-  // async function pullDeckId() {
-  //   let res = await CardsApi.getDeckId();
-  //   // localStorage.setItem("deckId", JSON.stringify(res));
-  //   return res;
-  // }
-  // async function buildPlayerHand(deckId) {
-  //   let res = await CardsApi.getPlayerCards(deckId);
-  //   // console.log(res.cards);
-  //   return res.cards;
-  // }
 
   return (
     <div className="App">

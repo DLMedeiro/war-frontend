@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { playersActions } from "../../store/player-slice";
 import { fetchCards, cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
-import { warActions } from "../../store/war-slice";
 import cardBack from "./back.png";
 import "./GameSetup.css";
-
-import PlayerBoard from "./PlayerBoard";
-import CenterBoard from "./CenterBoard";
-import PlayerCountForm from "./PlayerCountForm";
-import SkyjoApi from "../../skyjoApi";
-import Main from "./Main";
-
-import "./Main.css";
+import "./Card.css";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
