@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { playersActions } from "../../store/player-slice";
 import WarApi from "../../warApi";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
+import { fetchCards } from "../../store/cards-slice";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,7 @@ const SetPlayerForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(playersActions.addPlayer(formData));
+    dispatch(fetchCards());
     setFormData(INITIAL_STATE);
     // clearCards();
   };
@@ -50,7 +53,7 @@ const SetPlayerForm = () => {
         className="btn btn-primary btn-lg btn-block"
         onClick={handleSubmit}
       >
-        Let's Play!
+        <Link to="/newGame">Let's Play!</Link>
       </button>
     </form>
   );

@@ -2,39 +2,56 @@ import React from "react";
 import "./NavBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { authActions } from "./../store/auth-slice";
+import { authActions } from "../store/auth-slice";
+import { cardsActions, clearCards } from "../store/cards-slice";
+import { player1Actions } from "../store/player1-slice";
+import { player2Actions } from "../store/player2-slice";
+import { playersActions } from "../store/player-slice";
 
 function NavBar() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const players = useSelector((state) => state.players.players);
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(authActions.logout());
   };
+
+  function loggedIn() {
+    return (
+      <ul className="nav justify-content-center">
+        <li className="nav-item nav-link">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/instructions">How to Play</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/" onClick={logout}>
+            Log Out
+          </Link>
+        </li>
+      </ul>
+    );
+  }
+
+  function loggedOut() {
+    return (
+      <ul className="nav justify-content-center">
+        <li className="nav-item nav-link">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/instructions">How to Play</Link>
+        </li>
+      </ul>
+    );
+  }
+
   return (
-    <nav>
-      {isLoggedIn ? (
-        <ul className="nav justify-content-center">
-          <li className="nav-item nav-link">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item nav-link">
-            <Link to="/instructions">How to Play</Link>
-          </li>
-          <li className="nav-item nav-link">
-            <button onClick={logout}>Logout</button>
-          </li>
-        </ul>
-      ) : (
-        <ul className="nav justify-content-center">
-          <li className="nav-item nav-link">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item nav-link">
-            <Link to="/instructions">How to Play</Link>
-          </li>
-        </ul>
-      )}
-    </nav>
+    <div>
+      {isLoggedIn && players.length === 0 && loggedIn()}
+      {!isLoggedIn && loggedOut()}
+    </div>
   );
 }
 // function NavBar({ logout }) {

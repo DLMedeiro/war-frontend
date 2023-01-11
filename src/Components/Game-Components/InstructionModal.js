@@ -1,0 +1,31 @@
+import React from "react";
+
+// https://medium.com/tinyso/how-to-create-a-modal-component-in-react-from-basic-to-advanced-a3357a2a716a
+
+const InstructionModal = (props) => {
+  //   This block means we will handle show/hide by props.show value so we possibly have 2 use cases in App.js
+
+  // <Modal show={true} />: show the modal
+  // <Modal show={false} />: hide the modal
+  if (!props.show) {
+    return null;
+  }
+
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h4>Instructions</h4>
+        </div>
+        <div className="modal-body">This is the modal content</div>
+        <div className="modal-footer">
+          <button onClick={props.onClose} className="button">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InstructionModal;

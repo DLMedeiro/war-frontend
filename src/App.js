@@ -21,34 +21,20 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/instructions" element={<Instructions />}></Route>
-        <Route path="/login" element={<LoginForm />}></Route>
-        <Route path="/newGame" element={<SetPlayerForm />}></Route>
-      </Routes> */}
       {isLoggedIn ? (
         <Routes>
           <Route path="/" element={<WelcomeUser />}></Route>
           <Route path="/instructions" element={<Instructions />}></Route>
-          <Route path="/login" element={<LoginForm />}></Route>
-          <Route path="/newGame" element={<SetPlayerForm />}></Route>
+          <Route path="/newGame" element={<GameSetup />}></Route>
         </Routes>
       ) : (
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/instructions" element={<Instructions />}></Route>
           <Route path="/login" element={<LoginForm />}></Route>
-          <Route path="/newGame" element={<SetPlayerForm />}></Route>
+          <Route path="/newGame" element={<GameSetup />}></Route>
         </Routes>
       )}
-
-      {/* {isLoggedIn && players.length === 0 && (
-        <div>
-          <WelcomeUser />
-        </div>
-      )} */}
-      {players.length > 0 && <GameSetup />}
     </div>
   );
 }

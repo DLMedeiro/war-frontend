@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCards, cardsActions, clearCards } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
@@ -8,6 +8,9 @@ import "./Card.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GameBoard from "./GameBoard";
 import { playersActions } from "../../store/player-slice";
+import SetPlayerForm from "./SetPlayerForm";
+import { Link } from "react-router-dom";
+import InstructionModal from "./InstructionModal";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
@@ -21,12 +24,15 @@ function GameSetup() {
 
   const dispatch = useDispatch();
 
+  // State for Instruction Modal
+  const [show, setShow] = useState(false);
+
   // Pull cards from API, assign cards to players in backend
   // updates state of "cards" to card table information from backend
-  const deal = async () => {
-    // dispatch(clearCards());
-    dispatch(fetchCards());
-  };
+  // const deal = async () => {
+  //   // dispatch(clearCards());
+  //   dispatch(fetchCards());
+  // };
 
   const newGame = () => {
     dispatch(player1Actions.endGame());
@@ -34,6 +40,7 @@ function GameSetup() {
     dispatch(cardsActions.endGame());
     dispatch(playersActions.removeWinner());
     dispatch(playersActions.removePlayers());
+    dispatch(clearCards());
   };
 
   // player 1 and 2 cards assigned and state updated
@@ -61,23 +68,35 @@ function GameSetup() {
     <>
       {gameStatus == true ? (
         <div className="outer-container">
-          <GameBoard />
+          {/* ---- */}
+          <div>
+            <button onClick={() => setShow(true)}>Instructions</button>
+            <InstructionModal onClose={() => setShow(false)} show={show} />
+          </div>
+          {/* ---- */}
           <button
             className="btn btn-primary btn-lg btn-block"
             onClick={newGame}
           >
             New Game
           </button>
+          <button
+            className="btn btn-primary btn-lg btn-block"
+            onClick={newGame}
+          >
+            <Link to="/">Leave Game</Link>
+          </button>
+          <GameBoard />
         </div>
       ) : (
         <div>
-          {winner.length > 0 ? (
-            <h1>The winner is: {winner[0]}</h1>
-          ) : (
-            <button className="btn btn-primary btn-lg btn-block" onClick={deal}>
-              Deal
-            </button>
-          )}
+          <SetPlayerForm />
+        </div>
+      )}
+
+      {winner.length > 0 && (
+        <div>
+          <h1>The winner is: {winner[0]}</h1>
         </div>
       )}
     </>
