@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCards, cardsActions } from "../../store/cards-slice";
+import { fetchCards, cardsActions, clearCards } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import "./GameSetup.css";
@@ -24,6 +24,7 @@ function GameSetup() {
   // Pull cards from API, assign cards to players in backend
   // updates state of "cards" to card table information from backend
   const deal = async () => {
+    // dispatch(clearCards());
     dispatch(fetchCards());
   };
 
@@ -59,7 +60,7 @@ function GameSetup() {
   return (
     <>
       {gameStatus == true ? (
-        <div>
+        <div className="outer-container">
           <GameBoard />
           <button
             className="btn btn-primary btn-lg btn-block"

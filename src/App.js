@@ -16,9 +16,9 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
       {isLoggedIn && players.length === 0 && (
         <div>
-          <NavBar />
           <SetPlayerForm />
         </div>
       )}

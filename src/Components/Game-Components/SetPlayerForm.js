@@ -22,11 +22,11 @@ const SetPlayerForm = () => {
     e.preventDefault();
     dispatch(playersActions.addPlayer(formData));
     setFormData(INITIAL_STATE);
-    clearCards();
+    // clearCards();
   };
-  async function clearCards() {
-    await WarApi.removeCards();
-  }
+  // async function clearCards() {
+  //   await WarApi.removeCards();
+  // }
   return (
     <form>
       <div className="form-group">

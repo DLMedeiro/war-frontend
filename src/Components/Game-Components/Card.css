@@ -1,13 +1,11 @@
 .playerCard{
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height: 95px;
-    width: 70px;
-    /* height: 160px;
-    width: 115px; */
-}
+    height: 98px;
+    width: 72px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-.grid-item {
-/* padding: 5px; */
 }

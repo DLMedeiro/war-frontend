@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// https causes errors when running on local host
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class WarApi {
@@ -10,9 +11,9 @@ class WarApi {
     //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
     const url = `${BASE_URL}/${endpoint}`;
     const params = method === "get" ? data : {};
-
+    const withCredentials = false;
     try {
-      return (await axios({ url, method, data, params })).data;
+      return (await axios({ url, method, data, params, withCredentials })).data;
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -25,7 +26,8 @@ class WarApi {
     return res;
   }
   static async removeCards() {
-    await this.request("game/teardown", {}, "delete");
+    let res = await this.request("game/teardown", {}, "delete");
+    return res;
   }
 }
 

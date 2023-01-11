@@ -5,11 +5,11 @@ export const fetchCards = createAsyncThunk("game/setup", async () => {
   const cards = await WarApi.getCards();
   return cards;
 });
-// export const clearCards = createAsyncThunk("game/teardown", async () => {
-//   const cards = await WarApi.removeCards();
-//   console.log(cards);
-//   return cards;
-// });
+export const clearCards = createAsyncThunk("game/teardown", async () => {
+  const cards = await WarApi.removeCards();
+  console.log(cards);
+  return cards;
+});
 
 const cardSlice = createSlice({
   name: "cardDeck",
@@ -38,16 +38,16 @@ const cardSlice = createSlice({
     [fetchCards.rejected]: (state, action) => {
       state.loading = false;
     },
-    // [clearCards.pending]: (state, action) => {
-    //   state.loading = true;
-    // },
-    // [clearCards.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.cardDeck = [];
-    // },
-    // [clearCards.rejected]: (state, action) => {
-    //   state.loading = false;
-    // },
+    [clearCards.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [clearCards.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.cardDeck = [];
+    },
+    [clearCards.rejected]: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

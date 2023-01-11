@@ -256,12 +256,7 @@ function GameBoard() {
               </div>
             ) : (
               <div>
-                <div
-                  className="playerCard"
-                  style={{
-                    backgroundColor: `green`,
-                  }}
-                ></div>
+                <div className="playerCard card-placeholder"></div>
               </div>
             )}
           </div>
@@ -298,24 +293,9 @@ function GameBoard() {
           </div>
         ) : (
           <div className="outer-container">
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
+            <div className="playerCard inner-container card-placeholder"></div>
+            <div className="playerCard inner-container card-placeholder"></div>
+            <div className="playerCard inner-container card-placeholder"></div>
           </div>
         )}
 
@@ -334,12 +314,7 @@ function GameBoard() {
           </div>
         ) : (
           <div className="outer-container">
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
+            <div className="playerCard inner-container card-placeholder"></div>
           </div>
         )}
       </div>
@@ -364,12 +339,7 @@ function GameBoard() {
               </div>
             ) : (
               <div>
-                <div
-                  className="playerCard"
-                  style={{
-                    backgroundColor: `green`,
-                  }}
-                ></div>
+                <div className="playerCard card-placeholder"></div>
               </div>
             )}
           </div>
@@ -416,24 +386,9 @@ function GameBoard() {
           </div>
         ) : (
           <div className="outer-container">
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
+            <div className="playerCard inner-container card-placeholder"></div>
+            <div className="playerCard inner-container card-placeholder"></div>
+            <div className="playerCard inner-container card-placeholder"></div>
           </div>
         )}
 
@@ -452,12 +407,7 @@ function GameBoard() {
           </div>
         ) : (
           <div className="outer-container">
-            <div
-              className="playerCard inner-container"
-              style={{
-                backgroundColor: `green`,
-              }}
-            ></div>
+            <div className="playerCard inner-container card-placeholder"></div>
           </div>
         )}
       </div>
