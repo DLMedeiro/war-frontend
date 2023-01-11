@@ -1,14 +1,18 @@
 import "./App.css";
 import React from "react";
 import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import NavBar from "./Components/Navbar";
-import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
 
+import Home from "./Components/Home";
 import LoginForm from "./Components/LoginForm";
+import Instructions from "./Components/Instructions";
+import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import GameSetup from "./Components/Game-Components/GameSetup";
+import WelcomeUser from "./Components/WelcomeUser";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -17,12 +21,33 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {isLoggedIn && players.length === 0 && (
-        <div>
-          <SetPlayerForm />
-        </div>
+      {/* <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/instructions" element={<Instructions />}></Route>
+        <Route path="/login" element={<LoginForm />}></Route>
+        <Route path="/newGame" element={<SetPlayerForm />}></Route>
+      </Routes> */}
+      {isLoggedIn ? (
+        <Routes>
+          <Route path="/" element={<WelcomeUser />}></Route>
+          <Route path="/instructions" element={<Instructions />}></Route>
+          <Route path="/login" element={<LoginForm />}></Route>
+          <Route path="/newGame" element={<SetPlayerForm />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/instructions" element={<Instructions />}></Route>
+          <Route path="/login" element={<LoginForm />}></Route>
+          <Route path="/newGame" element={<SetPlayerForm />}></Route>
+        </Routes>
       )}
-      {!isLoggedIn && <LoginForm />}
+
+      {/* {isLoggedIn && players.length === 0 && (
+        <div>
+          <WelcomeUser />
+        </div>
+      )} */}
       {players.length > 0 && <GameSetup />}
     </div>
   );

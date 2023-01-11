@@ -35,6 +35,7 @@ function SignupForm({ registerNewPlayer }) {
   };
   return (
     <section>
+      <h1>Create New Account</h1>
       <Card>
         <CardBody className="text-center">
           <Form onSubmit={submit}>
