@@ -8,6 +8,7 @@ import Home from "./Components/Home";
 import LoginForm from "./Components/LoginForm";
 import Instructions from "./Components/Instructions";
 import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
+import SignUpForm from "./Components/SignUpForm";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,6 +25,24 @@ function App() {
       {isLoggedIn ? (
         <Routes>
           <Route path="/" element={<WelcomeUser />}></Route>
+          <Route path="/login" element={<WelcomeUser />}></Route>
+          <Route path="/instructions" element={<Instructions />}></Route>
+          <Route path="/newGame" element={<GameSetup />}></Route>
+          <Route path="/logout" element={<LoginForm />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<WelcomeUser />}></Route>
+          <Route path="/instructions" element={<Instructions />}></Route>
+          <Route path="/newGame" element={<GameSetup />}></Route>
+          <Route path="/signup" element={<SignUpForm />}></Route>
+          <Route path="/login" element={<LoginForm />}></Route>
+        </Routes>
+      )}
+
+      {/* {isLoggedIn ? (
+        <Routes>
+          <Route path="/" element={<WelcomeUser />}></Route>
           <Route path="/instructions" element={<Instructions />}></Route>
           <Route path="/newGame" element={<GameSetup />}></Route>
         </Routes>
@@ -34,7 +53,7 @@ function App() {
           <Route path="/login" element={<LoginForm />}></Route>
           <Route path="/newGame" element={<GameSetup />}></Route>
         </Routes>
-      )}
+      )} */}
     </div>
   );
 }

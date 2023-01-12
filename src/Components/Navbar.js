@@ -43,6 +43,12 @@ function NavBar() {
         <li className="nav-item nav-link">
           <Link to="/instructions">How to Play</Link>
         </li>
+        <li className="nav-item nav-link">
+          <Link to="/login">Login</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/signup">Create Account</Link>
+        </li>
       </ul>
     );
   }

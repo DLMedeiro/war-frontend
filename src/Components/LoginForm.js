@@ -1,18 +1,27 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { redirect } from "react-router-dom";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const handleSubmit = (e) => {
     e.preventDefault();
     // dispatch the actions
     dispatch(authActions.login());
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      return redirect("/");
+    }
+  }, []);
+
   return (
     <div className="container">
-      <h1>Login</h1>{" "}
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="id">Id</label>
@@ -28,7 +37,7 @@ const LoginForm = () => {
           />
         </div>
         <button className="btn btn-primary btn-lg btn-block" type="submit">
-          Login
+          LogIn
         </button>
       </form>
     </div>

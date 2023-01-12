@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignUpForm";
@@ -31,7 +32,9 @@ function Home() {
   return (
     <div>
       <h1>This is the Home Page</h1>
-      <button>Continue as Guest</button>
+      <button>
+        <Link to="/">Continue as Guest</Link>
+      </button>
       <button onClick={showLoginForm}>Log In</button>
       <button onClick={showSignupForm}>Create an Account</button>
       {showLogin && <LoginForm />}
