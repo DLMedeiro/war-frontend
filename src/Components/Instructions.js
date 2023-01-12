@@ -4,7 +4,7 @@ import React from "react";
 
 function Instructions() {
   return (
-    <div>
+    <div className="modal-body">
       <h1>This is how you play Skyjo!</h1>
       <h2> Game Idea and Game Target </h2>
       <p>

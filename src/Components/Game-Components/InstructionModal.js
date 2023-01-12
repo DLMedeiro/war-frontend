@@ -1,4 +1,5 @@
 import React from "react";
+import Instructions from "../Instructions";
 
 // https://medium.com/tinyso/how-to-create-a-modal-component-in-react-from-basic-to-advanced-a3357a2a716a
 
@@ -17,7 +18,9 @@ const InstructionModal = (props) => {
         <div className="modal-header">
           <h4>Instructions</h4>
         </div>
-        <div className="modal-body">This is the modal content</div>
+        {/* <div > */}
+        <Instructions />
+        {/* </div> */}
         <div className="modal-footer">
           <button onClick={props.onClose} className="button">
             Close
