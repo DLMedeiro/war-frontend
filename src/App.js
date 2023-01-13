@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import GameSetup from "./Components/Game-Components/GameSetup";
 import WelcomeUser from "./Components/WelcomeUser";
+import Profile from "./Components/Profile";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<WelcomeUser />}></Route>
           <Route path="/login" element={<WelcomeUser />}></Route>
           <Route path="/instructions" element={<Instructions />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/newGame" element={<GameSetup />}></Route>
           <Route path="/logout" element={<LoginForm />}></Route>
         </Routes>

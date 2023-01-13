@@ -19,7 +19,7 @@ function WelcomeUser() {
         </div>
       ) : (
         <div>
-          <h1>Welcome Guest!</h1>
+          <h1>Welcome!</h1>
           <h2>Play against Computer</h2>
           <button>Play Game?</button>
           <h2>Play with a friend</h2>

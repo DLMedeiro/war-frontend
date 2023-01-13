@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,6 +7,7 @@ import { cardsActions, clearCards } from "../store/cards-slice";
 import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
 import { playersActions } from "../store/player-slice";
+import InstructionModal from "./Game-Components/InstructionModal";
 
 function NavBar() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -14,6 +15,17 @@ function NavBar() {
   const dispatch = useDispatch();
   const logout = () => {
     dispatch(authActions.logout());
+  };
+  // State for Instruction Modal
+  const [show, setShow] = useState(false);
+
+  const newGame = () => {
+    dispatch(player1Actions.endGame());
+    dispatch(player2Actions.endGame());
+    dispatch(cardsActions.endGame());
+    dispatch(playersActions.removeWinner());
+    dispatch(playersActions.removePlayers());
+    dispatch(clearCards());
   };
 
   function loggedIn() {
@@ -26,9 +38,32 @@ function NavBar() {
           <Link to="/instructions">How to Play</Link>
         </li>
         <li className="nav-item nav-link">
+          <Link to="/profile">Profile</Link>
+        </li>
+        <li className="nav-item nav-link">
           <Link to="/" onClick={logout}>
             Log Out
           </Link>
+        </li>
+      </ul>
+    );
+  }
+  function gamePlay() {
+    return (
+      <ul className="nav justify-content-center">
+        <li className="nav-item nav-link">
+          <Link to="/newGame" onClick={newGame}>
+            New Game
+          </Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/" onClick={newGame}>
+            Leave Game
+          </Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link onClick={() => setShow(true)}>How to Play</Link>
+          <InstructionModal onClose={() => setShow(false)} show={show} />
         </li>
       </ul>
     );
@@ -56,7 +91,11 @@ function NavBar() {
   return (
     <div>
       {isLoggedIn && players.length === 0 && loggedIn()}
-      {!isLoggedIn && loggedOut()}
+      {players.length > 0 &&
+        players[0].player1.length &&
+        players[0].player2.length &&
+        gamePlay()}
+      {!isLoggedIn && players.length === 0 && loggedOut()}
     </div>
   );
 }

@@ -34,14 +34,14 @@ function GameSetup() {
   //   dispatch(fetchCards());
   // };
 
-  const newGame = () => {
-    dispatch(player1Actions.endGame());
-    dispatch(player2Actions.endGame());
-    dispatch(cardsActions.endGame());
-    dispatch(playersActions.removeWinner());
-    dispatch(playersActions.removePlayers());
-    dispatch(clearCards());
-  };
+  // const newGame = () => {
+  //   dispatch(player1Actions.endGame());
+  //   dispatch(player2Actions.endGame());
+  //   dispatch(cardsActions.endGame());
+  //   dispatch(playersActions.removeWinner());
+  //   dispatch(playersActions.removePlayers());
+  //   dispatch(clearCards());
+  // };
 
   // player 1 and 2 cards assigned and state updated
   useEffect(() => {
@@ -67,25 +67,24 @@ function GameSetup() {
   return (
     <>
       {gameStatus == true ? (
-        <div className="outer-container">
-          {/* ---- */}
-          <div>
-            <button onClick={() => setShow(true)}>Instructions</button>
-            <InstructionModal onClose={() => setShow(false)} show={show} />
-          </div>
-          {/* ---- */}
-          <button
-            className="btn btn-primary btn-lg btn-block"
-            onClick={newGame}
-          >
-            New Game
-          </button>
-          <button
-            className="btn btn-primary btn-lg btn-block"
-            onClick={newGame}
-          >
-            <Link to="/">Leave Game</Link>
-          </button>
+        <div>
+          {/* <div className="outer-container">
+            <ul className="nav justify-content-center">
+              <div>
+              <button onClick={() => setShow(true)}>Instructions</button>
+              <InstructionModal onClose={() => setShow(false)} show={show} />
+            </div>
+              <li className="nav-item nav-link" onClick={newGame}>
+                {" "}
+                New Game
+              </li>
+              <li className="nav-item nav-link">
+                <Link to="/" onClick={newGame}>
+                  Leave Game
+                </Link>
+              </li>
+            </ul>
+          </div> */}
           <GameBoard />
         </div>
       ) : (
