@@ -24,10 +24,13 @@
   .deal:hover{
     background-color: #347738; /* Green */
   }
-.card-placeholder{
-  border: 1px solid black;
-  background-color: #34773971;
-  margin: 2px;
+
+
+.drawLeft{
+  margin-right: 5rem;
+}
+.drawRight{
+  margin-left: 5rem;
 }
 
 /* Modal React Tutorial */

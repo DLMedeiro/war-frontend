@@ -8,6 +8,7 @@ import cardBack from "./back.png";
 import "./Card.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
+import "./GameSetup.css";
 
 function GameBoard() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
@@ -224,192 +225,218 @@ function GameBoard() {
   };
 
   return (
-    <div className="Outer-container">
-      <div className="inner-container">
-        <h1>{players[0].player1}'s Cards</h1>
-        <h2>Card Total: {player1Cards.length + player1Collection.length}</h2>
+    <div className="outer-container gameboard">
+      <div className="row">
+        {/* <div className="column side"></div> */}
+        {/* Player 1 Board - Draw and collection piles */}
+        <div className="column">
+          <div>
+            <h1>{players[0].player1}'s Cards</h1>
+            <h3>
+              Card Total: {player1Cards.length + player1Collection.length}
+            </h3>
 
-        <div className="outer-container">
-          <div className="inner-container">
-            <button
-              onClick={p1War}
-              className="playerCard"
-              style={{
-                backgroundImage: `url(${cardBack})`,
-              }}
-            ></button>
+            <div className="inner-container">
+              {/* ---------- */}
+              {player1Collection.length > 0 ? (
+                <div className="inner-container">
+                  <div
+                    className="playerCard inner-container"
+                    style={{
+                      backgroundImage: `url(${
+                        player1Collection[player1Collection.length - 1]
+                          .image_url
+                      })`,
+                    }}
+                  ></div>
+                </div>
+              ) : (
+                <div className="inner-container">
+                  <div className="playerCard inner-container card-placeholder"></div>
+                </div>
+              )}
+
+              {/* ---------- */}
+
+              <div className="inner-container">
+                <button
+                  onClick={p1War}
+                  className="playerCard"
+                  style={{
+                    backgroundImage: `url(${cardBack})`,
+                  }}
+                ></button>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div className="inner-container">
-            {player1War.length > 0 ? (
-              <div>
+        {/* War and Battle Cards Combine player 1 and player 2*/}
+        <div className="column">
+          {/* <div className="stacked-outer-container"> */}
+          <div className="stacked-outer-container">
+            {/* Player 1 Portion */}
+
+            {/* --------- */}
+            <div className="inner-container">
+              {player1War.length > 0 ? (
                 <div>
-                  <button
+                  <div
                     className="playerCard"
                     style={{
                       backgroundImage: `url(${
                         player1War[player1War.length - 1].image_url
                       })`,
                     }}
-                  ></button>
+                  ></div>
+                </div>
+              ) : (
+                <div>
+                  <div className="playerCard card-placeholder"></div>
+                </div>
+              )}
+            </div>
+
+            {/* ------------- */}
+
+            {player1Battle.length > 0 ? (
+              <div>
+                <div>
+                  <div
+                    className="playerCard card-1"
+                    style={{
+                      backgroundImage: `url(${
+                        player1Battle[player1Battle.length - 1].image_url
+                      })`,
+                    }}
+                  ></div>
+                  <div
+                    className="playerCard card-2"
+                    style={{
+                      backgroundImage: `url(${
+                        player1Battle[player1Battle.length - 2].image_url
+                      })`,
+                    }}
+                  ></div>
+                  <div
+                    className="playerCard card-3"
+                    style={{
+                      backgroundImage: `url(${
+                        player1Battle[player1Battle.length - 3].image_url
+                      })`,
+                    }}
+                  ></div>
                 </div>
               </div>
             ) : (
               <div>
-                <div className="playerCard card-placeholder"></div>
+                <div className="playerCard card-placeholder-1"></div>
+                <div className="playerCard card-placeholder-2"></div>
+                <div className="playerCard card-placeholder-3"></div>
               </div>
             )}
           </div>
-        </div>
 
-        {player1Battle.length > 0 ? (
-          <div>
-            <div className="outer-container">
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player1Battle[player1Battle.length - 1].image_url
-                  })`,
-                }}
-              ></div>
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player1Battle[player1Battle.length - 2].image_url
-                  })`,
-                }}
-              ></div>
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player1Battle[player1Battle.length - 3].image_url
-                  })`,
-                }}
-              ></div>
-            </div>
-          </div>
-        ) : (
-          <div className="outer-container">
-            <div className="playerCard inner-container card-placeholder"></div>
-            <div className="playerCard inner-container card-placeholder"></div>
-            <div className="playerCard inner-container card-placeholder"></div>
-          </div>
-        )}
-
-        {player1Collection.length > 0 ? (
-          <div>
-            <div className="outer-container">
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player1Collection[player1Collection.length - 1].image_url
-                  })`,
-                }}
-              ></div>
-            </div>
-          </div>
-        ) : (
-          <div className="outer-container">
-            <div className="playerCard inner-container card-placeholder"></div>
-          </div>
-        )}
-      </div>
-
-      <div className="inner-container">
-        <h1>{players[0].player2}'s Cards</h1>
-        <h2>Card Total: {player2Cards.length + player2Collection.length}</h2>
-        <div className="outer-container">
-          <div className="inner-container">
-            {player2War.length > 0 ? (
-              <div>
+          {/* Player 2 Portion */}
+          <div className="stacked-outer-container">
+            <div className="inner-container">
+              {player2War.length > 0 ? (
                 <div>
-                  <button
+                  <div
                     className="playerCard"
                     style={{
                       backgroundImage: `url(${
                         player2War[player2War.length - 1].image_url
                       })`,
                     }}
-                  ></button>
+                  ></div>
+                </div>
+              ) : (
+                <div>
+                  <div className="playerCard card-placeholder"></div>
+                </div>
+              )}
+            </div>
+
+            {player2Battle.length > 0 ? (
+              <div>
+                <div>
+                  <div
+                    className="playerCard card-1"
+                    style={{
+                      backgroundImage: `url(${
+                        player2Battle[player2Battle.length - 1].image_url
+                      })`,
+                    }}
+                  ></div>
+                  <div
+                    className="playerCard card-2"
+                    style={{
+                      backgroundImage: `url(${
+                        player2Battle[player2Battle.length - 2].image_url
+                      })`,
+                    }}
+                  ></div>
+                  <div
+                    className="playerCard card-3"
+                    style={{
+                      backgroundImage: `url(${
+                        player2Battle[player2Battle.length - 3].image_url
+                      })`,
+                    }}
+                  ></div>
                 </div>
               </div>
             ) : (
               <div>
-                <div className="playerCard card-placeholder"></div>
+                <div className="playerCard card-placeholder-1"></div>
+                <div className="playerCard card-placeholder-2"></div>
+                <div className="playerCard card-placeholder-3"></div>
               </div>
             )}
           </div>
-
-          <div className="inner-container">
-            <button
-              onClick={p2War}
-              className="playerCard"
-              style={{
-                backgroundImage: `url(${cardBack})`,
-              }}
-            ></button>
-          </div>
         </div>
 
-        {player2Battle.length > 0 ? (
+        {/* Player 2 Board */}
+        <div className="column">
           <div>
-            <div className="outer-container">
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player2Battle[player2Battle.length - 1].image_url
-                  })`,
-                }}
-              ></div>
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player2Battle[player2Battle.length - 2].image_url
-                  })`,
-                }}
-              ></div>
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player2Battle[player2Battle.length - 3].image_url
-                  })`,
-                }}
-              ></div>
-            </div>
-          </div>
-        ) : (
-          <div className="outer-container">
-            <div className="playerCard inner-container card-placeholder"></div>
-            <div className="playerCard inner-container card-placeholder"></div>
-            <div className="playerCard inner-container card-placeholder"></div>
-          </div>
-        )}
+            <h1>{players[0].player2}'s Cards</h1>
+            <h3>
+              Card Total: {player2Cards.length + player2Collection.length}
+            </h3>
+            {/* Player 2 draw card area */}
+            <div className="inner-container">
+              <div className="inner-container">
+                <button
+                  onClick={p2War}
+                  className="playerCard"
+                  style={{
+                    backgroundImage: `url(${cardBack})`,
+                  }}
+                ></button>
+              </div>
 
-        {player2Collection.length > 0 ? (
-          <div>
-            <div className="outer-container">
-              <div
-                className="playerCard inner-container"
-                style={{
-                  backgroundImage: `url(${
-                    player2Collection[player2Collection.length - 1].image_url
-                  })`,
-                }}
-              ></div>
+              {player2Collection.length > 0 ? (
+                <div className="inner-container">
+                  <div
+                    className="playerCard inner-container"
+                    style={{
+                      backgroundImage: `url(${
+                        player2Collection[player2Collection.length - 1]
+                          .image_url
+                      })`,
+                    }}
+                  ></div>
+                </div>
+              ) : (
+                <div className="inner-container">
+                  <div className="playerCard inner-container card-placeholder"></div>
+                </div>
+              )}
             </div>
           </div>
-        ) : (
-          <div className="outer-container">
-            <div className="playerCard inner-container card-placeholder"></div>
-          </div>
-        )}
+        </div>
+        {/* <div className="column side"></div> */}
       </div>
     </div>
   );

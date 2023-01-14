@@ -1,3 +1,8 @@
+
+:root{
+  --color1: rgba(131, 43, 43, 0.5);
+}
+
 .playerCard{
     background-size: contain;
     background-repeat: no-repeat;
@@ -7,5 +12,42 @@
     border: 2px solid transparent;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px transparent;
+    transition: 1s;
 
 }
+
+.card-placeholder{
+    background-color: var(--color1);
+    transition: 1s;
+  }
+.card-placeholder-1{
+    background-color: var(--color1);
+    margin-bottom:-2rem;
+    transition: 1s;
+  }
+.card-placeholder-2{
+    background-color: var(--color1);
+    margin-left:2rem;
+    transition: 1s;
+  }
+.card-placeholder-3{
+    background-color: var(--color1);
+    margin-top:-2rem;
+    transition: 1s;
+  }
+.card-1{
+    margin-bottom:-2rem; 
+    transition: 1s;
+    background-color: var(--color1);
+  }
+.card-2{
+    margin-left:2rem;
+    transition: 1s;
+    background-color: var(--color1);
+  }
+.card-3{
+    margin-top:-2rem;
+    transition: 1s;
+    background-color: var(--color1);
+  }
