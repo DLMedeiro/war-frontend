@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./NavBar.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../store/auth-slice";

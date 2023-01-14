@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/auth-slice";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { redirect } from "react-router-dom";
 
 const LoginForm = () => {
@@ -36,7 +36,7 @@ const LoginForm = () => {
             id="password"
           />
         </div>
-        <button className="btn btn-primary btn-lg btn-block" type="submit">
+        <button id="btn-login" className="btn btn-lg btn-block" type="submit">
           LogIn
         </button>
       </form>

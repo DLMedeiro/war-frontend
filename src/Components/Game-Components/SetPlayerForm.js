@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { useDispatch } from "react-redux";
 import { playersActions } from "../../store/player-slice";
 import WarApi from "../../warApi";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
 
@@ -48,13 +48,16 @@ const SetPlayerForm = () => {
           name="player2"
         />
       </div>
-      <button
+
+      <Link
         type="button"
+        id="btn-login"
         className="btn btn-primary btn-lg btn-block"
         onClick={handleSubmit}
+        to="/newGame"
       >
-        <Link to="/newGame">Let's Play!</Link>
-      </button>
+        Let's Play!
+      </Link>
     </form>
   );
 };

@@ -9,9 +9,7 @@ import LoginForm from "./Components/LoginForm";
 import Instructions from "./Components/Instructions";
 import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
 import SignUpForm from "./Components/SignUpForm";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import GameSetup from "./Components/Game-Components/GameSetup";
 import WelcomeUser from "./Components/WelcomeUser";
 import Profile from "./Components/Profile";

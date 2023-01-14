@@ -5,7 +5,7 @@ import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import "./GameSetup.css";
 import "./Card.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import GameBoard from "./GameBoard";
 import { playersActions } from "../../store/player-slice";
 import SetPlayerForm from "./SetPlayerForm";

@@ -6,7 +6,7 @@ import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import cardBack from "./back.png";
 import "./Card.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
 import "./GameSetup.css";
 

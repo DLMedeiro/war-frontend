@@ -94,12 +94,10 @@ function SignupForm({ registerNewPlayer }) {
                 onChange={handleChange}
               />
             </FormGroup>
-            {/* <FormGroup>
-              <Label htmlFor="image">Profile Picture</Label>
-              <Input id="image" type="text" name="image" />
-            </FormGroup> */}
 
-            <Button>Create Account</Button>
+            <Button id="btn-login" className="btn btn-primary btn-lg btn-block">
+              Create Account
+            </Button>
           </Form>
         </CardBody>
       </Card>

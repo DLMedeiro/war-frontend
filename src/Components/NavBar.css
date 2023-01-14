@@ -1,3 +1,4 @@
+/* Navbar */
 .nav{
     padding-top:1rem;
     padding-bottom: 1rem;
@@ -16,9 +17,81 @@
   }
   .nav a:hover {
     color: black;
-    border-bottom: 3px rgba(149, 166, 160) solid;
+    border-bottom: 3px var(--color1) solid;
   }
   .nav a.current {
     color: black;
-    border-color: 3px rgba(149, 166, 160) solid;
+    border-color: 3px var(--color1) solid;
   }
+
+ /* Buttons */
+  
+  /* CSS 
+  https://getcssscan.com/css-buttons-examples*/
+  #btn-main {
+    margin: 25px 250px 25px 250px;
+    padding: 25px 50px 25px 50px;
+  display: block;
+  background-color: #FFFFFF;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border: transparent 2px solid;
+}
+  #btn-login {
+    margin: 25px;
+    padding: 15px 50px 15px 50px;
+  /* display: block; */
+  background-color: #FFFFFF;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  border: transparent 2px solid;
+}
+
+#btn-main:hover{
+  background-color: rgb(249,250,251);
+  border: var(--color1) 2px solid;
+}
+#btn-login:hover{
+  background-color: rgb(249,250,251);
+  border: var(--color1) 2px solid;
+}
+
+#btn-main:focus{
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+#btn-login:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+#btn-login:focus-visible{
+  box-shadow: none;
+}
+#btn-main:focus-visible{
+  box-shadow: none;
+}
