@@ -91,15 +91,15 @@ function NavBar() {
 
   return (
     <div>
-      {isLoggedIn && players.length === 0 && loggedIn()}
-      {players.length > 0 &&
-        players[0].player1.length &&
-        players[0].player2.length &&
-        gamePlay()}
-      {!isLoggedIn && players.length === 0 && loggedOut()}
+      {players.length < 1 ? (
+        <>{isLoggedIn ? loggedIn() : loggedOut()}</>
+      ) : (
+        <>{gamePlay()}</>
+      )}
     </div>
   );
 }
+
 // function NavBar({ logout }) {
 //   const player = useContext(UserContext);
 //   return (

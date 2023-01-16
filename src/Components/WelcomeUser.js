@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import SetPlayerForm from "./Game-Components/SetPlayerForm";
+import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
+import { playersActions } from "../store/player-slice";
 
 function WelcomeUser() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
+
+  const setComputer = () => {
+    dispatch(playersActions.addPlayer({ player1: "Computer" }));
+  };
+
   return (
     <>
       <Link
@@ -13,6 +19,7 @@ function WelcomeUser() {
         role="button"
         className="btn btn-lg btn-block"
         to="/newGame"
+        onClick={setComputer}
       >
         Play against a Computer
       </Link>

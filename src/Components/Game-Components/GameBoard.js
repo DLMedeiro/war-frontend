@@ -400,7 +400,7 @@ function GameBoard() {
         {/* Player 2 Board */}
         <div className="column">
           <div>
-            <h1>{players[0].player2}'s Cards</h1>
+            <h1>{players[1].player2}'s Cards</h1>
             <h3>
               Card Total: {player2Cards.length + player2Collection.length}
             </h3>

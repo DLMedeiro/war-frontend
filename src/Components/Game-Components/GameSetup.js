@@ -14,7 +14,7 @@ import InstructionModal from "./InstructionModal";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
-  const players = useSelector((state) => state.players.players);
+
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const player1Cards = useSelector((state) => state.player1.cards);
 
@@ -68,23 +68,6 @@ function GameSetup() {
     <>
       {gameStatus == true ? (
         <div>
-          {/* <div className="outer-container">
-            <ul className="nav justify-content-center">
-              <div>
-              <button onClick={() => setShow(true)}>Instructions</button>
-              <InstructionModal onClose={() => setShow(false)} show={show} />
-            </div>
-              <li className="nav-item nav-link" onClick={newGame}>
-                {" "}
-                New Game
-              </li>
-              <li className="nav-item nav-link">
-                <Link to="/" onClick={newGame}>
-                  Leave Game
-                </Link>
-              </li>
-            </ul>
-          </div> */}
           <GameBoard />
         </div>
       ) : (
