@@ -28,6 +28,15 @@ function GameBoard() {
 
   const dispatch = useDispatch();
 
+  // Computer play functionality
+  useEffect(() => {
+    if (players[0].player1 === "Computer") {
+      if (player2War.length > 0) {
+        setTimeout(p1War, 1000);
+      }
+    }
+  }, [player2War]);
+
   const shuffle = (cards) => {
     let index = cards.length;
     let randomIndex;
@@ -116,7 +125,7 @@ function GameBoard() {
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
       //   checkForWin();
-      setTimeout(checkForWin, 3000);
+      setTimeout(checkForWin, 2000);
     }
   }, [p2Compare, p1Compare]);
 

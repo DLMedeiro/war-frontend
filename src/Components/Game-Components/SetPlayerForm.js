@@ -49,7 +49,6 @@ const SetPlayerForm = () => {
       dispatch(playersActions.addPlayer({ player1: player2 }));
       dispatch(playersActions.addPlayer({ player2: player2 }));
     }
-    console.log(players);
     dispatch(fetchCards());
     setFormData(INITIAL_STATE);
     // clearCards();

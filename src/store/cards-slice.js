@@ -7,7 +7,6 @@ export const fetchCards = createAsyncThunk("game/setup", async () => {
 });
 export const clearCards = createAsyncThunk("game/teardown", async () => {
   const cards = await WarApi.removeCards();
-  console.log(cards);
   return cards;
 });
 
