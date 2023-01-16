@@ -46,7 +46,7 @@ const SetPlayerForm = () => {
     if (players[0]) {
       dispatch(playersActions.addPlayer({ player2: player2 }));
     } else {
-      dispatch(playersActions.addPlayer({ player1: player1 }));
+      dispatch(playersActions.addPlayer({ player1: player2 }));
       dispatch(playersActions.addPlayer({ player2: player2 }));
     }
     console.log(players);
