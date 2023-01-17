@@ -9,6 +9,8 @@ import "./Card.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
 import "./GameSetup.css";
+import Toast from "../../Components/Toast";
+import "../../Components/Toast.css";
 
 function GameBoard() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
@@ -31,6 +33,12 @@ function GameBoard() {
   const dispatch = useDispatch();
 
   // Computer play functionality
+
+  useEffect(() => {
+    new Toast({
+      message: `${players[1].player2}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+    });
+  }, []);
 
   useEffect(() => {
     if (players[0].player1 === "Computer") {
@@ -202,6 +210,10 @@ function GameBoard() {
       dispatch(player1Actions.removeFromBattle());
       dispatch(player2Actions.removeFromBattle());
     } else if (p1Compare === p2Compare) {
+      new Toast({
+        message:
+          "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
+      });
       checkEndGame();
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.addToBattle(player1Cards[1]));
