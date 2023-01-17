@@ -124,19 +124,61 @@ function GameBoard() {
   }, [player1Cards, player2Cards]);
 
   const p1War = () => {
-    dispatch(player1Actions.addToWar(player1Cards[0]));
-    dispatch(player1Actions.removeCard());
+    if (player1War.length === 0) {
+      dispatch(player1Actions.addToWar(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+    } else if (player1Battle.length === 0) {
+      console.log(player1Cards[0]);
+      dispatch(player1Actions.addToBattle(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+    } else if (player1Battle.length === 1) {
+      console.log(player1Cards[0]);
+      dispatch(player1Actions.addToBattle(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+    } else if (player1Battle.length === 2) {
+      console.log(player1Cards[0]);
+      dispatch(player1Actions.addToBattle(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+    } else if (player1Battle.length === 3) {
+      console.log(player1Cards[0]);
+      dispatch(player1Actions.addToWar(player1Cards[3]));
+      dispatch(player1Actions.removeCard());
+      console.log(player1War);
+      setDisableP1Btn(true);
+      setDisableP2Btn(false);
+    }
   };
   const p2War = () => {
-    dispatch(player2Actions.addToWar(player2Cards[0]));
-    dispatch(player2Actions.removeCard());
+    if (player2War.length === 0) {
+      dispatch(player2Actions.addToWar(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 0) {
+      console.log(player2Cards[0]);
+      dispatch(player2Actions.addToBattle(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 1) {
+      console.log(player2Cards[0]);
+      dispatch(player2Actions.addToBattle(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 2) {
+      console.log(player2Cards[0]);
+      dispatch(player2Actions.addToBattle(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 3) {
+      console.log(player2Cards[0]);
+      dispatch(player2Actions.addToWar(player2Cards[3]));
+      dispatch(player2Actions.removeCard());
+      console.log(player2War);
+      // setDisableP1Btn(true);
+      // setDisableP2Btn(false);
+    }
   };
 
   useEffect(() => {
-    if (player1War.length > 0 && player2War.length === 0) {
+    if (player1War.length === 1 && player2War.length === 0) {
       setDisableP1Btn(true);
       setDisableP2Btn(false);
-    } else if (player1War.length > 0 && player2War.length > 0) {
+    } else if (player1War.length === 1 && player2War.length === 1) {
       setDisableP1Btn(true);
       setDisableP2Btn(true);
     } else if (
@@ -157,16 +199,23 @@ function GameBoard() {
   }, [player1War, player2War]);
 
   useEffect(() => {
-    if (player1War.length > 0 && player2War.length > 0) {
-      setP1Compare(player1War[player1War.length - 1].game_value);
-      setP2Compare(player2War[player2War.length - 1].game_value);
+    if (player1War.length === 1 && player2War.length === 1) {
+      setP1Compare(player1War[0].game_value);
+      setP2Compare(player2War[0].game_value);
+    } else if (player1War.length === 2 && player2War.length === 2) {
+      setP1Compare(player1War[1].game_value);
+      setP2Compare(player2War[1].game_value);
     }
   }, [player1War, player2War]);
 
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
-      //   checkForWin();
-      setTimeout(checkForWin, 2000);
+      if (player2War.length > 1) {
+        // Set longer time for battle
+        setTimeout(checkForWin, 4000);
+      } else {
+        setTimeout(checkForWin, 2000);
+      }
     }
   }, [p2Compare, p1Compare]);
 
@@ -221,24 +270,31 @@ function GameBoard() {
           "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
       });
       checkEndGame();
-      dispatch(player1Actions.addToBattle(player1Cards[0]));
-      dispatch(player1Actions.addToBattle(player1Cards[1]));
-      dispatch(player1Actions.addToBattle(player1Cards[2]));
-      dispatch(player1Actions.addToWar(player1Cards[3]));
-      dispatch(player1Actions.removeCard());
-      dispatch(player1Actions.removeCard());
-      dispatch(player1Actions.removeCard());
-      dispatch(player1Actions.removeCard());
-      dispatch(player2Actions.addToBattle(player2Cards[0]));
-      dispatch(player2Actions.addToBattle(player2Cards[1]));
-      dispatch(player2Actions.addToBattle(player2Cards[2]));
-      dispatch(player2Actions.addToWar(player2Cards[3]));
-      dispatch(player2Actions.removeCard());
-      dispatch(player2Actions.removeCard());
-      dispatch(player2Actions.removeCard());
-      dispatch(player2Actions.removeCard());
-      setP1Compare(player1War[player1War.length - 1]);
-      setP2Compare([player2War[player2War.length - 1]]);
+      setDisableP1Btn(false);
+      // on next click
+      // dispatch(player1Actions.addToBattle(player1Cards[0]));
+      // dispatch(player1Actions.removeCard());
+      // on next click
+      // dispatch(player1Actions.addToBattle(player1Cards[1]));
+      // dispatch(player1Actions.removeCard());
+      // on next click
+      // dispatch(player1Actions.addToBattle(player1Cards[2]));
+      // dispatch(player1Actions.removeCard());
+      // on next click
+      // dispatch(player1Actions.addToWar(player1Cards[3]));
+      // dispatch(player1Actions.removeCard());
+
+      // Player 2
+      // dispatch(player2Actions.addToBattle(player2Cards[0]));
+      // dispatch(player2Actions.addToBattle(player2Cards[1]));
+      // dispatch(player2Actions.addToBattle(player2Cards[2]));
+      // dispatch(player2Actions.addToWar(player2Cards[3]));
+      // dispatch(player2Actions.removeCard());
+      // dispatch(player2Actions.removeCard());
+      // dispatch(player2Actions.removeCard());
+      // dispatch(player2Actions.removeCard());
+      // setP1Compare(player1War[player1War.length - 1]);
+      // setP2Compare([player2War[player2War.length - 1]]);
     }
   };
 
@@ -354,9 +410,9 @@ function GameBoard() {
 
             {/* ------------- */}
 
-            {player1Battle.length > 0 ? (
+            <div>
               <div>
-                <div>
+                {player1Battle.length > 0 ? (
                   <div
                     className="playerCard card-1"
                     style={{
@@ -365,6 +421,10 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-1"> </div>
+                )}
+                {player1Battle.length > 1 ? (
                   <div
                     className="playerCard card-2"
                     style={{
@@ -373,6 +433,10 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-2"> </div>
+                )}
+                {player1Battle.length > 2 ? (
                   <div
                     className="playerCard card-3"
                     style={{
@@ -381,15 +445,23 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
-                </div>
+                ) : (
+                  <div className="playerCard card-placeholder-3"> </div>
+                )}
+                {/* {player1Battle.length > 3 ? (
+                  <div
+                    className="playerCard card-4"
+                    style={{
+                      backgroundImage: `url(${
+                        player1Battle[player1Battle.length - 3].image_url
+                      })`,
+                    }}
+                  ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-3"> </div>
+                )} */}
               </div>
-            ) : (
-              <div>
-                <div className="playerCard card-placeholder-1"></div>
-                <div className="playerCard card-placeholder-2"></div>
-                <div className="playerCard card-placeholder-3"></div>
-              </div>
-            )}
+            </div>
           </div>
 
           {/* Player 2 Portion */}
@@ -413,9 +485,9 @@ function GameBoard() {
               )}
             </div>
 
-            {player2Battle.length > 0 ? (
+            <div>
               <div>
-                <div>
+                {player2Battle.length > 0 ? (
                   <div
                     className="playerCard card-1"
                     style={{
@@ -424,6 +496,10 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-1"></div>
+                )}
+                {player2Battle.length > 1 ? (
                   <div
                     className="playerCard card-2"
                     style={{
@@ -432,6 +508,10 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-2"></div>
+                )}
+                {player2Battle.length > 2 ? (
                   <div
                     className="playerCard card-3"
                     style={{
@@ -440,15 +520,23 @@ function GameBoard() {
                       })`,
                     }}
                   ></div>
-                </div>
+                ) : (
+                  <div className="playerCard card-placeholder-3"></div>
+                )}
+                {/* {player2Battle.length > 3 ? (
+                  <div
+                    className="playerCard card-4"
+                    style={{
+                      backgroundImage: `url(${
+                        player2Battle[player2Battle.length - 3].image_url
+                      })`,
+                    }}
+                  ></div>
+                ) : (
+                  <div className="playerCard card-placeholder-3"> </div>
+                )} */}
               </div>
-            ) : (
-              <div>
-                <div className="playerCard card-placeholder-1"></div>
-                <div className="playerCard card-placeholder-2"></div>
-                <div className="playerCard card-placeholder-3"></div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
 

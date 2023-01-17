@@ -64,6 +64,11 @@ button:disabled{
     margin-top:-2rem;
     transition: 1s;
   }
+  .card-placeholder-2{
+    background-color: var(--color1);
+    margin-right:2rem;
+    transition: 1s;
+  }
 .card-1{
     margin-bottom:-2rem; 
     transition: 1s;
@@ -74,8 +79,14 @@ button:disabled{
     transition: 1s;
     background-color: var(--color1);
   }
-.card-3{
+  .card-3{
     margin-top:-2rem;
     transition: 1s;
     background-color: var(--color1);
   }
+  
+  .card-4{
+      margin-right:2rem;
+      transition: 1s;
+      background-color: var(--color1);
+    }

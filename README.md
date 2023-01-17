@@ -1,6 +1,11 @@
 # Skyjo
 🚧👷🏽‍♀️ Under Construction 👷🏽‍♀️🚧
 
+Update ReadMe
+Change Game to War
+
+Add underline for player turn
+
 ## Game Details
 
 ## Program Details
