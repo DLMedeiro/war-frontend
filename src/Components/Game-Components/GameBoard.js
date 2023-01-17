@@ -25,10 +25,13 @@ function GameBoard() {
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
   const [collection, setCollection] = useState([]);
+  const [disableP1Btn, setDisableP1Btn] = useState(false);
+  const [disableP2Btn, setDisableP2Btn] = useState(true);
 
   const dispatch = useDispatch();
 
   // Computer play functionality
+
   useEffect(() => {
     if (players[0].player1 === "Computer") {
       if (player2War.length > 0) {
@@ -114,6 +117,30 @@ function GameBoard() {
     dispatch(player2Actions.addToWar(player2Cards[0]));
     dispatch(player2Actions.removeCard());
   };
+
+  useEffect(() => {
+    if (player1War.length > 0 && player2War.length === 0) {
+      setDisableP1Btn(true);
+      setDisableP2Btn(false);
+    } else if (player1War.length > 0 && player2War.length > 0) {
+      setDisableP1Btn(true);
+      setDisableP2Btn(true);
+    } else if (
+      player1War.length === 0 &&
+      player2War.length === 0 &&
+      players[0].player1 === "Computer"
+    ) {
+      setDisableP1Btn(true);
+      setDisableP2Btn(false);
+    } else if (
+      player1War.length === 0 &&
+      player2War.length === 0 &&
+      players[0].player1 !== "Computer"
+    ) {
+      setDisableP1Btn(false);
+      setDisableP2Btn(true);
+    }
+  }, [player1War, player2War]);
 
   useEffect(() => {
     if (player1War.length > 0 && player2War.length > 0) {
@@ -274,6 +301,7 @@ function GameBoard() {
                   style={{
                     backgroundImage: `url(${cardBack})`,
                   }}
+                  disabled={disableP1Btn}
                 ></button>
               </div>
             </div>
@@ -422,6 +450,7 @@ function GameBoard() {
                   style={{
                     backgroundImage: `url(${cardBack})`,
                   }}
+                  disabled={disableP2Btn}
                 ></button>
               </div>
 
