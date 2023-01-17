@@ -394,9 +394,7 @@ function GameBoard() {
                   <div
                     className="playerCard"
                     style={{
-                      backgroundImage: `url(${
-                        player1War[player1War.length - 1].image_url
-                      })`,
+                      backgroundImage: `url(${player1War[0].image_url})`,
                     }}
                   ></div>
                 </div>
@@ -447,18 +445,16 @@ function GameBoard() {
                 ) : (
                   <div className="playerCard card-placeholder-3"> </div>
                 )}
-                {/* {player1Battle.length > 3 ? (
+                {player1War.length === 2 ? (
                   <div
                     className="playerCard card-4"
                     style={{
-                      backgroundImage: `url(${
-                        player1Battle[player1Battle.length - 3].image_url
-                      })`,
+                      backgroundImage: `url(${player1Battle[1].image_url})`,
                     }}
                   ></div>
                 ) : (
                   <div className="playerCard card-placeholder-3"> </div>
-                )} */}
+                )}
               </div>
             </div>
           </div>
@@ -471,9 +467,7 @@ function GameBoard() {
                   <div
                     className="playerCard"
                     style={{
-                      backgroundImage: `url(${
-                        player2War[player2War.length - 1].image_url
-                      })`,
+                      backgroundImage: `url(${player2War[0].image_url})`,
                     }}
                   ></div>
                 </div>
@@ -522,18 +516,16 @@ function GameBoard() {
                 ) : (
                   <div className="playerCard card-placeholder-3"></div>
                 )}
-                {/* {player2Battle.length > 3 ? (
+                {player2War.length === 2 ? (
                   <div
                     className="playerCard card-4"
                     style={{
-                      backgroundImage: `url(${
-                        player2Battle[player2Battle.length - 3].image_url
-                      })`,
+                      backgroundImage: `url(${player2War[1].image_url})`,
                     }}
                   ></div>
                 ) : (
                   <div className="playerCard card-placeholder-3"> </div>
-                )} */}
+                )}
               </div>
             </div>
           </div>
