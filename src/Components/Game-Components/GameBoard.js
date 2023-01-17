@@ -297,7 +297,7 @@ function GameBoard() {
               <div className="inner-container">
                 <button
                   onClick={p1War}
-                  className="playerCard"
+                  className="clickCard"
                   style={{
                     backgroundImage: `url(${cardBack})`,
                   }}
@@ -446,7 +446,7 @@ function GameBoard() {
               <div className="inner-container">
                 <button
                   onClick={p2War}
-                  className="playerCard"
+                  className="clickCard"
                   style={{
                     backgroundImage: `url(${cardBack})`,
                   }}

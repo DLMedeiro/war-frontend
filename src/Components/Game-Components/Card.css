@@ -3,6 +3,19 @@
   --color1: rgba(131, 43, 43, 0.5);
 }
 
+.clickCard {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 98px;
+  width: 72px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px 0 rgba(255, 0, 0, 0.4), 0 12px 40px 0 rgba(255, 0, 0, 0.40);
+  border: 1px transparent;
+  transition: 1s;
+}
+
 .playerCard{
     background-size: contain;
     background-repeat: no-repeat;
@@ -16,6 +29,21 @@
     transition: 1s;
 
 }
+button:disabled{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 98px;
+    width: 72px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px transparent;
+    transition: 1s;
+
+}
+
+
 
 .card-placeholder{
     background-color: var(--color1);
