@@ -400,7 +400,8 @@ function GameBoard() {
                 </div>
               ) : (
                 <div>
-                  <div className="playerCard card-placeholder"></div>
+                  <div></div>
+                  {/* <div className="playerCard card-placeholder"></div> */}
                 </div>
               )}
             </div>
@@ -419,7 +420,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-1"> </div>
+                  <div> </div>
+                  // <div className="playerCard card-placeholder-1"> </div>
                 )}
                 {player1Battle.length > 1 ? (
                   <div
@@ -431,7 +433,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-2"> </div>
+                  <div> </div>
+                  // <div className="playerCard card-placeholder-2"> </div>
                 )}
                 {player1Battle.length > 2 ? (
                   <div
@@ -443,7 +446,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-3"> </div>
+                  <div> </div>
+                  // <div className="playerCard card-placeholder-3"> </div>
                 )}
                 {player1War.length === 2 ? (
                   <div
@@ -453,7 +457,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-3"> </div>
+                  <div> </div>
+                  // <div className="playerCard card-placeholder-3"> </div>
                 )}
               </div>
             </div>
@@ -473,7 +478,8 @@ function GameBoard() {
                 </div>
               ) : (
                 <div>
-                  <div className="playerCard card-placeholder"></div>
+                  <div></div>
+                  {/* <div className="playerCard card-placeholder"></div> */}
                 </div>
               )}
             </div>
@@ -490,7 +496,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-1"></div>
+                  <div></div>
+                  // <div className="playerCard card-placeholder-1"></div>
                 )}
                 {player2Battle.length > 1 ? (
                   <div
@@ -502,7 +509,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-2"></div>
+                  <div></div>
+                  // <div className="playerCard card-placeholder-2"></div>
                 )}
                 {player2Battle.length > 2 ? (
                   <div
@@ -514,7 +522,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-3"></div>
+                  <div></div>
+                  // <div className="playerCard card-placeholder-3"></div>
                 )}
                 {player2War.length === 2 ? (
                   <div
@@ -524,7 +533,8 @@ function GameBoard() {
                     }}
                   ></div>
                 ) : (
-                  <div className="playerCard card-placeholder-3"> </div>
+                  <div> </div>
+                  // <div className="playerCard card-placeholder-3"> </div>
                 )}
               </div>
             </div>
