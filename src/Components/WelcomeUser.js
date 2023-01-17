@@ -5,7 +5,6 @@ import "./NavBar.css";
 import { playersActions } from "../store/player-slice";
 
 function WelcomeUser() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   const setComputer = () => {

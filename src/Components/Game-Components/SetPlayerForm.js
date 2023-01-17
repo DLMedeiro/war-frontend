@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
 import WarApi from "../../warApi";
 // import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
+import Toast from "../../Components/Toast";
+import "../../Components/Toast.css";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
@@ -43,14 +45,26 @@ const SetPlayerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (player1.length === 0 || player2.length === 0) {
+      new Toast({
+        message: "Please enter a name for both players",
+        type: "danger",
+      });
+    }
     if (players[0]) {
       dispatch(playersActions.addPlayer({ player2: player2 }));
-    } else {
-      dispatch(playersActions.addPlayer({ player1: player2 }));
+      dispatch(fetchCards());
+      setFormData(INITIAL_STATE);
+      return redirect("/newGame");
+    } else if (player1 && player2) {
+      dispatch(playersActions.addPlayer({ player1: player1 }));
       dispatch(playersActions.addPlayer({ player2: player2 }));
+      dispatch(fetchCards());
+      setFormData(INITIAL_STATE);
+      return redirect("/newGame");
     }
-    dispatch(fetchCards());
-    setFormData(INITIAL_STATE);
+
     // clearCards();
   };
   // const handleSubmit = (e) => {
@@ -65,7 +79,7 @@ const SetPlayerForm = () => {
   //   await WarApi.removeCards();
   // }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       {player1 === "Computer" ? (
         <div className="form-group">
           <label htmlFor="player1">Player 1</label>
@@ -95,8 +109,14 @@ const SetPlayerForm = () => {
           name="player2"
         />
       </div>
-
-      <Link
+      <button
+        type="submit"
+        id="btn-login"
+        className="btn btn-primary btn-lg btn-block"
+      >
+        Let's Play!
+      </button>
+      {/* <Link
         type="button"
         id="btn-login"
         className="btn btn-primary btn-lg btn-block"
@@ -104,7 +124,7 @@ const SetPlayerForm = () => {
         to="/newGame"
       >
         Let's Play!
-      </Link>
+      </Link> */}
     </form>
   );
 };
