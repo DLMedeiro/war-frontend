@@ -11,6 +11,10 @@ function WelcomeUser() {
     dispatch(playersActions.addPlayer({ player1: "Computer" }));
   };
 
+  const resetPlayers = () => {
+    dispatch(playersActions.removePlayers());
+  };
+
   return (
     <>
       <Link
@@ -27,6 +31,7 @@ function WelcomeUser() {
         role="button"
         className="btn btn-lg btn-block"
         to="/newGame"
+        onClick={resetPlayers}
       >
         Play with a friend
       </Link>

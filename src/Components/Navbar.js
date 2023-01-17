@@ -53,11 +53,6 @@ function NavBar() {
     return (
       <ul className="nav justify-content-center">
         <li className="nav-item nav-link">
-          <Link to="/newGame" onClick={newGame}>
-            New Game
-          </Link>
-        </li>
-        <li className="nav-item nav-link">
           <Link to="/" onClick={newGame}>
             Leave Game
           </Link>

@@ -52,7 +52,7 @@ const SetPlayerForm = () => {
         type: "danger",
       });
     }
-    if (players[0]) {
+    if (players[0] && player2.length !== 0) {
       dispatch(playersActions.addPlayer({ player2: player2 }));
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
