@@ -29,6 +29,37 @@ class WarApi {
     let res = await this.request("game/teardown", {}, "delete");
     return res;
   }
+
+  // User Information
+
+  // log in a user
+  static async loginUser(loginData) {
+    let res = await this.request(`auth/token`, loginData, "post");
+    console.log(`res=${res}`);
+
+    WarApi.token = res.token;
+    localStorage.setItem("headToken", JSON.stringify(WarApi.token));
+
+    return WarApi.token;
+  }
+
+  // Pull user information after login
+  static async loggedInUser(username) {
+    let res = await this.request(`players/${username}`);
+    return res;
+  }
+
+  // Create a new user
+  static async registerUser(newUserData) {
+    let res = await this.request(`auth/register`, newUserData, "post");
+    return res.token;
+  }
+
+  // Update user
+  static async updateUser(username, updatedData) {
+    let res = await this.request(`players/${username}`, updatedData, "patch");
+    return res;
+  }
 }
 
 export default WarApi;
