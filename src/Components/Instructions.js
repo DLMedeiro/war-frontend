@@ -7,7 +7,6 @@ function Instructions() {
     <div className="modal-body">
       <h1>This is how you play the card game War!</h1>
       <p>
-        {" "}
         <b>Objective: </b>The objective of the game is to win all cards.
       </p>
       <p>
