@@ -36,6 +36,7 @@ function SignupForm() {
     }));
   };
 
+  // Need to consolidate with LoginForm
   async function login(data, username) {
     let res = await WarApi.loginUser(data);
     if (res) {
