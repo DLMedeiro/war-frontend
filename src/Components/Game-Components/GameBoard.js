@@ -35,9 +35,15 @@ function GameBoard() {
   // Computer play functionality
 
   useEffect(() => {
-    new Toast({
-      message: `${players[1].player2}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
-    });
+    if (players.player1 === "Computer") {
+      new Toast({
+        message: `${players[1].player2}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+      });
+    } else {
+      new Toast({
+        message: `${players[0].player1}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+      });
+    }
   }, []);
 
   useEffect(() => {
