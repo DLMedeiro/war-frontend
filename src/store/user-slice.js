@@ -40,10 +40,11 @@ export const registerUser = createAsyncThunk(`auth/register`, async (data) => {
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { isLoggedIn: false },
+  initialState: { isLoggedIn: false, currentUser: {} },
   reducers: {
     logout: (state) => {
       state.isLoggedIn = false;
+      state.currentUser = {};
       localStorage.clear();
     },
   },
@@ -53,6 +54,7 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
+      state.currentUser = action.payload;
     },
     [loginUser.rejected]: (state, action) => {
       state.loading = false;
@@ -62,6 +64,7 @@ const userSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
+      state.currentUser = action.payload;
     },
     [registerUser.rejected]: (state, action) => {
       state.loading = false;

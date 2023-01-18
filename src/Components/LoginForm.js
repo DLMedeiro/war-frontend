@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { redirect } from "react-router-dom";
 import { loginUser } from "../store/user-slice";
+import userSlice from "../store/user-slice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const INITIAL_STATE = {
     username: "",
     password: "",
@@ -25,6 +27,7 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(loginUser(formData));
     setFormData(INITIAL_STATE);
+    console.log(currentUser);
   };
 
   useEffect(() => {
