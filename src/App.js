@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./Components/Navbar";
 
-import Home from "./Components/Home";
 import LoginForm from "./Components/LoginForm";
 import Instructions from "./Components/Instructions";
-import SetPlayerForm from "./Components/Game-Components/SetPlayerForm";
+
 import SignUpForm from "./Components/SignUpForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GameSetup from "./Components/Game-Components/GameSetup";
@@ -15,8 +14,7 @@ import WelcomeUser from "./Components/WelcomeUser";
 import Profile from "./Components/Profile";
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const players = useSelector((state) => state.players.players);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   return (
     <div className="App">
@@ -29,6 +27,7 @@ function App() {
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/newGame" element={<GameSetup />}></Route>
           <Route path="/logout" element={<LoginForm />}></Route>
+          <Route path="/signup" element={<WelcomeUser />}></Route>
         </Routes>
       ) : (
         <Routes>

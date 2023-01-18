@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
@@ -9,10 +10,7 @@ import {
   FormGroup,
   Form,
 } from "reactstrap";
-import WarApi from "../warApi";
-import Toast from "./Toast";
-import "./Toast.css";
-import { authActions } from "../store/auth-slice";
+import { registerUser } from "../store/user-slice";
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -25,8 +23,7 @@ function SignupForm() {
     password: "",
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
-  const [currentUser, setCurrentUser] = useState({});
-  const [token, setToken] = useState({});
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,46 +33,16 @@ function SignupForm() {
     }));
   };
 
-  // Need to consolidate with LoginForm
-  async function login(data, username) {
-    let res = await WarApi.loginUser(data);
-    if (res) {
-      let user = await WarApi.loggedInUser(username);
-      console.log(user);
-      setToken(res);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", JSON.stringify(res));
-      dispatch(authActions.login());
-      new Toast({
-        message: `Welcome ${user.player.firstName}`,
-        type: "success",
-      });
-    }
-  }
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user"))) {
-      setCurrentUser(JSON.parse(localStorage.getItem("user")));
-    }
-  }, [token]);
-
-  async function registerNewUser(data) {
-    let newUserToken = await WarApi.registerUser(data);
-    if (newUserToken) {
-      let newUser = {
-        username: data.username,
-        password: data.password,
-      };
-      login(newUser, data.username);
-    }
-  }
-
   const submit = (e) => {
     e.preventDefault();
-    // console.log(formData);
-    registerNewUser(formData);
-    // setFormData(INITIAL_STATE);
+    dispatch(registerUser(formData));
+    setFormData(INITIAL_STATE);
   };
+  useEffect(() => {
+    if (isLoggedIn) {
+      return redirect("/");
+    }
+  }, [isLoggedIn]);
   return (
     <section>
       <h1>Create New Account</h1>

@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { playersActions } from "../../store/player-slice";
-import WarApi from "../../warApi";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
@@ -35,13 +34,6 @@ const SetPlayerForm = () => {
       setPlayer2(value);
     }
   };
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((formData) => ({
-  //     ...formData,
-  //     [name]: value,
-  //   }));
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,20 +56,8 @@ const SetPlayerForm = () => {
       setFormData(INITIAL_STATE);
       return redirect("/newGame");
     }
-
-    // clearCards();
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(playersActions.addPlayer(formData));
-  //   console.log(players);
-  //   dispatch(fetchCards());
-  //   setFormData(INITIAL_STATE);
-  //   // clearCards();
-  // };
-  // async function clearCards() {
-  //   await WarApi.removeCards();
-  // }
+
   return (
     <form onSubmit={handleSubmit}>
       {player1 === "Computer" ? (
@@ -116,15 +96,6 @@ const SetPlayerForm = () => {
       >
         Let's Play!
       </button>
-      {/* <Link
-        type="button"
-        id="btn-login"
-        className="btn btn-primary btn-lg btn-block"
-        onClick={handleSubmit}
-        to="/newGame"
-      >
-        Let's Play!
-      </Link> */}
     </form>
   );
 };

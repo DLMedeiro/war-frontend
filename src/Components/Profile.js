@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import SetPlayerForm from "./Game-Components/SetPlayerForm";
 
 function Profile() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   return (
     <div>
       <h1>Welcome User!</h1>

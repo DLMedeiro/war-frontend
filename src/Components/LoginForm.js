@@ -1,39 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../store/auth-slice";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { redirect } from "react-router-dom";
-import WarApi from "../warApi";
-import Toast from "./Toast";
-import "./Toast.css";
+import { loginUser } from "../store/user-slice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const INITIAL_STATE = {
     username: "",
     password: "",
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
-  // Need to consolidate with SignUpForm
-  const [token, setToken] = useState({});
-
-  // Need to consolidate with SignUpForm
-  async function login(data, username) {
-    let res = await WarApi.loginUser(data);
-    if (res) {
-      let user = await WarApi.loggedInUser(username);
-      console.log(user);
-      setToken(res);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("token", JSON.stringify(res));
-      dispatch(authActions.login());
-      new Toast({
-        message: `Welcome ${user.player.firstName}`,
-        type: "success",
-      });
-    }
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,10 +23,8 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch the actions
-    login(formData, formData.username);
+    dispatch(loginUser(formData));
     setFormData(INITIAL_STATE);
-    // return redirect("/");
   };
 
   useEffect(() => {

@@ -11,7 +11,7 @@ function Home() {
   const [showGuest, setShowGuest] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   function showLoginForm() {
     setShowSignUp(false);

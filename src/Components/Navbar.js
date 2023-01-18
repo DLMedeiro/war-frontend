@@ -3,7 +3,7 @@ import "./NavBar.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { authActions } from "../store/auth-slice";
+import { userActions } from "../store/user-slice";
 import { cardsActions, clearCards } from "../store/cards-slice";
 import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
@@ -11,11 +11,11 @@ import { playersActions } from "../store/player-slice";
 import InstructionModal from "./Game-Components/InstructionModal";
 
 function NavBar() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const players = useSelector((state) => state.players.players);
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(authActions.logout());
+    dispatch(userActions.logout());
   };
   // State for Instruction Modal
   const [show, setShow] = useState(false);
