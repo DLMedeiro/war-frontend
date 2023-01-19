@@ -344,7 +344,6 @@ function PlayerWar({ player }) {
 
   return (
     <div>
-      {console.log(player)}
       {player === "Player1" ? (
         <div className="inner-container">
           {player1War.length > 0 ? (

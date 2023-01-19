@@ -234,14 +234,10 @@ function GameBoard() {
   }, [player1War, player2War]);
 
   useEffect(() => {
-    console.log(player1War);
-    console.log(player2War);
     if (player1War.length > 0 && player1War.length === player2War.length) {
       setP1Compare(player1War[player1War.length - 1].game_value);
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
-    console.log(p1Compare);
-    console.log(p2Compare);
   }, [player1War, player2War]);
 
   useEffect(() => {
@@ -305,7 +301,7 @@ function GameBoard() {
         message:
           "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
       });
-      if (players[0].player1 !== "Computer") {
+      if (player1.name !== "Computer") {
         checkEndGame();
         setDisableP1Btn(false);
       } else {
@@ -362,10 +358,13 @@ function GameBoard() {
 
       {/* -------------------------------------------------------- */}
       {/* 2nd row for battles */}
-      {/* <div className="row">
-        <PlayerBattle player={"Player1"} />
-        <PlayerBattle player={"Player2"} />
-      </div> */}
+      {player1Battle.length > 0 ? (
+        <div className="row">
+          <PlayerBattle />
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

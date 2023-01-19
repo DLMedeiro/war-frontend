@@ -130,7 +130,7 @@ function Players(player) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
     } else if (player1Battle.length === 0) {
-      if (players[0].player1 === "Computer") {
+      if (player1.name === "Computer") {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[1]));
