@@ -13,7 +13,7 @@ import Toast from "../../Components/Toast";
 import "../../Components/Toast.css";
 import Players from "./Players";
 
-function PlayerBattle() {
+function PlayerBattle({ battleStartingIndex }) {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const players = useSelector((state) => state.players.players);
   const player1Cards = useSelector((state) => state.player1.cards);
@@ -279,6 +279,7 @@ function PlayerBattle() {
     <div className="column">
       {/* <div className="stacked-outer-container"> */}
       <div className="stacked-outer-container">
+        {console.log(player1Battle)}
         {/* {player1Battle.map((card) => (
           <div
             className="playerCard card-1"
@@ -288,25 +289,27 @@ function PlayerBattle() {
           ></div>
         ))} */}
 
-        {player1Battle.length > 0 ? (
+        {player1Battle.length >= 1 ||
+        player1Battle.length >= 4 ||
+        player1Battle.length >= 7 ? (
           <div
             className="playerCard card-1"
             style={{
-              backgroundImage: `url(${
-                player1Battle[player1Battle.length - 1].image_url
-              })`,
+              backgroundImage: `url(${player1Battle[battleStartingIndex].image_url})`,
             }}
           ></div>
         ) : (
           <div> </div>
           // <div className="playerCard card-placeholder-1"> </div>
         )}
-        {player1Battle.length > 1 ? (
+        {player1Battle.length >= 2 ||
+        player1Battle.length >= 5 ||
+        player1Battle.length >= 8 ? (
           <div
             className="playerCard card-2"
             style={{
               backgroundImage: `url(${
-                player1Battle[player1Battle.length - 2].image_url
+                player1Battle[battleStartingIndex + 1].image_url
               })`,
             }}
           ></div>
@@ -314,12 +317,14 @@ function PlayerBattle() {
           <div> </div>
           // <div className="playerCard card-placeholder-2"> </div>
         )}
-        {player1Battle.length > 2 ? (
+        {player1Battle.length >= 3 ||
+        player1Battle.length >= 6 ||
+        player1Battle.length >= 9 ? (
           <div
             className="playerCard card-3"
             style={{
               backgroundImage: `url(${
-                player1Battle[player1Battle.length - 3].image_url
+                player1Battle[battleStartingIndex + 2].image_url
               })`,
             }}
           ></div>
@@ -331,7 +336,9 @@ function PlayerBattle() {
           <div
             className="playerCard card-4"
             style={{
-              backgroundImage: `url(${player1War[1].image_url})`,
+              backgroundImage: `url(${
+                player1War[player1War.length - 1].image_url
+              })`,
             }}
           ></div>
         ) : (
@@ -344,25 +351,27 @@ function PlayerBattle() {
       <div className="stacked-outer-container">
         <div className="inner-container"></div>
 
-        {player2Battle.length > 0 ? (
+        {player2Battle.length >= 1 ||
+        player2Battle.length >= 4 ||
+        player2Battle.length >= 7 ? (
           <div
             className="playerCard card-1"
             style={{
-              backgroundImage: `url(${
-                player2Battle[player2Battle.length - 1].image_url
-              })`,
+              backgroundImage: `url(${player2Battle[battleStartingIndex].image_url})`,
             }}
           ></div>
         ) : (
           <div></div>
           // <div className="playerCard card-placeholder-1"></div>
         )}
-        {player2Battle.length > 1 ? (
+        {player2Battle.length >= 2 ||
+        player2Battle.length >= 5 ||
+        player2Battle.length >= 8 ? (
           <div
             className="playerCard card-2"
             style={{
               backgroundImage: `url(${
-                player2Battle[player2Battle.length - 2].image_url
+                player2Battle[battleStartingIndex + 1].image_url
               })`,
             }}
           ></div>
@@ -370,12 +379,14 @@ function PlayerBattle() {
           <div></div>
           // <div className="playerCard card-placeholder-2"></div>
         )}
-        {player2Battle.length > 2 ? (
+        {player2Battle.length >= 3 ||
+        player2Battle.length >= 6 ||
+        player2Battle.length >= 9 ? (
           <div
             className="playerCard card-3"
             style={{
               backgroundImage: `url(${
-                player2Battle[player2Battle.length - 3].image_url
+                player2Battle[battleStartingIndex + 2].image_url
               })`,
             }}
           ></div>
@@ -387,7 +398,9 @@ function PlayerBattle() {
           <div
             className="playerCard card-4"
             style={{
-              backgroundImage: `url(${player2War[1].image_url})`,
+              backgroundImage: `url(${
+                player2War[player2War.length - 1].image_url
+              })`,
             }}
           ></div>
         ) : (

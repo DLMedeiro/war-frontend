@@ -26,9 +26,8 @@ const player2Slice = createSlice({
     removeFromWar: (state, action) => {
       state.war = [];
     },
-    // Change to unshift to add to beginning to fit in with UI format
     addToBattle: (state, action) => {
-      state.battle.unshift(action.payload);
+      state.battle.push(action.payload);
     },
     removeFromBattle: (state, action) => {
       state.battle = [];

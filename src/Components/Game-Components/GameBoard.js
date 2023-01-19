@@ -360,12 +360,20 @@ function GameBoard() {
 
       {/* -------------------------------------------------------- */}
       {/* 2nd row for battles */}
-      {player1Battle.length > 0 ? (
+      {player1Battle.length > 0 && (
         <div className="row">
-          <PlayerBattle />
+          <PlayerBattle battleStartingIndex={0} />
         </div>
-      ) : (
-        <div></div>
+      )}
+      {player1Battle.length > 3 && (
+        <div className="row">
+          <PlayerBattle battleStartingIndex={3} />
+        </div>
+      )}
+      {player1Battle.length > 6 && (
+        <div className="row">
+          <PlayerBattle battleStartingIndex={6} />
+        </div>
       )}
     </div>
   );
