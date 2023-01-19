@@ -177,27 +177,18 @@ function Players(player) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 0) {
-      console.log(player2Cards[0]);
+      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
-      console.log(player2Cards[0]);
+      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 3) {
-      console.log(player2Cards[0]);
+      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      console.log(player2War);
-    } else if (player2Battle.length > 3 && player2Battle.length < 6) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToBattle(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length === 6) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToWar(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-      console.log(player2War);
+      // console.log(player2War);
     }
   };
 

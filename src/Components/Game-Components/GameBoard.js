@@ -256,46 +256,48 @@ function GameBoard() {
       // add all cards to p1 collection
       for (let card in player1War) {
         dispatch(player1Actions.addToCollection(player1War[card]));
+        dispatch(player1Actions.removeFromWar());
       }
       for (let card in player2War) {
         dispatch(player1Actions.addToCollection(player2War[card]));
+        dispatch(player2Actions.removeFromWar());
       }
       if (player1Battle.length > 0 && player2Battle.length > 0) {
         for (let card in player1Battle) {
           dispatch(player1Actions.addToCollection(player1Battle[card]));
+          dispatch(player1Actions.removeFromBattle());
         }
         for (let card in player2Battle) {
           dispatch(player1Actions.addToCollection(player2Battle[card]));
+          dispatch(player2Actions.removeFromBattle());
         }
       }
       setP1Compare(0);
       setP2Compare(0);
-      dispatch(player1Actions.removeFromWar());
-      dispatch(player2Actions.removeFromWar());
-      dispatch(player1Actions.removeFromBattle());
-      dispatch(player2Actions.removeFromBattle());
     } else if (p1Compare < p2Compare) {
       // add all cards to p2 collection
       for (let card in player1War) {
         dispatch(player2Actions.addToCollection(player1War[card]));
+        dispatch(player1Actions.removeFromWar());
       }
       for (let card in player2War) {
         dispatch(player2Actions.addToCollection(player2War[card]));
+        dispatch(player2Actions.removeFromWar());
       }
       if (player1Battle.length > 0 && player2Battle.length > 0) {
         for (let card in player1Battle) {
           dispatch(player2Actions.addToCollection(player1Battle[card]));
+          dispatch(player1Actions.removeFromBattle());
         }
         for (let card in player2Battle) {
           dispatch(player2Actions.addToCollection(player2Battle[card]));
+          dispatch(player2Actions.removeFromBattle());
         }
       }
       setP1Compare(0);
       setP2Compare(0);
-      dispatch(player1Actions.removeFromWar());
-      dispatch(player2Actions.removeFromWar());
+
       dispatch(player1Actions.removeFromBattle());
-      dispatch(player2Actions.removeFromBattle());
     } else if (p1Compare === p2Compare) {
       new Toast({
         message:

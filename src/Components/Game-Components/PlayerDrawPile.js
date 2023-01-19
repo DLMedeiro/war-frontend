@@ -127,32 +127,23 @@ function PlayerDrawPile({ player }) {
     } else if (player1Battle.length === 0) {
       if (player1.name === "Computer") {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
-        console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[1]));
-        console.log(player1Cards[1]);
         dispatch(player1Actions.addToBattle(player1Cards[2]));
-        console.log(player1Cards[2]);
         dispatch(player1Actions.addToWar(player1Cards[3]));
-        console.log(player1Cards[3]);
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
       } else {
-        console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         dispatch(player1Actions.removeCard());
       }
     } else if (player1Battle.length > 0 && player1Battle.length < 3) {
-      console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
     } else if (player1Battle.length === 3) {
-      console.log("test");
-      console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      console.log(player1War);
       dispatch(player1Actions.changeTurn());
       dispatch(player2Actions.changeTurn());
     }
@@ -162,27 +153,20 @@ function PlayerDrawPile({ player }) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 0) {
-      console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
-      console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 3) {
-      console.log(player2Cards[0]);
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      console.log(player2War);
     } else if (player2Battle.length > 3 && player2Battle.length < 6) {
-      console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 6) {
-      console.log(player2Cards[0]);
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      console.log(player2War);
     }
   };
 

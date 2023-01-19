@@ -233,86 +233,11 @@ function PlayerBattle() {
   }, [player1War, player2War]);
 
   useEffect(() => {
-    console.log(player1War);
-    console.log(player2War);
     if (player1War.length > 0 && player1War.length === player2War.length) {
       setP1Compare(player1War[player1War.length - 1].game_value);
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
-    console.log(p1Compare);
-    console.log(p2Compare);
   }, [player1War, player2War]);
-
-  useEffect(() => {
-    if (p1Compare > 0 && p2Compare > 0) {
-      if (player2War.length > 1) {
-        // Set longer time for battle
-        setTimeout(checkForWin, 6000);
-      } else {
-        setTimeout(checkForWin, 2000);
-      }
-    }
-  }, [p2Compare, p1Compare]);
-
-  const checkForWin = () => {
-    if (p1Compare > p2Compare) {
-      // add all cards to p1 collection
-      for (let card in player1War) {
-        dispatch(player1Actions.addToCollection(player1War[card]));
-      }
-      for (let card in player2War) {
-        dispatch(player1Actions.addToCollection(player2War[card]));
-      }
-      if (player1Battle.length > 0 && player2Battle.length > 0) {
-        for (let card in player1Battle) {
-          dispatch(player1Actions.addToCollection(player1Battle[card]));
-        }
-        for (let card in player2Battle) {
-          dispatch(player1Actions.addToCollection(player2Battle[card]));
-        }
-      }
-      setP1Compare(0);
-      setP2Compare(0);
-      dispatch(player1Actions.removeFromWar());
-      dispatch(player2Actions.removeFromWar());
-      dispatch(player1Actions.removeFromBattle());
-      dispatch(player2Actions.removeFromBattle());
-    } else if (p1Compare < p2Compare) {
-      // add all cards to p2 collection
-      for (let card in player1War) {
-        dispatch(player2Actions.addToCollection(player1War[card]));
-      }
-      for (let card in player2War) {
-        dispatch(player2Actions.addToCollection(player2War[card]));
-      }
-      if (player1Battle.length > 0 && player2Battle.length > 0) {
-        for (let card in player1Battle) {
-          dispatch(player2Actions.addToCollection(player1Battle[card]));
-        }
-        for (let card in player2Battle) {
-          dispatch(player2Actions.addToCollection(player2Battle[card]));
-        }
-      }
-      setP1Compare(0);
-      setP2Compare(0);
-      dispatch(player1Actions.removeFromWar());
-      dispatch(player2Actions.removeFromWar());
-      dispatch(player1Actions.removeFromBattle());
-      dispatch(player2Actions.removeFromBattle());
-    } else if (p1Compare === p2Compare) {
-      new Toast({
-        message:
-          "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
-      });
-      if (player1.name !== "Computer") {
-        checkEndGame();
-        setDisableP1Btn(false);
-      } else {
-        checkEndGame();
-        setDisableP2Btn(false);
-      }
-    }
-  };
 
   useEffect(() => {
     if (gameStatus) {
