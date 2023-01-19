@@ -7,6 +7,7 @@ const player1Slice = createSlice({
     war: [],
     battle: [],
     collection: [],
+    playerTurn: false,
   },
   reducers: {
     addCard: (state, action) => {
@@ -39,6 +40,13 @@ const player1Slice = createSlice({
       state.war = [];
       state.battle = [];
       state.collection = [];
+    },
+    changeTurn: (state, action) => {
+      if (state.playerTurn) {
+        state.playerTurn = false;
+      } else {
+        state.playerTurn = true;
+      }
     },
   },
 });

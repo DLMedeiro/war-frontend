@@ -5,7 +5,7 @@ import SetPlayerForm from "./Game-Components/SetPlayerForm";
 
 function Profile() {
   const currentUser = useSelector((state) => state.user.currentUser.player);
-  console.log(currentUser);
+  // console.log(currentUser);
   return (
     <div>
       <h1>Welcome {currentUser.username}!</h1>

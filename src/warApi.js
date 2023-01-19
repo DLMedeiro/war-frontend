@@ -35,7 +35,7 @@ class WarApi {
   // log in a user
   static async loginUser(loginData) {
     let res = await this.request(`auth/token`, loginData, "post");
-    console.log(`res=${res}`);
+    // console.log(`res=${res}`);
 
     WarApi.token = res.token;
     localStorage.setItem("headToken", JSON.stringify(WarApi.token));

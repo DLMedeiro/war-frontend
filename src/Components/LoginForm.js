@@ -27,7 +27,7 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(loginUser(formData));
     setFormData(INITIAL_STATE);
-    console.log(currentUser);
+    // console.log(currentUser);
   };
 
   useEffect(() => {
