@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const player2Slice = createSlice({
   name: "player2",
   initialState: {
+    player: [],
     cards: [],
     war: [],
     battle: [],
@@ -10,6 +11,9 @@ const player2Slice = createSlice({
     playerTurn: false,
   },
   reducers: {
+    addPlayer: (state, action) => {
+      state.player = action.payload;
+    },
     addCard: (state, action) => {
       state.cards.push(action.payload);
     },

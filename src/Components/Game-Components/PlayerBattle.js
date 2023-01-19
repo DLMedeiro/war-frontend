@@ -12,9 +12,8 @@ import "./GameSetup.css";
 import Toast from "../../Components/Toast";
 import "../../Components/Toast.css";
 import Players from "./Players";
-import PlayerBattle from "./PlayerBattle";
 
-function GameBoard() {
+function PlayerBattle() {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const players = useSelector((state) => state.players.players);
   const player1Cards = useSelector((state) => state.player1.cards);
@@ -352,22 +351,193 @@ function GameBoard() {
   };
 
   return (
-    <div className="outer-container gameboard">
-      <div className="row">
-        {/* <div className="column side"></div> */}
-        {/* Player 1 Board - Draw and collection piles */}
-        <Players />
-        {/* <div className="column side"></div> */}
+    <div className="column">
+      {/* <div className="stacked-outer-container"> */}
+      <div className="stacked-outer-container">
+        {player1Battle.map((card) => (
+          <div
+            className="playerCard card-1"
+            style={{
+              backgroundImage: `url(${card.image_url})`,
+            }}
+          ></div>
+        ))}
+
+        <div>
+          <div>
+            {player1Battle.length > 0 ? (
+              <div
+                className="playerCard card-1"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 1].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-1"> </div>
+            )}
+            {player1Battle.length > 1 ? (
+              <div
+                className="playerCard card-2"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 2].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-2"> </div>
+            )}
+            {player1Battle.length > 2 ? (
+              <div
+                className="playerCard card-3"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 3].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-3"> </div>
+            )}
+
+            {player1Battle.length > 3 ? (
+              <div
+                className="playerCard card-1"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 4].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-1"> </div>
+            )}
+            {player1Battle.length > 4 ? (
+              <div
+                className="playerCard card-2"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 5].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-2"> </div>
+            )}
+            {player1Battle.length > 5 ? (
+              <div
+                className="playerCard card-3"
+                style={{
+                  backgroundImage: `url(${
+                    player1Battle[player1Battle.length - 6].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div> </div>
+              // <div className="playerCard card-placeholder-3"> </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* -------------------------------------------------------- */}
-      {/* 2nd row for battles */}
-      {/* <div className="row">
-        <PlayerBattle player={"Player1"} />
-        <PlayerBattle player={"Player2"} />
-      </div> */}
+      {/* Player 2 Portion */}
+      <div className="stacked-outer-container">
+        <div className="inner-container"></div>
+
+        <div>
+          <div>
+            {player2Battle.length > 0 ? (
+              <div
+                className="playerCard card-1"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 1].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-1"></div>
+            )}
+            {player2Battle.length > 1 ? (
+              <div
+                className="playerCard card-2"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 2].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-2"></div>
+            )}
+            {player2Battle.length > 2 ? (
+              <div
+                className="playerCard card-3"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 3].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-3"></div>
+            )}
+
+            {player2Battle.length > 3 ? (
+              <div
+                className="playerCard card-1"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 4].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-1"></div>
+            )}
+            {player2Battle.length > 4 ? (
+              <div
+                className="playerCard card-2"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 5].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-2"></div>
+            )}
+            {player2Battle.length > 5 ? (
+              <div
+                className="playerCard card-3"
+                style={{
+                  backgroundImage: `url(${
+                    player2Battle[player2Battle.length - 6].image_url
+                  })`,
+                }}
+              ></div>
+            ) : (
+              <div></div>
+              // <div className="playerCard card-placeholder-3"></div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default GameBoard;
+export default PlayerBattle;

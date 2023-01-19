@@ -20,6 +20,8 @@ function GameSetup() {
 
   const player2Cards = useSelector((state) => state.player2.cards);
 
+  const players = useSelector((state) => state.players.players);
+
   const winner = useSelector((state) => state.players.winner);
 
   const dispatch = useDispatch();
@@ -66,15 +68,7 @@ function GameSetup() {
 
   return (
     <>
-      {gameStatus == true ? (
-        <div>
-          <GameBoard />
-        </div>
-      ) : (
-        <div>
-          <SetPlayerForm />
-        </div>
-      )}
+      {gameStatus == true ? <GameBoard /> : <SetPlayerForm />}
 
       {winner.length > 0 && (
         <div>

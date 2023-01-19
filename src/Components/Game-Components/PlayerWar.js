@@ -9,17 +9,24 @@ import "./Card.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
 import "./GameSetup.css";
-import Toast from "../../Components/Toast";
+import Toast from "../Toast";
 import "../../Components/Toast.css";
 import PlayerCollection from "./PlayerCollection";
+import PlayerDrawPile from "./PlayerDrawPile";
 
-function PlayerDrawPile({ player }) {
-  const gameStatus = useSelector((state) => state.cardDeck.gameReady);
-  const players = useSelector((state) => state.players.players);
+function PlayerWar({ player }) {
+  // useEffect(() => {
+  //   if (player === "player1") {
+
+  //   }
+  // }, players);
+
+  // const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const player1Cards = useSelector((state) => state.player1.cards);
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
   const player1Collection = useSelector((state) => state.player1.collection);
+  const players = useSelector((state) => state.players.players);
   const player2Cards = useSelector((state) => state.player2.cards);
   const player2War = useSelector((state) => state.player2.war);
   const player2Battle = useSelector((state) => state.player2.battle);
@@ -29,24 +36,24 @@ function PlayerDrawPile({ player }) {
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
 
-  const [p1Compare, setP1Compare] = useState(0);
-  const [p2Compare, setP2Compare] = useState(0);
+  // const [p1Compare, setP1Compare] = useState(0);
+  // const [p2Compare, setP2Compare] = useState(0);
 
-  const [collection, setCollection] = useState([]);
+  // const [collection, setCollection] = useState([]);
   //   const [disableP1Btn, setDisableP1Btn] = useState(false);
   //   const [disableP2Btn, setDisableP2Btn] = useState(true);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (player1.name === "Computer") {
-      if (player2War.length === 1) {
-        setTimeout(p1War, 1000);
-      } else if (player2War.length === 2 && player1Battle.length === 0) {
-        setTimeout(p1War, 1000);
-      }
-    }
-  }, [player2War]);
+  //   useEffect(() => {
+  //     if (players[0].player1 === "Computer") {
+  //       if (player2War.length === 1) {
+  //         setTimeout(p1War, 1000);
+  //       } else if (player2War.length === 2 && player1Battle.length === 0) {
+  //         setTimeout(p1War, 1000);
+  //       }
+  //     }
+  //   }, [player2War]);
 
   //   const shuffle = (cards) => {
   //     let index = cards.length;
@@ -117,9 +124,6 @@ function PlayerDrawPile({ player }) {
   //     }
   //   }, [player1Cards, player2Cards]);
 
-  // const war = () => {
-  // }
-
   const p1War = () => {
     if (player1War.length === 0) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
@@ -127,101 +131,101 @@ function PlayerDrawPile({ player }) {
     } else if (player1Battle.length === 0) {
       if (players[0].player1 === "Computer") {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
-        console.log(player1Cards[0]);
+        // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[1]));
-        console.log(player1Cards[1]);
+        // console.log(player1Cards[1]);
         dispatch(player1Actions.addToBattle(player1Cards[2]));
-        console.log(player1Cards[2]);
+        // console.log(player1Cards[2]);
         dispatch(player1Actions.addToWar(player1Cards[3]));
-        console.log(player1Cards[3]);
+        // console.log(player1Cards[3]);
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
       } else {
-        console.log(player1Cards[0]);
+        // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         dispatch(player1Actions.removeCard());
       }
     } else if (player1Battle.length > 0 && player1Battle.length < 3) {
-      console.log(player1Cards[0]);
+      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
     } else if (player1Battle.length === 3) {
-      console.log(player1Cards[0]);
+      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      console.log(player1War);
+      //   console.log(player1War);
       dispatch(player1Actions.changeTurn());
       dispatch(player2Actions.changeTurn());
     } else if (player1Battle.length > 3 && player1Battle.length < 6) {
-      console.log(player1Cards[0]);
+      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
     } else if (player1Battle.length === 6) {
-      console.log(player1Cards[0]);
+      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      console.log(player1War);
+      //   console.log(player1War);
       dispatch(player1Actions.changeTurn());
       dispatch(player2Actions.changeTurn());
     }
   };
-  const p2War = () => {
-    if (player2War.length === 0) {
-      dispatch(player2Actions.addToWar(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length === 0) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToBattle(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length > 0 && player2Battle.length < 3) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToBattle(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length === 3) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToWar(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-      console.log(player2War);
-    } else if (player2Battle.length > 3 && player2Battle.length < 6) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToBattle(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length === 6) {
-      console.log(player2Cards[0]);
-      dispatch(player2Actions.addToWar(player2Cards[0]));
-      dispatch(player2Actions.removeCard());
-      console.log(player2War);
-    }
-  };
+  //   const p2War = () => {
+  //     if (player2War.length === 0) {
+  //       dispatch(player2Actions.addToWar(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //     } else if (player2Battle.length === 0) {
+  //       console.log(player2Cards[0]);
+  //       dispatch(player2Actions.addToBattle(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
+  //       console.log(player2Cards[0]);
+  //       dispatch(player2Actions.addToBattle(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //     } else if (player2Battle.length === 3) {
+  //       console.log(player2Cards[0]);
+  //       dispatch(player2Actions.addToWar(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //       console.log(player2War);
+  //     } else if (player2Battle.length > 3 && player2Battle.length < 6) {
+  //       console.log(player2Cards[0]);
+  //       dispatch(player2Actions.addToBattle(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //     } else if (player2Battle.length === 6) {
+  //       console.log(player2Cards[0]);
+  //       dispatch(player2Actions.addToWar(player2Cards[0]));
+  //       dispatch(player2Actions.removeCard());
+  //       console.log(player2War);
+  //     }
+  //   };
 
-  useEffect(() => {
-    if (
-      (player1War.length === 1 && player2War.length === 0) ||
-      (player1War.length === 2 && player2War.length === 1)
-    ) {
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    } else if (player1War.length === 1 && player2War.length === 1) {
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name === "Computer"
-    ) {
-      //   dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name !== "Computer"
-    ) {
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    }
-  }, [player1War, player2War]);
+  //   useEffect(() => {
+  //     if (
+  //       (player1War.length === 1 && player2War.length === 0) ||
+  //       (player1War.length === 2 && player2War.length === 1)
+  //     ) {
+  //       dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     } else if (player1War.length === 1 && player2War.length === 1) {
+  //       dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     } else if (
+  //       player1War.length === 0 &&
+  //       player2War.length === 0 &&
+  //       players[0].player1 === "Computer"
+  //     ) {
+  //       //   dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     } else if (
+  //       player1War.length === 0 &&
+  //       player2War.length === 0 &&
+  //       players[0].player1 !== "Computer"
+  //     ) {
+  //       dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     }
+  //   }, [player1War, player2War]);
 
   //   useEffect(() => {
   //     console.log(player1War.length);
@@ -339,28 +343,47 @@ function PlayerDrawPile({ player }) {
   //   };
 
   return (
-    <div className="inner-container">
-      {player === "player1" ? (
-        <button
-          onClick={p1War}
-          className="clickCard"
-          style={{
-            backgroundImage: `url(${cardBack})`,
-          }}
-          // disabled={player1Turn}
-        ></button>
+    <div>
+      {console.log(player)}
+      {player === "Player1" ? (
+        <div className="inner-container">
+          {player1War.length > 0 ? (
+            <div>
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player1War[0].image_url})`,
+                }}
+              ></div>
+            </div>
+          ) : (
+            <div>
+              <div></div>
+              <div className="playerCard card-placeholder"></div>
+            </div>
+          )}
+        </div>
       ) : (
-        <button
-          onClick={p2War}
-          className="clickCard"
-          style={{
-            backgroundImage: `url(${cardBack})`,
-          }}
-          // disabled={player1Turn}
-        ></button>
+        <div className="inner-container">
+          {player2War.length > 0 ? (
+            <div>
+              <div
+                className="playerCard"
+                style={{
+                  backgroundImage: `url(${player2War[0].image_url})`,
+                }}
+              ></div>
+            </div>
+          ) : (
+            <div>
+              <div></div>
+              <div className="playerCard card-placeholder"></div>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
 }
 
-export default PlayerDrawPile;
+export default PlayerWar;
