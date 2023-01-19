@@ -12,7 +12,7 @@ import "./GameSetup.css";
 import Toast from "../../Components/Toast";
 import "../../Components/Toast.css";
 
-function PlayerCollection(player) {
+function PlayerCollection({ player }) {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const players = useSelector((state) => state.players.players);
   const player1Cards = useSelector((state) => state.player1.cards);
