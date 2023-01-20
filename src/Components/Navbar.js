@@ -29,6 +29,25 @@ function NavBar() {
     dispatch(clearCards());
   };
 
+  function loggedOut() {
+    return (
+      <ul className="nav justify-content-center">
+        <li className="nav-item nav-link">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/instructions">How to Play</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/login">Login</Link>
+          {/* LoginForm */}
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/signup">Create Account</Link>
+        </li>
+      </ul>
+    );
+  }
   function loggedIn() {
     return (
       <ul className="nav justify-content-center">
@@ -60,25 +79,6 @@ function NavBar() {
         <li className="nav-item nav-link">
           <Link onClick={() => setShow(true)}>How to Play</Link>
           <InstructionModal onClose={() => setShow(false)} show={show} />
-        </li>
-      </ul>
-    );
-  }
-
-  function loggedOut() {
-    return (
-      <ul className="nav justify-content-center">
-        <li className="nav-item nav-link">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/instructions">How to Play</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/login">Login</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/signup">Create Account</Link>
         </li>
       </ul>
     );

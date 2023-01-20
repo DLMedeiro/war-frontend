@@ -45,7 +45,8 @@ class WarApi {
 
   // Pull user information after login
   static async loggedInUser(username) {
-    let res = await this.request(`players/${username}`);
+    let res = await this.request(`users/${username}`);
+    console.log(res);
     return res;
   }
 
@@ -57,7 +58,7 @@ class WarApi {
 
   // Update user
   static async updateUser(username, updatedData) {
-    let res = await this.request(`players/${username}`, updatedData, "patch");
+    let res = await this.request(`users/${username}`, updatedData, "patch");
     return res;
   }
 }

@@ -38,18 +38,6 @@ function PlayerBattle({ battleStartingIndex }) {
 
   // Computer play functionality
 
-  useEffect(() => {
-    if (player1.name === "Computer") {
-      new Toast({
-        message: `${player2.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
-      });
-    } else {
-      new Toast({
-        message: `${player1.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
-      });
-    }
-  }, []);
-
   // useEffect(() => {
   //   if (players[0].player1 === "Computer") {
   //     if (player2War.length === 1) {

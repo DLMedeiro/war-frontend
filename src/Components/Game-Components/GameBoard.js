@@ -27,6 +27,8 @@ function GameBoard() {
   const player2Collection = useSelector((state) => state.player2.collection);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
+  const player1Turn = useSelector((state) => state.player1.playerTurn);
+  const player2Turn = useSelector((state) => state.player2.playerTurn);
 
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
@@ -41,6 +43,8 @@ function GameBoard() {
 
   useEffect(() => {
     if (player1.name === "Computer") {
+      dispatch(player1Actions.changeTurn());
+      dispatch(player2Actions.changeTurn());
       new Toast({
         message: `${player2.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
       });
@@ -206,32 +210,29 @@ function GameBoard() {
   //   }
   // };
 
-  useEffect(() => {
-    if (
-      (player1War.length === 1 && player2War.length === 0) ||
-      (player1War.length === 2 && player2War.length === 1)
-    ) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(false);
-    } else if (player1War.length === 1 && player2War.length === 1) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(true);
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name === "Computer"
-    ) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(false);
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name !== "Computer"
-    ) {
-      setDisableP1Btn(false);
-      setDisableP2Btn(true);
-    }
-  }, [player1War, player2War]);
+  // useEffect(() => {
+  //   if (
+  //     (player1War.length === 1 && player2War.length === 0) ||
+  //     (player1War.length === 2 && player2War.length === 1)
+  //   ) {
+  //   } else if (player1War.length === 1 && player2War.length === 1) {
+
+  //   } else if (
+  //     player1War.length === 0 &&
+  //     player2War.length === 0 &&
+  //     player1.name === "Computer"
+  //   ) {
+  //     setDisableP1Btn(true);
+  //     setDisableP2Btn(false);
+  //   } else if (
+  //     player1War.length === 0 &&
+  //     player2War.length === 0 &&
+  //     player1.name !== "Computer"
+  //   ) {
+  //     setDisableP1Btn(false);
+  //     setDisableP2Btn(true);
+  //   }
+  // }, [player1War, player2War]);
 
   useEffect(() => {
     if (player1War.length > 0 && player1War.length === player2War.length) {
@@ -271,6 +272,8 @@ function GameBoard() {
           dispatch(player1Actions.addToCollection(player2Battle[card]));
           dispatch(player2Actions.removeFromBattle());
         }
+        dispatch(player1Actions.changeTurn());
+        dispatch(player2Actions.changeTurn());
       }
       setP1Compare(0);
       setP2Compare(0);
@@ -298,6 +301,8 @@ function GameBoard() {
       setP2Compare(0);
 
       dispatch(player1Actions.removeFromBattle());
+      dispatch(player1Actions.changeTurn());
+      dispatch(player2Actions.changeTurn());
     } else if (p1Compare === p2Compare) {
       new Toast({
         message:
@@ -305,10 +310,10 @@ function GameBoard() {
       });
       if (player1.name !== "Computer") {
         checkEndGame();
-        setDisableP1Btn(false);
+        // setDisableP1Btn(false);
       } else {
         checkEndGame();
-        setDisableP2Btn(false);
+        // setDisableP2Btn(false);
       }
     }
   };

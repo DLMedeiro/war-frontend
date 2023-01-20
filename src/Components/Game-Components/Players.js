@@ -12,7 +12,6 @@ import "./GameSetup.css";
 import Toast from "../Toast";
 import "../../Components/Toast.css";
 import PlayerCollection from "./PlayerCollection";
-import PlayerDrawPile from "./PlayerDrawPile";
 import PlayerWar from "./PlayerWar";
 
 function Players(player) {
@@ -32,8 +31,8 @@ function Players(player) {
   const player2War = useSelector((state) => state.player2.war);
   const player2Battle = useSelector((state) => state.player2.battle);
   const player2Collection = useSelector((state) => state.player2.collection);
-  const player1Turn = useSelector((state) => state.player1.playerTurn);
-  const player2Turn = useSelector((state) => state.player2.playerTurn);
+  const player1Turn = useSelector((state) => state.player1.playerBtn);
+  const player2Turn = useSelector((state) => state.player2.playerBtn);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
 
@@ -157,8 +156,6 @@ function Players(player) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
       //   console.log(player1War);
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
     } else if (player1Battle.length > 3 && player1Battle.length < 6) {
       //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
@@ -168,8 +165,15 @@ function Players(player) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
       //   console.log(player1War);
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
+    } else if (player1Battle.length > 6 && player1Battle.length < 9) {
+      //   console.log(player1Cards[0]);
+      dispatch(player1Actions.addToBattle(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+    } else if (player1Battle.length === 9) {
+      //   console.log(player1Cards[0]);
+      dispatch(player1Actions.addToWar(player1Cards[0]));
+      dispatch(player1Actions.removeCard());
+      //   console.log(player1War);
     }
   };
   const p2War = () => {
@@ -177,18 +181,26 @@ function Players(player) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 0) {
-      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
-      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
     } else if (player2Battle.length === 3) {
-      // console.log(player2Cards[0]);
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      // console.log(player2War);
+    } else if (player2Battle.length > 3 && player2Battle.length < 6) {
+      dispatch(player2Actions.addToBattle(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 6) {
+      dispatch(player2Actions.addToWar(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length > 6 && player2Battle.length < 9) {
+      dispatch(player2Actions.addToBattle(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
+    } else if (player2Battle.length === 9) {
+      dispatch(player2Actions.addToWar(player2Cards[0]));
+      dispatch(player2Actions.removeCard());
     }
   };
 
@@ -349,7 +361,7 @@ function Players(player) {
             style={{
               backgroundImage: `url(${cardBack})`,
             }}
-            // disabled={player1Turn}
+            disabled={player1Turn}
           ></button>
           <PlayerWar player={"Player1"} />
         </div>
@@ -367,7 +379,7 @@ function Players(player) {
             style={{
               backgroundImage: `url(${cardBack})`,
             }}
-            // disabled={player1Turn}
+            disabled={player2Turn}
           ></button>
           <PlayerWar player={"Player2"} />
         </div>

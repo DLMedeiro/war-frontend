@@ -12,7 +12,6 @@ import "./GameSetup.css";
 import Toast from "../Toast";
 import "../../Components/Toast.css";
 import PlayerCollection from "./PlayerCollection";
-import PlayerDrawPile from "./PlayerDrawPile";
 
 function PlayerWar({ player }) {
   // useEffect(() => {
@@ -124,53 +123,53 @@ function PlayerWar({ player }) {
   //     }
   //   }, [player1Cards, player2Cards]);
 
-  const p1War = () => {
-    if (player1War.length === 0) {
-      dispatch(player1Actions.addToWar(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-    } else if (player1Battle.length === 0) {
-      if (players[0].player1 === "Computer") {
-        dispatch(player1Actions.addToBattle(player1Cards[0]));
-        // console.log(player1Cards[0]);
-        dispatch(player1Actions.addToBattle(player1Cards[1]));
-        // console.log(player1Cards[1]);
-        dispatch(player1Actions.addToBattle(player1Cards[2]));
-        // console.log(player1Cards[2]);
-        dispatch(player1Actions.addToWar(player1Cards[3]));
-        // console.log(player1Cards[3]);
-        dispatch(player1Actions.removeCard());
-        dispatch(player1Actions.removeCard());
-        dispatch(player1Actions.removeCard());
-        dispatch(player1Actions.removeCard());
-      } else {
-        // console.log(player1Cards[0]);
-        dispatch(player1Actions.addToBattle(player1Cards[0]));
-        dispatch(player1Actions.removeCard());
-      }
-    } else if (player1Battle.length > 0 && player1Battle.length < 3) {
-      //   console.log(player1Cards[0]);
-      dispatch(player1Actions.addToBattle(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-    } else if (player1Battle.length === 3) {
-      //   console.log(player1Cards[0]);
-      dispatch(player1Actions.addToWar(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-      //   console.log(player1War);
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    } else if (player1Battle.length > 3 && player1Battle.length < 6) {
-      //   console.log(player1Cards[0]);
-      dispatch(player1Actions.addToBattle(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-    } else if (player1Battle.length === 6) {
-      //   console.log(player1Cards[0]);
-      dispatch(player1Actions.addToWar(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-      //   console.log(player1War);
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-    }
-  };
+  //   const p1War = () => {
+  //     if (player1War.length === 0) {
+  //       dispatch(player1Actions.addToWar(player1Cards[0]));
+  //       dispatch(player1Actions.removeCard());
+  //     } else if (player1Battle.length === 0) {
+  //       if (players[0].player1 === "Computer") {
+  //         dispatch(player1Actions.addToBattle(player1Cards[0]));
+  //         // console.log(player1Cards[0]);
+  //         dispatch(player1Actions.addToBattle(player1Cards[1]));
+  //         // console.log(player1Cards[1]);
+  //         dispatch(player1Actions.addToBattle(player1Cards[2]));
+  //         // console.log(player1Cards[2]);
+  //         dispatch(player1Actions.addToWar(player1Cards[3]));
+  //         // console.log(player1Cards[3]);
+  //         dispatch(player1Actions.removeCard());
+  //         dispatch(player1Actions.removeCard());
+  //         dispatch(player1Actions.removeCard());
+  //         dispatch(player1Actions.removeCard());
+  //       } else {
+  //         // console.log(player1Cards[0]);
+  //         dispatch(player1Actions.addToBattle(player1Cards[0]));
+  //         dispatch(player1Actions.removeCard());
+  //       }
+  //     } else if (player1Battle.length > 0 && player1Battle.length < 3) {
+  //       //   console.log(player1Cards[0]);
+  //       dispatch(player1Actions.addToBattle(player1Cards[0]));
+  //       dispatch(player1Actions.removeCard());
+  //     } else if (player1Battle.length === 3) {
+  //       //   console.log(player1Cards[0]);
+  //       dispatch(player1Actions.addToWar(player1Cards[0]));
+  //       dispatch(player1Actions.removeCard());
+  //       //   console.log(player1War);
+  //       dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     } else if (player1Battle.length > 3 && player1Battle.length < 6) {
+  //       //   console.log(player1Cards[0]);
+  //       dispatch(player1Actions.addToBattle(player1Cards[0]));
+  //       dispatch(player1Actions.removeCard());
+  //     } else if (player1Battle.length === 6) {
+  //       //   console.log(player1Cards[0]);
+  //       dispatch(player1Actions.addToWar(player1Cards[0]));
+  //       dispatch(player1Actions.removeCard());
+  //       //   console.log(player1War);
+  //       dispatch(player1Actions.changeTurn());
+  //       dispatch(player2Actions.changeTurn());
+  //     }
+  //   };
   //   const p2War = () => {
   //     if (player2War.length === 0) {
   //       dispatch(player2Actions.addToWar(player2Cards[0]));

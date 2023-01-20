@@ -8,7 +8,7 @@ const player2Slice = createSlice({
     war: [],
     battle: [],
     collection: [],
-    playerTurn: false,
+    playerBtn: true,
   },
   reducers: {
     addPlayer: (state, action) => {
@@ -46,10 +46,10 @@ const player2Slice = createSlice({
       state.collection = [];
     },
     changeTurn: (state, action) => {
-      if (state.playerTurn) {
-        state.playerTurn = false;
+      if (state.playerBtn === true) {
+        state.playerBtn = false;
       } else {
-        state.playerTurn = true;
+        state.playerBtn = true;
       }
     },
   },
