@@ -87,7 +87,7 @@ function NavBar() {
   return (
     <div>
       {players.length <= 1 ? (
-        <>{isLoggedIn ? loggedIn() : loggedOut()}</>
+        <>{isLoggedIn === true ? loggedIn() : loggedOut()}</>
       ) : (
         <>{gamePlay()}</>
       )}

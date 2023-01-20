@@ -7,10 +7,10 @@ export const loginUser = createAsyncThunk(`auth/token`, async (data) => {
   const response = await WarApi.loginUser(data);
   if (response) {
     let user = await WarApi.loggedInUser(data.username);
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user.user));
     localStorage.setItem("token", JSON.stringify(response));
     new Toast({
-      message: `Welcome ${user.player.firstName}`,
+      message: `Welcome ${user.user.firstName}`,
       type: "success",
     });
     return user;
@@ -27,10 +27,10 @@ export const registerUser = createAsyncThunk(`auth/register`, async (data) => {
     const response = await WarApi.loginUser(newUser);
     if (response) {
       let user = await WarApi.loggedInUser(newUser.username);
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user.user));
       localStorage.setItem("token", JSON.stringify(response));
       new Toast({
-        message: `Welcome ${user.player.firstName}`,
+        message: `Welcome ${user.user.firstName}`,
         type: "success",
       });
       return user;
@@ -54,7 +54,7 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.currentUser = action.payload;
+      state.currentUser = localStorage.getItem("user").value;
     },
     [loginUser.rejected]: (state, action) => {
       state.loading = false;
@@ -64,7 +64,7 @@ const userSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.currentUser = action.payload;
+      state.currentUser = localStorage.getItem("user").value;
     },
     [registerUser.rejected]: (state, action) => {
       state.loading = false;
