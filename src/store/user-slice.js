@@ -54,7 +54,7 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.currentUser = localStorage.getItem("user").value;
+      state.currentUser = JSON.parse(localStorage.getItem("user"));
     },
     [loginUser.rejected]: (state, action) => {
       state.loading = false;
@@ -64,7 +64,7 @@ const userSlice = createSlice({
     },
     [registerUser.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
-      state.currentUser = localStorage.getItem("user").value;
+      state.currentUser = JSON.parse(localStorage.getItem("user"));
     },
     [registerUser.rejected]: (state, action) => {
       state.loading = false;
