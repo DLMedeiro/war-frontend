@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cardsActions } from "../../store/cards-slice";
-import { playersActions } from "../../store/player-slice";
+import { playersActions } from "../../store/players-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import cardBack from "./back.png";
@@ -27,6 +27,7 @@ function GameBoard() {
   const player2Collection = useSelector((state) => state.player2.collection);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
+  const currentPlayer = useSelector((state) => state.players.currentPlayer);
   const player1Turn = useSelector((state) => state.player1.playerTurn);
   const player2Turn = useSelector((state) => state.player2.playerTurn);
 
@@ -42,18 +43,22 @@ function GameBoard() {
   // Computer play functionality
 
   useEffect(() => {
-    if (player1.name === "Computer") {
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
-      new Toast({
-        message: `${player2.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
-      });
-    } else {
-      new Toast({
-        message: `${player1.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
-      });
-    }
+    console.log(players);
+    new Toast({
+      message: `${currentPlayer.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+    });
   }, []);
+  // useEffect(() => {
+  //   if (player1.name === "Computer") {
+  //     new Toast({
+  //       message: `${player2.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+  //     });
+  //   } else {
+  //     new Toast({
+  //       message: `${player1.name}'s Turn! Start by clicking on your face down card.  Watch for the red highlight to see when you can flip another card`,
+  //     });
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (players[0].player1 === "Computer") {

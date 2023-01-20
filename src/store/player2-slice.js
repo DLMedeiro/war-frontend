@@ -14,6 +14,9 @@ const player2Slice = createSlice({
     addPlayer: (state, action) => {
       state.player = action.payload;
     },
+    removePlayer: (state, action) => {
+      state.player = [];
+    },
     addCard: (state, action) => {
       state.cards.push(action.payload);
     },

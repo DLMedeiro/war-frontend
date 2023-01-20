@@ -5,9 +5,8 @@ import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import "./GameSetup.css";
 import "./Card.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import GameBoard from "./GameBoard";
-import { playersActions } from "../../store/player-slice";
+import { playersActions } from "../../store/players-slice";
 import SetPlayerForm from "./SetPlayerForm";
 import { Link } from "react-router-dom";
 import InstructionModal from "./InstructionModal";
@@ -23,6 +22,8 @@ function GameSetup() {
   const players = useSelector((state) => state.players.players);
 
   const winner = useSelector((state) => state.players.winner);
+
+  const currentPlayer = useSelector((state) => state.players.currentPlayer);
 
   const dispatch = useDispatch();
 

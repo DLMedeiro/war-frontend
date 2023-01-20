@@ -7,7 +7,7 @@ import { userActions } from "../store/user-slice";
 import { cardsActions, clearCards } from "../store/cards-slice";
 import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
-import { playersActions } from "../store/player-slice";
+import { playersActions } from "../store/players-slice";
 import InstructionModal from "./Game-Components/InstructionModal";
 
 function NavBar() {
@@ -26,6 +26,7 @@ function NavBar() {
     dispatch(cardsActions.endGame());
     dispatch(playersActions.removeWinner());
     dispatch(playersActions.removePlayers());
+    dispatch(playersActions.removeCurrentPlayer());
     dispatch(clearCards());
   };
 

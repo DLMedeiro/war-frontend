@@ -1,11 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { playersActions } from "../../store/player-slice";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
 import Toast from "../../Components/Toast";
 import "../../Components/Toast.css";
+import { playersActions } from "../../store/players-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 
@@ -14,28 +13,25 @@ const SetPlayerForm = () => {
   const players = useSelector((state) => state.players.players);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
-  const [player1Placeholder, setPlayer1Placeholder] = useState("");
-  const [player2Placeholder, setPlayer2Placeholder] = useState("");
+  const [player1Placeholder, setPlayer1Placeholder] = useState({});
+  const [player2Placeholder, setPlayer2Placeholder] = useState({});
 
   const INITIAL_STATE = {};
   const [formData, setFormData] = useState(INITIAL_STATE);
 
+  // Computer is added into players when computer choice is chosen.  This checks if players has anything in it, and assigns player 1 to that player("Computer")
   useEffect(() => {
     if (players.length > 0) {
       if (players[0].player1) {
-        dispatch(player1Actions.addPlayer(players[0]));
-        // setPlayer1(players[0].player1);
-        // setFormData({ player1: "Computer" });
+        dispatch(player1Actions.addPlayer({ name: players[0].player1 }));
+        setPlayer1Placeholder({ name: "Computer" });
       }
     }
   }, [players]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (player1.player1 === "Computer") {
-      dispatch(player1Actions.addPlayer({ name: value }));
-    }
-    if (name === "player1" && player1.player1 !== "Computer") {
+    if (name === "player1" && player1.name !== "Computer") {
       setPlayer1Placeholder({ name: value });
     }
     if (name === "player2") {
@@ -45,23 +41,45 @@ const SetPlayerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (player1Placeholder.length === 0 || player2Placeholder.length === 0) {
+    console.log(player1Placeholder.name);
+    console.log(player2Placeholder.name.length);
+    if (
+      player1Placeholder.name.length === 0 ||
+      player2Placeholder.name.length === 0
+    ) {
       new Toast({
         message: "Please enter a name for both players",
         type: "danger",
       });
     }
-    if (player1.length > 0 && player2.length === 0) {
+    if (
+      player1Placeholder.name === "Computer" &&
+      player2Placeholder.name.length > 0
+    ) {
       dispatch(player2Actions.addPlayer(player2Placeholder));
+      dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
+      // set current player to player 2
+      dispatch(playersActions.setCurrentPlayer(player2Placeholder));
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
+      setPlayer1Placeholder({});
+      setPlayer2Placeholder({});
       return redirect("/newGame");
-    } else if (player1.length === 0 && player2.length === 0) {
+    } else if (
+      player1Placeholder.name !== "Computer" &&
+      player1Placeholder.name.length > 0 &&
+      player2Placeholder.name.length > 0
+    ) {
       dispatch(player1Actions.addPlayer(player1Placeholder));
+      dispatch(playersActions.addPlayer({ player1: player1Placeholder.name }));
       dispatch(player2Actions.addPlayer(player2Placeholder));
+      dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
+      // Set current player to player 1
+      dispatch(playersActions.setCurrentPlayer(player1Placeholder));
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
+      setPlayer1Placeholder({});
+      setPlayer2Placeholder({});
       return redirect("/newGame");
     }
   };

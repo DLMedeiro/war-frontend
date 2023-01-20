@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const playersSlice = createSlice({
   name: "players",
-  initialState: { players: [], winner: [] },
+  initialState: { players: [], currentPlayer: [], winner: [] },
   reducers: {
     addPlayer: (state, action) => {
       // console.log(action.payload);
@@ -10,6 +10,12 @@ const playersSlice = createSlice({
     },
     removePlayers: (state, action) => {
       state.players = [];
+    },
+    setCurrentPlayer: (state, action) => {
+      state.currentPlayer = action.payload;
+    },
+    removeCurrentPlayer: (state, action) => {
+      state.currentPlayer = [];
     },
     addWinner: (state, action) => {
       state.winner.push(action.payload);
