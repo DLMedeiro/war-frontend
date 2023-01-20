@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
 import Toast from "../../Components/Toast";
 import "../../Components/Toast.css";
@@ -12,7 +12,6 @@ const SetPlayerForm = () => {
   const dispatch = useDispatch();
   const players = useSelector((state) => state.players.players);
   const player1 = useSelector((state) => state.player1.player);
-  const player2 = useSelector((state) => state.player2.player);
   const [player1Placeholder, setPlayer1Placeholder] = useState({});
   const [player2Placeholder, setPlayer2Placeholder] = useState({});
 
@@ -59,7 +58,9 @@ const SetPlayerForm = () => {
       dispatch(player2Actions.addPlayer(player2Placeholder));
       dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
       // set current player to player 2
-      dispatch(playersActions.setCurrentPlayer(player2Placeholder));
+      dispatch(
+        playersActions.setCurrentPlayer({ player2: player2Placeholder.name })
+      );
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
       setPlayer1Placeholder({});
@@ -75,7 +76,9 @@ const SetPlayerForm = () => {
       dispatch(player2Actions.addPlayer(player2Placeholder));
       dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
       // Set current player to player 1
-      dispatch(playersActions.setCurrentPlayer(player1Placeholder));
+      dispatch(
+        playersActions.setCurrentPlayer({ player1: player1Placeholder.name })
+      );
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
       setPlayer1Placeholder({});

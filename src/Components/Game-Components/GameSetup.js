@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCards, cardsActions, clearCards } from "../../store/cards-slice";
+import { cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import "./GameSetup.css";
 import "./Card.css";
 import GameBoard from "./GameBoard";
-import { playersActions } from "../../store/players-slice";
 import SetPlayerForm from "./SetPlayerForm";
-import { Link } from "react-router-dom";
-import InstructionModal from "./InstructionModal";
 
 function GameSetup() {
   const cards = useSelector((state) => state.cardDeck.cardDeck);
@@ -19,16 +16,9 @@ function GameSetup() {
 
   const player2Cards = useSelector((state) => state.player2.cards);
 
-  const players = useSelector((state) => state.players.players);
-
   const winner = useSelector((state) => state.players.winner);
 
-  const currentPlayer = useSelector((state) => state.players.currentPlayer);
-
   const dispatch = useDispatch();
-
-  // State for Instruction Modal
-  const [show, setShow] = useState(false);
 
   // Pull cards from API, assign cards to players in backend
   // updates state of "cards" to card table information from backend
