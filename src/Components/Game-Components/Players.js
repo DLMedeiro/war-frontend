@@ -13,7 +13,8 @@ import Toast from "../Toast";
 import "../../Components/Toast.css";
 import PlayerCollection from "./PlayerCollection";
 import PlayerWar from "./PlayerWar";
-import PlayerBattle from "./PlayerBattle";
+import Player1Battle from "./Player1Battle";
+import Player2Battle from "./Player2Battle";
 
 function Players(player) {
   // useEffect(() => {
@@ -50,16 +51,19 @@ function Players(player) {
 
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     if (players[0].player1 === "Computer") {
-  //       if (player2War.length === 1) {
-  //         setTimeout(p1War, 1000);
-  //       } else if (player2War.length === 2 && player1Battle.length === 0) {
-  //         setTimeout(p1War, 1000);
-  //       }
-  //     }
-  //   }, [player2War]);
-
+  // Only for computer play
+  useEffect(() => {
+    if (player1.name === "Computer") {
+      // Change turn at start of game
+      if (player2War.length === 1) {
+        // playerButtonActivation();
+        setTimeout(p1War, 1000);
+      } else if (player1War.length === 2 && player2Battle.length < 3) {
+        // playerButtonActivation();
+        // setTimeout(p1War, 1000);
+      }
+    }
+  }, [player2War]);
   //   const shuffle = (cards) => {
   //     let index = cards.length;
   //     let randomIndex;
@@ -129,13 +133,17 @@ function Players(player) {
   //     }
   //   }, [player1Cards, player2Cards]);
 
-  console.log(currentPlayer);
   const p1War = () => {
     if (player1War.length === 0) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
-    } else if (player1Battle.length === 0) {
+      if (player1.name !== "Computer") {
+        changeCurrentPlayer();
+      }
+      // playerButtonActivation();
+      // changeCurrentPlayer();
+      // dispatch(playersActions.setCurrentPlayer(players[1]));
+    } else if (player1War.length > 0 && player1Battle.length < 3) {
       if (player1.name === "Computer") {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         // console.log(player1Cards[0]);
@@ -149,33 +157,29 @@ function Players(player) {
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
-        dispatch(playersActions.setCurrentPlayer(players[1]));
+        // dispatch(playersActions.setCurrentPlayer(players[1]));
+        changeCurrentPlayer();
+
         // updatePlayerTurn();
       } else {
         // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         dispatch(player1Actions.removeCard());
-        dispatch(playersActions.setCurrentPlayer(players[1]));
+        // dispatch(playersActions.setCurrentPlayer(players[1]));
         // updatePlayerTurn();
       }
-    } else if (player1Battle.length > 0 && player1Battle.length < 3) {
-      //   console.log(player1Cards[0]);
-      dispatch(player1Actions.addToBattle(player1Cards[0]));
-      dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
     } else if (player1Battle.length === 3) {
       //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
+      // dispatch(playersActions.setCurrentPlayer(players[1]));
       // updatePlayerTurn();
       //   console.log(player1War);
     } else if (player1Battle.length > 3 && player1Battle.length < 6) {
       //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
+      // dispatch(playersActions.setCurrentPlayer(players[1]));
       // updatePlayerTurn();
     } else if (player1Battle.length === 6) {
       //   console.log(player1Cards[0]);
@@ -203,23 +207,27 @@ function Players(player) {
     if (player2War.length === 0) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      if (player1War.length === 0) {
+        changeCurrentPlayer();
+      }
+
+      // dispatch(playersActions.setCurrentPlayer(players[0]));
       // updatePlayerTurn();
     } else if (player2Battle.length === 0) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      // dispatch(playersActions.setCurrentPlayer(players[0]));
       // updatePlayerTurn();
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      // dispatch(playersActions.setCurrentPlayer(players[0]));
       // updatePlayerTurn();
     } else if (player2Battle.length === 3) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
+      // playerButtonActivation();
     } else if (player2Battle.length > 3 && player2Battle.length < 6) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
@@ -229,7 +237,7 @@ function Players(player) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
+      // playerButtonActivation();
     } else if (player2Battle.length > 6 && player2Battle.length < 9) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
@@ -239,7 +247,6 @@ function Players(player) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     }
   };
 
@@ -386,14 +393,20 @@ function Players(player) {
   //   };
 
   useEffect(() => {
-    if (player1War.length > 0 && player2War.length < player1War.length) {
-      playerTurn();
-    }
+    // if (
+    //   player1.name !== "Computer" &&
+    //   player1War.length > 0 &&
+    //   player1War.length > player2War.length
+    // ) {
+    //   changeCurrentPlayer();
+    //   playerButtonActivation();
+    // }
     if (player1War.length > 0 && player1War.length === player2War.length) {
       setP1Compare(player1War[player1War.length - 1].game_value);
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
   }, [player1War, player2War]);
+  console.log(currentPlayer);
 
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
@@ -427,7 +440,8 @@ function Players(player) {
           dispatch(player2Actions.removeFromBattle());
         }
       }
-      playerTurn();
+      changeCurrentPlayer();
+      // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
     } else if (p1Compare < p2Compare) {
@@ -450,12 +464,10 @@ function Players(player) {
           dispatch(player2Actions.removeFromBattle());
         }
       }
-      playerTurn();
+      changeCurrentPlayer();
+      // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
-
-      dispatch(player1Actions.changeTurn());
-      dispatch(player2Actions.changeTurn());
     } else if (p1Compare === p2Compare) {
       new Toast({
         message:
@@ -466,6 +478,7 @@ function Players(player) {
         // setDisableP1Btn(false);
       } else {
         checkEndGame();
+        p1War();
         // setDisableP2Btn(false);
       }
     }
@@ -477,9 +490,10 @@ function Players(player) {
     }
   }, [player1Cards, player1Collection, player2Cards, player2Collection]);
 
+  // Run playerTurn at the start of the game to highlight the correct card, not needed for anything else
   useEffect(() => {
-    playerTurn();
-  }, []);
+    // playerButtonActivation();
+  }, [gameStatus]);
 
   const checkEndGame = () => {
     if (
@@ -511,7 +525,7 @@ function Players(player) {
     }
   };
 
-  const playerTurn = () => {
+  useEffect(() => {
     if (
       Object.keys(currentPlayer)[0] === "player1" &&
       players[0].player1 === "Computer"
@@ -522,16 +536,22 @@ function Players(player) {
       Object.keys(currentPlayer)[0] === "player1" &&
       players[0].player1 !== "Computer"
     ) {
-      console.log("test");
       document.getElementById("p1Btn").disabled = false;
       document.getElementById("p2Btn").disabled = true;
     } else if (Object.keys(currentPlayer)[0] === "player2") {
+      console.log("test");
       document.getElementById("p1Btn").disabled = true;
       document.getElementById("p2Btn").disabled = false;
     }
-  };
+  }, [currentPlayer]);
 
-  // console.log(Object.keys(currentPlayer)[0].length);
+  const changeCurrentPlayer = () => {
+    if (Object.keys(currentPlayer)[0] === "player1") {
+      dispatch(playersActions.setCurrentPlayer(players[1]));
+    } else if (Object.keys(currentPlayer)[0] === "player2") {
+      dispatch(playersActions.setCurrentPlayer(players[0]));
+    }
+  };
 
   return (
     <div>
@@ -571,20 +591,40 @@ function Players(player) {
           <PlayerWar player={"Player2"} />
         </div>
       </div>
+
       <div className="column">
         {player1Battle.length > 0 && (
           <div className="row">
-            <PlayerBattle battleStartingIndex={0} />
+            <Player1Battle battleStartingIndex={0} />
           </div>
         )}
+        {player2Battle.length > 0 && (
+          <div className="row">
+            <Player2Battle battleStartingIndex={0} />
+          </div>
+        )}
+      </div>
+      <div className="column">
         {player1Battle.length > 3 && (
           <div className="row">
-            <PlayerBattle battleStartingIndex={3} />
+            <Player1Battle battleStartingIndex={3} />
           </div>
         )}
+        {player2Battle.length > 3 && (
+          <div className="row">
+            <Player2Battle battleStartingIndex={3} />
+          </div>
+        )}
+      </div>
+      <div className="column">
         {player1Battle.length > 6 && (
           <div className="row">
-            <PlayerBattle battleStartingIndex={6} />
+            <Player1Battle battleStartingIndex={6} />
+          </div>
+        )}
+        {player2Battle.length > 6 && (
+          <div className="row">
+            <Player2Battle battleStartingIndex={6} />
           </div>
         )}
       </div>

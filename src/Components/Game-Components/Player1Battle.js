@@ -9,11 +9,11 @@ import "./Card.css";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
 import "./GameSetup.css";
-import Toast from "../../Components/Toast";
+import Toast from "../Toast";
 import "../../Components/Toast.css";
 import Players from "./Players";
 
-function PlayerBattle({ battleStartingIndex }) {
+function Player1Battle({ battleStartingIndex }) {
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
   const players = useSelector((state) => state.players.players);
   const player1Cards = useSelector((state) => state.player1.cards);
@@ -193,75 +193,75 @@ function PlayerBattle({ battleStartingIndex }) {
   //   }
   // };
 
-  useEffect(() => {
-    if (
-      (player1War.length === 1 && player2War.length === 0) ||
-      (player1War.length === 2 && player2War.length === 1)
-    ) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(false);
-    } else if (player1War.length === 1 && player2War.length === 1) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(true);
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name === "Computer"
-    ) {
-      setDisableP1Btn(true);
-      setDisableP2Btn(false);
-    } else if (
-      player1War.length === 0 &&
-      player2War.length === 0 &&
-      player1.name !== "Computer"
-    ) {
-      setDisableP1Btn(false);
-      setDisableP2Btn(true);
-    }
-  }, [player1War, player2War]);
+  // useEffect(() => {
+  //   if (
+  //     (player1War.length === 1 && player2War.length === 0) ||
+  //     (player1War.length === 2 && player2War.length === 1)
+  //   ) {
+  //     setDisableP1Btn(true);
+  //     setDisableP2Btn(false);
+  //   } else if (player1War.length === 1 && player2War.length === 1) {
+  //     setDisableP1Btn(true);
+  //     setDisableP2Btn(true);
+  //   } else if (
+  //     player1War.length === 0 &&
+  //     player2War.length === 0 &&
+  //     player1.name === "Computer"
+  //   ) {
+  //     setDisableP1Btn(true);
+  //     setDisableP2Btn(false);
+  //   } else if (
+  //     player1War.length === 0 &&
+  //     player2War.length === 0 &&
+  //     player1.name !== "Computer"
+  //   ) {
+  //     setDisableP1Btn(false);
+  //     setDisableP2Btn(true);
+  //   }
+  // }, [player1War, player2War]);
 
-  useEffect(() => {
-    if (player1War.length > 0 && player1War.length === player2War.length) {
-      setP1Compare(player1War[player1War.length - 1].game_value);
-      setP2Compare(player2War[player2War.length - 1].game_value);
-    }
-  }, [player1War, player2War]);
+  // useEffect(() => {
+  //   if (player1War.length > 0 && player1War.length === player2War.length) {
+  //     setP1Compare(player1War[player1War.length - 1].game_value);
+  //     setP2Compare(player2War[player2War.length - 1].game_value);
+  //   }
+  // }, [player1War, player2War]);
 
-  useEffect(() => {
-    if (gameStatus) {
-      checkEndGame();
-    }
-  }, [player1Cards, player1Collection, player2Cards, player2Collection]);
+  // useEffect(() => {
+  //   if (gameStatus) {
+  //     checkEndGame();
+  //   }
+  // }, [player1Cards, player1Collection, player2Cards, player2Collection]);
 
-  const checkEndGame = () => {
-    if (
-      p1Compare > 0 &&
-      p2Compare > 0 &&
-      p1Compare === p2Compare &&
-      player1Cards.length + player1Collection.length < 4
-    ) {
-      dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player2));
-    } else if (
-      p1Compare > 0 &&
-      p2Compare > 0 &&
-      p1Compare === p2Compare &&
-      player2Cards.length + player2Collection.length < 4
-    ) {
-      dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player1));
-    }
-    if (gameStatus && player1Cards.length + player1Collection.length <= 0) {
-      dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player1));
-    } else if (
-      gameStatus &&
-      player2Cards.length + player2Collection.length <= 0
-    ) {
-      dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player2));
-    }
-  };
+  // const checkEndGame = () => {
+  //   if (
+  //     p1Compare > 0 &&
+  //     p2Compare > 0 &&
+  //     p1Compare === p2Compare &&
+  //     player1Cards.length + player1Collection.length < 4
+  //   ) {
+  //     dispatch(cardsActions.endGame());
+  //     dispatch(playersActions.addWinner(players[0].player2));
+  //   } else if (
+  //     p1Compare > 0 &&
+  //     p2Compare > 0 &&
+  //     p1Compare === p2Compare &&
+  //     player2Cards.length + player2Collection.length < 4
+  //   ) {
+  //     dispatch(cardsActions.endGame());
+  //     dispatch(playersActions.addWinner(players[0].player1));
+  //   }
+  //   if (gameStatus && player1Cards.length + player1Collection.length <= 0) {
+  //     dispatch(cardsActions.endGame());
+  //     dispatch(playersActions.addWinner(players[0].player1));
+  //   } else if (
+  //     gameStatus &&
+  //     player2Cards.length + player2Collection.length <= 0
+  //   ) {
+  //     dispatch(cardsActions.endGame());
+  //     dispatch(playersActions.addWinner(players[0].player2));
+  //   }
+  // };
 
   return (
     <div className="column">
@@ -334,70 +334,8 @@ function PlayerBattle({ battleStartingIndex }) {
           // <div className="playerCard card-placeholder-3"> </div>
         )}
       </div>
-
-      {/* Player 2 Portion */}
-      <div className="stacked-outer-container">
-        <div className="inner-container"></div>
-
-        {player2Battle.length >= 1 ||
-        player2Battle.length >= 4 ||
-        player2Battle.length >= 7 ? (
-          <div
-            className="playerCard card-1"
-            style={{
-              backgroundImage: `url(${player2Battle[battleStartingIndex].image_url})`,
-            }}
-          ></div>
-        ) : (
-          <div></div>
-          // <div className="playerCard card-placeholder-1"></div>
-        )}
-        {player2Battle.length >= 2 ||
-        player2Battle.length >= 5 ||
-        player2Battle.length >= 8 ? (
-          <div
-            className="playerCard card-2"
-            style={{
-              backgroundImage: `url(${
-                player2Battle[battleStartingIndex + 1].image_url
-              })`,
-            }}
-          ></div>
-        ) : (
-          <div></div>
-          // <div className="playerCard card-placeholder-2"></div>
-        )}
-        {player2Battle.length >= 3 ||
-        player2Battle.length >= 6 ||
-        player2Battle.length >= 9 ? (
-          <div
-            className="playerCard card-3"
-            style={{
-              backgroundImage: `url(${
-                player2Battle[battleStartingIndex + 2].image_url
-              })`,
-            }}
-          ></div>
-        ) : (
-          <div></div>
-          // <div className="playerCard card-placeholder-3"></div>
-        )}
-        {player2War[1] ? (
-          <div
-            className="playerCard card-4"
-            style={{
-              backgroundImage: `url(${
-                player2War[player2War.length - 1].image_url
-              })`,
-            }}
-          ></div>
-        ) : (
-          <div> </div>
-          // <div className="playerCard card-placeholder-3"> </div>
-        )}
-      </div>
     </div>
   );
 }
 
-export default PlayerBattle;
+export default Player1Battle;

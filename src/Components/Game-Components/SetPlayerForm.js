@@ -40,8 +40,6 @@ const SetPlayerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(player1Placeholder.name);
-    console.log(player2Placeholder.name.length);
     if (
       player1Placeholder.name.length === 0 ||
       player2Placeholder.name.length === 0
