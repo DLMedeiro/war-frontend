@@ -6,7 +6,6 @@ import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import cardBack from "./back.png";
 import "./Card.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "./GameBoard.css";
 import "./GameSetup.css";
 import Toast from "../Toast";
@@ -15,16 +14,8 @@ import PlayerCollection from "./PlayerCollection";
 import PlayerWar from "./PlayerWar";
 import Player1Battle from "./Player1Battle";
 import Player2Battle from "./Player2Battle";
-import e from "cors";
 
-function Players(player) {
-  // useEffect(() => {
-  //   if (player === "player1") {
-
-  //   }
-  // }, players);
-
-  // const gameStatus = useSelector((state) => state.cardDeck.gameReady);
+function Players() {
   const player1Cards = useSelector((state) => state.player1.cards);
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
@@ -34,21 +25,12 @@ function Players(player) {
   const player2War = useSelector((state) => state.player2.war);
   const player2Battle = useSelector((state) => state.player2.battle);
   const player2Collection = useSelector((state) => state.player2.collection);
-  // const player1Turn = useSelector((state) => state.player1.playerBtn);
-  // const player2Turn = useSelector((state) => state.player2.playerBtn);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
   const currentPlayer = useSelector((state) => state.players.currentPlayer);
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
-
-  // const [p1Compare, setP1Compare] = useState(0);
-  // const [p2Compare, setP2Compare] = useState(0);
-
-  // const [collection, setCollection] = useState([]);
-  //   const [disableP1Btn, setDisableP1Btn] = useState(false);
-  //   const [disableP2Btn, setDisableP2Btn] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -68,74 +50,7 @@ function Players(player) {
     }
   }, [currentPlayer]);
 
-  //   const shuffle = (cards) => {
-  //     let index = cards.length;
-  //     let randomIndex;
-
-  //     if (cards.length < 2) {
-  //       setCollection(cards);
-  //       return cards;
-  //     }
-
-  //     while (index != 0) {
-  //       randomIndex = Math.floor(Math.random() * index);
-  //       index--;
-  //     }
-
-  //     [cards[index], cards[randomIndex]] = [cards[randomIndex], cards[index]];
-
-  //     setCollection(cards);
-
-  //     return cards;
-  //   };
-
   // https://www.w3docs.com/snippets/javascript/how-to-randomize-shuffle-a-javascript-array.html
-
-  // function randomize(values) {
-  //   let index = values.length,
-  //     randomIndex;
-
-  //   // While there remain elements to shuffle.
-  //   while (index != 0) {
-  //     // Pick a remaining element.
-  //     randomIndex = Math.floor(Math.random() * index);
-  //     index--;
-
-  //     // And swap it with the current element.
-  //     [values[index], values[randomIndex]] = [values[randomIndex], values[index]];
-  //   }
-
-  //   return values;
-  // }
-
-  // var arr = ["a", "b", "c", "d", "e"];
-  // randomize(arr);
-  // console.log(arr);
-
-  //   useEffect(() => {
-  //     if (player1Cards.length <= 4 && player1Collection.length > 0) {
-  //       setCollection(player1Collection);
-  //       shuffle(collection);
-  //       dispatch(player1Actions.removeFromCollection());
-  //       dispatch(player1Actions.addToCollection(collection));
-  //       for (let card in player1Collection) {
-  //         dispatch(player1Actions.addCard(player1Collection[card]));
-  //       }
-  //       dispatch(player1Actions.removeFromCollection());
-  //       setCollection([]);
-  //     }
-  //     if (player2Cards.length <= 4 && player2Collection.length > 0) {
-  //       setCollection(player2Collection);
-  //       shuffle(collection);
-  //       dispatch(player2Actions.removeFromCollection());
-  //       dispatch(player2Actions.addToCollection(collection));
-  //       for (let card in player2Collection) {
-  //         dispatch(player2Actions.addCard(player2Collection[card]));
-  //       }
-  //       dispatch(player2Actions.removeFromCollection());
-  //       setCollection([]);
-  //     }
-  //   }, [player1Cards, player2Cards]);
 
   const shuffle = (cards, player) => {
     cards.sort(() => Math.random() - 0.5);
@@ -164,7 +79,6 @@ function Players(player) {
       dispatch(player1Actions.removeCard());
       document.getElementById("p1Btn").disabled = true;
       if (player1.name !== "Computer" && player2War.length < 1) {
-        // document.getElementById("p2Btn").disabled = false;
         changeCurrentPlayer();
       }
     } else if (player1War.length > 0 && player1Battle.length < 3) {
@@ -258,165 +172,12 @@ function Players(player) {
     }
   };
 
-  console.log(currentPlayer);
-
-  //   useEffect(() => {
-  //     if (
-  //       (player1War.length === 1 && player2War.length === 0) ||
-  //       (player1War.length === 2 && player2War.length === 1)
-  //     ) {
-  //       dispatch(player1Actions.changeTurn());
-  //       dispatch(player2Actions.changeTurn());
-  //     } else if (player1War.length === 1 && player2War.length === 1) {
-  //       dispatch(player1Actions.changeTurn());
-  //       dispatch(player2Actions.changeTurn());
-  //     } else if (
-  //       player1War.length === 0 &&
-  //       player2War.length === 0 &&
-  //       players[0].player1 === "Computer"
-  //     ) {
-  //       //   dispatch(player1Actions.changeTurn());
-  //       dispatch(player2Actions.changeTurn());
-  //     } else if (
-  //       player1War.length === 0 &&
-  //       player2War.length === 0 &&
-  //       players[0].player1 !== "Computer"
-  //     ) {
-  //       dispatch(player1Actions.changeTurn());
-  //       dispatch(player2Actions.changeTurn());
-  //     }
-  //   }, [player1War, player2War]);
-
-  //   useEffect(() => {
-  //     console.log(player1War.length);
-  //     if (player1War.length > 0 && player1War.length === player2War.length) {
-  //       setP1Compare(player1War[player1War.length - 1].game_value);
-  //       setP2Compare(player2War[player2War.length - 1].game_value);
-  //     }
-  //   }, [player1War, player2War]);
-
-  //   useEffect(() => {
-  //     if (p1Compare > 0 && p2Compare > 0) {
-  //       if (player2War.length > 1) {
-  //         // Set longer time for battle
-  //         setTimeout(checkForWin, 6000);
-  //       } else {
-  //         setTimeout(checkForWin, 2000);
-  //       }
-  //     }
-  //   }, [p2Compare, p1Compare]);
-
-  //   const checkForWin = () => {
-  //     if (p1Compare > p2Compare) {
-  //       // add all cards to p1 collection
-  //       for (let card in player1War) {
-  //         dispatch(player1Actions.addToCollection(player1War[card]));
-  //       }
-  //       for (let card in player2War) {
-  //         dispatch(player1Actions.addToCollection(player2War[card]));
-  //       }
-  //       if (player1Battle.length > 0 && player2Battle.length > 0) {
-  //         for (let card in player1Battle) {
-  //           dispatch(player1Actions.addToCollection(player1Battle[card]));
-  //         }
-  //         for (let card in player2Battle) {
-  //           dispatch(player1Actions.addToCollection(player2Battle[card]));
-  //         }
-  //       }
-  //       setP1Compare(0);
-  //       setP2Compare(0);
-  //       dispatch(player1Actions.removeFromWar());
-  //       dispatch(player2Actions.removeFromWar());
-  //       dispatch(player1Actions.removeFromBattle());
-  //       dispatch(player2Actions.removeFromBattle());
-  //     } else if (p1Compare < p2Compare) {
-  //       // add all cards to p2 collection
-  //       for (let card in player1War) {
-  //         dispatch(player2Actions.addToCollection(player1War[card]));
-  //       }
-  //       for (let card in player2War) {
-  //         dispatch(player2Actions.addToCollection(player2War[card]));
-  //       }
-  //       if (player1Battle.length > 0 && player2Battle.length > 0) {
-  //         for (let card in player1Battle) {
-  //           dispatch(player2Actions.addToCollection(player1Battle[card]));
-  //         }
-  //         for (let card in player2Battle) {
-  //           dispatch(player2Actions.addToCollection(player2Battle[card]));
-  //         }
-  //       }
-  //       setP1Compare(0);
-  //       setP2Compare(0);
-  //       dispatch(player1Actions.removeFromWar());
-  //       dispatch(player2Actions.removeFromWar());
-  //       dispatch(player1Actions.removeFromBattle());
-  //       dispatch(player2Actions.removeFromBattle());
-  //     } else if (p1Compare === p2Compare) {
-  //       new Toast({
-  //         message:
-  //           "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
-  //       });
-  //       if (players[0].player1 !== "Computer") {
-  //         checkEndGame();
-  //         setDisableP1Btn(false);
-  //       } else {
-  //         checkEndGame();
-  //         setDisableP2Btn(false);
-  //       }
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     if (gameStatus) {
-  //       checkEndGame();
-  //     }
-  //   }, [player1Cards, player1Collection, player2Cards, player2Collection]);
-
-  //   const checkEndGame = () => {
-  //     if (
-  //       p1Compare > 0 &&
-  //       p2Compare > 0 &&
-  //       p1Compare === p2Compare &&
-  //       player1Cards.length + player1Collection.length < 4
-  //     ) {
-  //       dispatch(cardsActions.endGame());
-  //       dispatch(playersActions.addWinner(players[0].player2));
-  //     } else if (
-  //       p1Compare > 0 &&
-  //       p2Compare > 0 &&
-  //       p1Compare === p2Compare &&
-  //       player2Cards.length + player2Collection.length < 4
-  //     ) {
-  //       dispatch(cardsActions.endGame());
-  //       dispatch(playersActions.addWinner(players[0].player1));
-  //     }
-  //     if (gameStatus && player1Cards.length + player1Collection.length <= 0) {
-  //       dispatch(cardsActions.endGame());
-  //       dispatch(playersActions.addWinner(players[0].player1));
-  //     } else if (
-  //       gameStatus &&
-  //       player2Cards.length + player2Collection.length <= 0
-  //     ) {
-  //       dispatch(cardsActions.endGame());
-  //       dispatch(playersActions.addWinner(players[0].player2));
-  //     }
-  //   };
-
   useEffect(() => {
-    // if (
-    //   player1.name !== "Computer" &&
-    //   player1War.length > 0 &&
-    //   player1War.length > player2War.length
-    // ) {
-    //   changeCurrentPlayer();
-    //   playerButtonActivation();
-    // }
     if (player1War.length > 0 && player1War.length === player2War.length) {
       setP1Compare(player1War[player1War.length - 1].game_value);
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
   }, [player1War, player2War]);
-  // console.log(currentPlayer);
 
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
@@ -453,7 +214,6 @@ function Players(player) {
 
       changeCurrentPlayer();
 
-      // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
     } else if (p1Compare < p2Compare) {
@@ -479,7 +239,6 @@ function Players(player) {
 
       changeCurrentPlayer();
 
-      // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
     } else if (p1Compare === p2Compare) {
@@ -534,7 +293,6 @@ function Players(player) {
       document.getElementById("p1Btn").disabled = false;
       document.getElementById("p2Btn").disabled = true;
     }
-    // playerButtonActivation();
   }, [gameStatus]);
 
   const checkEndGame = () => {
@@ -567,26 +325,6 @@ function Players(player) {
     }
   };
 
-  // useEffect(() => {
-  //   if (
-  //     Object.keys(currentPlayer)[0] === "player1" &&
-  //     players[0].player1 === "Computer"
-  //   ) {
-  //     document.getElementById("p1Btn").disabled = true;
-  //     document.getElementById("p2Btn").disabled = true;
-  //   } else if (
-  //     Object.keys(currentPlayer)[0] === "player1" &&
-  //     players[0].player1 !== "Computer"
-  //   ) {
-  //     document.getElementById("p1Btn").disabled = false;
-  //     document.getElementById("p2Btn").disabled = true;
-  //   } else if (Object.keys(currentPlayer)[0] === "player2") {
-  //     // console.log("test");
-  //     document.getElementById("p1Btn").disabled = true;
-  //     document.getElementById("p2Btn").disabled = false;
-  //   }
-  // }, [currentPlayer]);
-
   console.log(player2War);
 
   const changeCurrentPlayer = () => {
@@ -594,20 +332,7 @@ function Players(player) {
       dispatch(playersActions.setCurrentPlayer(players[1]));
       document.getElementById("p2Btn").disabled = false;
       document.getElementById("p1Btn").disabled = true;
-      // if (players[0].player1 === "Computer") {
-      //   document.getElementById("p1Btn").disabled = true;
-      // }
     } else if (Object.keys(currentPlayer)[0] === "player2") {
-      // if (
-      //   player1.name === "Computer" &&
-      //   player1War.length > 0 &&
-      //   player2War.length > 0
-      // ) {
-      //   console.log(player1War.length);
-      //   console.log(player2War.length);
-      //   dispatch(playersActions.setCurrentPlayer(players[0]));
-      //   p1War();
-      // }
       dispatch(playersActions.setCurrentPlayer(players[0]));
 
       document.getElementById("p2Btn").disabled = true;
@@ -615,7 +340,6 @@ function Players(player) {
       if (players[0].player1 !== "Computer") {
         document.getElementById("p1Btn").disabled = false;
       }
-      // document.getElementById("p2Btn").disabled = false;
     }
   };
 
@@ -629,7 +353,6 @@ function Players(player) {
 
         <div className="inner-container">
           <PlayerCollection player={"Player1"} />
-          {/* <PlayerDrawPile player={"Player1"} /> */}
           <button
             id="p1Btn"
             onClick={p1War}
@@ -649,7 +372,6 @@ function Players(player) {
 
         <div className="inner-container">
           <PlayerCollection player={"Player2"} />
-          {/* <PlayerDrawPile player={"Player2"} /> */}
           <button
             id="p2Btn"
             onClick={p2War}

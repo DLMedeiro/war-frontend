@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
@@ -19,22 +19,6 @@ function GameSetup() {
   const winner = useSelector((state) => state.players.winner);
 
   const dispatch = useDispatch();
-
-  // Pull cards from API, assign cards to players in backend
-  // updates state of "cards" to card table information from backend
-  // const deal = async () => {
-  //   // dispatch(clearCards());
-  //   dispatch(fetchCards());
-  // };
-
-  // const newGame = () => {
-  //   dispatch(player1Actions.endGame());
-  //   dispatch(player2Actions.endGame());
-  //   dispatch(cardsActions.endGame());
-  //   dispatch(playersActions.removeWinner());
-  //   dispatch(playersActions.removePlayers());
-  //   dispatch(clearCards());
-  // };
 
   // player 1 and 2 cards assigned and state updated
   useEffect(() => {
