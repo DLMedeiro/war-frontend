@@ -38,7 +38,6 @@ const player2Slice = createSlice({
     addToCollection: (state, action) => {
       state.collection.push(action.payload);
     },
-    shuffleCollection: (state, action) => {},
     removeFromCollection: (state, action) => {
       state.collection = [];
     },

@@ -267,7 +267,7 @@ function Player1Battle({ battleStartingIndex }) {
     <div className="column">
       {/* <div className="stacked-outer-container"> */}
       <div className="stacked-outer-container">
-        {console.log(player1Battle)}
+        {/* {console.log(player1Battle)} */}
         {/* {player1Battle.map((card) => (
           <div
             className="playerCard card-1"

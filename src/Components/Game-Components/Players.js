@@ -15,6 +15,7 @@ import PlayerCollection from "./PlayerCollection";
 import PlayerWar from "./PlayerWar";
 import Player1Battle from "./Player1Battle";
 import Player2Battle from "./Player2Battle";
+import e from "cors";
 
 function Players(player) {
   // useEffect(() => {
@@ -55,15 +56,18 @@ function Players(player) {
   useEffect(() => {
     if (player1.name === "Computer") {
       // Change turn at start of game
-      if (player2War.length === 1) {
-        // playerButtonActivation();
+      if (player2War.length === 1 && player1War.length === 0) {
         setTimeout(p1War, 1000);
-      } else if (player1War.length === 2 && player2Battle.length < 3) {
-        // playerButtonActivation();
-        // setTimeout(p1War, 1000);
+      } else if (
+        player1War.length === 0 &&
+        Object.keys(currentPlayer)[0] === "player1"
+      ) {
+        setTimeout(p1War, 2000);
+        setTimeout(changeCurrentPlayer, 2000);
       }
     }
-  }, [player2War]);
+  }, [currentPlayer]);
+
   //   const shuffle = (cards) => {
   //     let index = cards.length;
   //     let randomIndex;
@@ -133,122 +137,128 @@ function Players(player) {
   //     }
   //   }, [player1Cards, player2Cards]);
 
+  const shuffle = (cards, player) => {
+    cards.sort(() => Math.random() - 0.5);
+    if (player === "p1") {
+      for (let card in cards) {
+        dispatch(player1Actions.addCard(cards[card]));
+      }
+      dispatch(player1Actions.removeFromCollection());
+    }
+    if (player === "p2") {
+      for (let card in cards) {
+        dispatch(player2Actions.addCard(cards[card]));
+      }
+      dispatch(player2Actions.removeFromCollection());
+    }
+  };
+
   const p1War = () => {
+    if (player1Cards.length <= 4 && player1Collection.length > 0) {
+      shuffle([...player1Collection], "p1");
+    }
+
+    console.log(player1War);
     if (player1War.length === 0) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      if (player1.name !== "Computer") {
+      document.getElementById("p1Btn").disabled = true;
+      if (player1.name !== "Computer" && player2War.length < 1) {
+        // document.getElementById("p2Btn").disabled = false;
         changeCurrentPlayer();
       }
-      // playerButtonActivation();
-      // changeCurrentPlayer();
-      // dispatch(playersActions.setCurrentPlayer(players[1]));
     } else if (player1War.length > 0 && player1Battle.length < 3) {
       if (player1.name === "Computer") {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
-        // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[1]));
-        // console.log(player1Cards[1]);
         dispatch(player1Actions.addToBattle(player1Cards[2]));
-        // console.log(player1Cards[2]);
         dispatch(player1Actions.addToWar(player1Cards[3]));
-        // console.log(player1Cards[3]);
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
         dispatch(player1Actions.removeCard());
-        // dispatch(playersActions.setCurrentPlayer(players[1]));
-        changeCurrentPlayer();
-
-        // updatePlayerTurn();
+        if (player2War.length < 2) {
+          changeCurrentPlayer();
+        }
+        document.getElementById("p2Btn").disabled = false;
       } else {
-        // console.log(player1Cards[0]);
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         dispatch(player1Actions.removeCard());
-        // dispatch(playersActions.setCurrentPlayer(players[1]));
-        // updatePlayerTurn();
       }
     } else if (player1Battle.length === 3) {
-      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      // dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
-      //   console.log(player1War);
+      document.getElementById("p1Btn").disabled = true;
+      if (player2War.length < 2) {
+        changeCurrentPlayer();
+      }
     } else if (player1Battle.length > 3 && player1Battle.length < 6) {
-      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      // dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
     } else if (player1Battle.length === 6) {
-      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
-      //   console.log(player1War);
+      document.getElementById("p1Btn").disabled = true;
     } else if (player1Battle.length > 6 && player1Battle.length < 9) {
-      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
     } else if (player1Battle.length === 9) {
-      //   console.log(player1Cards[0]);
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
-      // updatePlayerTurn();
-      //   console.log(player1War);
+      document.getElementById("p1Btn").disabled = true;
     }
   };
   const p2War = () => {
+    if (player2Cards.length <= 4 && player2Collection.length > 0) {
+      console.log([...player2Collection]);
+      shuffle([...player2Collection], "p2");
+    }
     if (player2War.length === 0) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
+      document.getElementById("p2Btn").disabled = true;
       if (player1War.length === 0) {
         changeCurrentPlayer();
       }
-
-      // dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     } else if (player2Battle.length === 0) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      // dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      // dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     } else if (player2Battle.length === 3) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
-      // playerButtonActivation();
+      document.getElementById("p2Btn").disabled = true;
+      if (player1War.length < 2) {
+        changeCurrentPlayer();
+        if (players[0].player1 === "Computer") {
+          p1War();
+        }
+      }
     } else if (player2Battle.length > 3 && player2Battle.length < 6) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     } else if (player2Battle.length === 6) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
-      // playerButtonActivation();
+      document.getElementById("p2Btn").disabled = true;
+      changeCurrentPlayer();
     } else if (player2Battle.length > 6 && player2Battle.length < 9) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       dispatch(playersActions.setCurrentPlayer(players[0]));
-      // updatePlayerTurn();
     } else if (player2Battle.length === 9) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      document.getElementById("p2Btn").disabled = true;
+      changeCurrentPlayer();
     }
   };
+
+  console.log(currentPlayer);
 
   //   useEffect(() => {
   //     if (
@@ -406,7 +416,7 @@ function Players(player) {
       setP2Compare(player2War[player2War.length - 1].game_value);
     }
   }, [player1War, player2War]);
-  console.log(currentPlayer);
+  // console.log(currentPlayer);
 
   useEffect(() => {
     if (p1Compare > 0 && p2Compare > 0) {
@@ -440,7 +450,9 @@ function Players(player) {
           dispatch(player2Actions.removeFromBattle());
         }
       }
+
       changeCurrentPlayer();
+
       // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
@@ -464,7 +476,9 @@ function Players(player) {
           dispatch(player2Actions.removeFromBattle());
         }
       }
+
       changeCurrentPlayer();
+
       // playerButtonActivation();
       setP1Compare(0);
       setP2Compare(0);
@@ -473,13 +487,26 @@ function Players(player) {
         message:
           "WAR! Time to battle by drawing 4 cards, the player with the higher fourth card wins the pile.",
       });
-      if (player1.name !== "Computer") {
-        checkEndGame();
-        // setDisableP1Btn(false);
-      } else {
-        checkEndGame();
+      checkEndGame();
+
+      if (
+        Object.keys(currentPlayer)[0] === "player1" &&
+        player1.name !== "Computer"
+      ) {
+        document.getElementById("p1Btn").disabled = false;
+        document.getElementById("p2Btn").disabled = true;
+      } else if (
+        Object.keys(currentPlayer)[0] === "player1" &&
+        player1.name === "Computer"
+      ) {
+        document.getElementById("p1Btn").disabled = true;
+        document.getElementById("p2Btn").disabled = true;
         p1War();
-        // setDisableP2Btn(false);
+      }
+
+      if (Object.keys(currentPlayer)[0] === "player2") {
+        document.getElementById("p1Btn").disabled = true;
+        document.getElementById("p2Btn").disabled = false;
       }
     }
   };
@@ -490,8 +517,23 @@ function Players(player) {
     }
   }, [player1Cards, player1Collection, player2Cards, player2Collection]);
 
+  useEffect(() => {
+    if (Object.keys(currentPlayer)[0] === "player2") {
+      document.getElementById("p1Btn").disabled = true;
+    } else if (Object.keys(currentPlayer)[0] === "player1") {
+      document.getElementById("p2Btn").disabled = true;
+    }
+  }, [currentPlayer]);
+
   // Run playerTurn at the start of the game to highlight the correct card, not needed for anything else
   useEffect(() => {
+    if (players[0].player1 === "Computer") {
+      document.getElementById("p1Btn").disabled = true;
+      document.getElementById("p2Btn").disabled = false;
+    } else {
+      document.getElementById("p1Btn").disabled = false;
+      document.getElementById("p2Btn").disabled = true;
+    }
     // playerButtonActivation();
   }, [gameStatus]);
 
@@ -525,31 +567,55 @@ function Players(player) {
     }
   };
 
-  useEffect(() => {
-    if (
-      Object.keys(currentPlayer)[0] === "player1" &&
-      players[0].player1 === "Computer"
-    ) {
-      document.getElementById("p1Btn").disabled = true;
-      document.getElementById("p2Btn").disabled = true;
-    } else if (
-      Object.keys(currentPlayer)[0] === "player1" &&
-      players[0].player1 !== "Computer"
-    ) {
-      document.getElementById("p1Btn").disabled = false;
-      document.getElementById("p2Btn").disabled = true;
-    } else if (Object.keys(currentPlayer)[0] === "player2") {
-      console.log("test");
-      document.getElementById("p1Btn").disabled = true;
-      document.getElementById("p2Btn").disabled = false;
-    }
-  }, [currentPlayer]);
+  // useEffect(() => {
+  //   if (
+  //     Object.keys(currentPlayer)[0] === "player1" &&
+  //     players[0].player1 === "Computer"
+  //   ) {
+  //     document.getElementById("p1Btn").disabled = true;
+  //     document.getElementById("p2Btn").disabled = true;
+  //   } else if (
+  //     Object.keys(currentPlayer)[0] === "player1" &&
+  //     players[0].player1 !== "Computer"
+  //   ) {
+  //     document.getElementById("p1Btn").disabled = false;
+  //     document.getElementById("p2Btn").disabled = true;
+  //   } else if (Object.keys(currentPlayer)[0] === "player2") {
+  //     // console.log("test");
+  //     document.getElementById("p1Btn").disabled = true;
+  //     document.getElementById("p2Btn").disabled = false;
+  //   }
+  // }, [currentPlayer]);
+
+  console.log(player2War);
 
   const changeCurrentPlayer = () => {
     if (Object.keys(currentPlayer)[0] === "player1") {
       dispatch(playersActions.setCurrentPlayer(players[1]));
+      document.getElementById("p2Btn").disabled = false;
+      document.getElementById("p1Btn").disabled = true;
+      // if (players[0].player1 === "Computer") {
+      //   document.getElementById("p1Btn").disabled = true;
+      // }
     } else if (Object.keys(currentPlayer)[0] === "player2") {
+      // if (
+      //   player1.name === "Computer" &&
+      //   player1War.length > 0 &&
+      //   player2War.length > 0
+      // ) {
+      //   console.log(player1War.length);
+      //   console.log(player2War.length);
+      //   dispatch(playersActions.setCurrentPlayer(players[0]));
+      //   p1War();
+      // }
       dispatch(playersActions.setCurrentPlayer(players[0]));
+
+      document.getElementById("p2Btn").disabled = true;
+
+      if (players[0].player1 !== "Computer") {
+        document.getElementById("p1Btn").disabled = false;
+      }
+      // document.getElementById("p2Btn").disabled = false;
     }
   };
 
@@ -557,6 +623,8 @@ function Players(player) {
     <div>
       <div className="column">
         <h1>{player1.name}'s Cards</h1>
+        <h3>Player1Cards: {player1Cards.length}</h3>
+        <h3>Player1Collection: {player1Collection.length}</h3>
         <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
 
         <div className="inner-container">
@@ -575,6 +643,8 @@ function Players(player) {
       </div>
       <div className="column">
         <h1>{player2.name}'s Cards</h1>
+        <h3>Player2Cards: {player2Cards.length}</h3>
+        <h3>Player2Collection: {player2Collection.length}</h3>
         <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
 
         <div className="inner-container">

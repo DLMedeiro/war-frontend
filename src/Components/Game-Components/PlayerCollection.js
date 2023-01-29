@@ -29,7 +29,8 @@ function PlayerCollection({ player }) {
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
 
-  const [collection, setCollection] = useState([]);
+  const [p1Collection, setP1Collection] = useState([]);
+  const [p2Collection, setP2Collection] = useState([]);
   //   const [disableP1Btn, setDisableP1Btn] = useState(false);
   //   const [disableP2Btn, setDisableP2Btn] = useState(true);
 
@@ -49,19 +50,50 @@ function PlayerCollection({ player }) {
     let index = cards.length;
     let randomIndex;
 
-    if (cards.length < 2) {
-      setCollection(cards);
-      return cards;
-    }
+    // console.log("test");
+    // console.log(cards);
+
+    // if (cards.length < 2) {
+    //   if (player === "p1") {
+    //     dispatch(player1Actions.addCard(cards));
+    //     dispatch(player1Actions.removeFromCollection());
+    //     setP1Collection([]);
+    //   } else if (player === "p2") {
+    //     dispatch(player2Actions.addCard(cards));
+    //     dispatch(player2Actions.removeFromCollection());
+    //     setP2Collection([]);
+    //   }
+    //   return cards;
+    // }
 
     while (index != 0) {
       randomIndex = Math.floor(Math.random() * index);
       index--;
+
+      [cards[index], cards[randomIndex]] = [cards[randomIndex], cards[index]];
     }
+    // cards.sort(() => Math.random() - 0.5);
+    console.log(cards);
 
-    [cards[index], cards[randomIndex]] = [cards[randomIndex], cards[index]];
-
-    setCollection(cards);
+    // console.log("player1");
+    // console.log(cards);
+    // if (player === "p1") {
+    //   setP1Collection(cards);
+    //   console.log("test2");
+    //   for (let card in p1Collection) {
+    //     dispatch(player1Actions.addCard(p1Collection[card]));
+    //   }
+    //   dispatch(player1Actions.removeFromCollection());
+    //   setP1Collection([]);
+    // } else if (player === "p2") {
+    //   setP2Collection(cards);
+    //   for (let card in p2Collection) {
+    //     dispatch(player2Actions.addCard(p2Collection[card]));
+    //   }
+    //   dispatch(player2Actions.removeFromCollection());
+    //   setP2Collection([]);
+    // }
+    setP1Collection(cards);
 
     return cards;
   };
@@ -89,30 +121,37 @@ function PlayerCollection({ player }) {
   // randomize(arr);
   // console.log(arr);
 
-  useEffect(() => {
-    if (player1Cards.length <= 4 && player1Collection.length > 0) {
-      setCollection(player1Collection);
-      shuffle(collection);
-      dispatch(player1Actions.removeFromCollection());
-      dispatch(player1Actions.addToCollection(collection));
-      for (let card in player1Collection) {
-        dispatch(player1Actions.addCard(player1Collection[card]));
-      }
-      dispatch(player1Actions.removeFromCollection());
-      setCollection([]);
-    }
-    if (player2Cards.length <= 4 && player2Collection.length > 0) {
-      setCollection(player2Collection);
-      shuffle(collection);
-      dispatch(player2Actions.removeFromCollection());
-      dispatch(player2Actions.addToCollection(collection));
-      for (let card in player2Collection) {
-        dispatch(player2Actions.addCard(player2Collection[card]));
-      }
-      dispatch(player2Actions.removeFromCollection());
-      setCollection([]);
-    }
-  }, [player1Cards, player2Cards]);
+  // useEffect(() => {
+  //   if (player1Cards.length <= 4 && player1Collection.length > 0) {
+  //     for (let card in player1Collection) {
+  //       console.log(card);
+  //       console.log(player1Collection[card]);
+  //       dispatch(player1Actions.addCard(player1Collection[card]));
+  //     }
+  //     dispatch(player1Actions.removeFromCollection());
+  //   }
+  // }, [player1Cards]);
+  // useEffect(() => {
+  //   if (player2Cards.length <= 4 && player2Collection.length > 0) {
+  //     for (let card in player2Collection) {
+  //       dispatch(player2Actions.addCard(player2Collection[card]));
+  //     }
+  //     dispatch(player2Actions.removeFromCollection());
+  //   }
+  //   // console.log(player2Cards);
+  // }, [player2Cards]);
+
+  // useEffect(() => {
+  //   if (player1Cards.length <= 4 && p1Collection.length !== 0) {
+  //     console.log(p1Collection);
+  //     shuffle(p1Collection, "p1");
+  //   }
+  // }, [p1Collection]);
+  // useEffect(() => {
+  //   if (player2Cards.length <= 4 && p2Collection.length !== 0) {
+  //     shuffle(p2Collection, "p2");
+  //   }
+  // }, [p2Collection]);
 
   //   const p1War = () => {
   //     if (player1War.length === 0) {
