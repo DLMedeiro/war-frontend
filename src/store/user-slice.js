@@ -46,6 +46,10 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.currentUser = {};
       localStorage.clear();
+      new Toast({
+        message: "Logout Successful",
+        type: "success",
+      });
     },
   },
   extraReducers: {
