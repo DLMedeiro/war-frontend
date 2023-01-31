@@ -347,7 +347,15 @@ function Players() {
     <>
       <div className="row">
         <div className="column">
-          <h1>{player1.name}'s Cards</h1>
+          <h1
+            className={
+              Object.keys(currentPlayer)[0] === "player1"
+                ? "currentPlayer"
+                : "notCurrentPlayer"
+            }
+          >
+            {player1.name}'s Cards
+          </h1>
           <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
 
           <div className="inner-container">
@@ -367,7 +375,15 @@ function Players() {
           <PlayerWar player={"Player2"} />
         </div>
         <div className="column">
-          <h1>{player2.name}'s Cards</h1>
+          <h1
+            className={
+              Object.keys(currentPlayer)[0] === "player2"
+                ? "currentPlayer"
+                : "notCurrentPlayer"
+            }
+          >
+            {player2.name}'s Cards
+          </h1>
           <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
 
           <div className="inner-container">
