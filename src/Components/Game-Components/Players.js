@@ -354,7 +354,7 @@ function Players() {
                 : "notCurrentPlayer"
             }
           >
-            {player1.name}'s Cards
+            {player1.name}'s <br /> Cards
           </h1>
           <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
 
@@ -382,7 +382,7 @@ function Players() {
                 : "notCurrentPlayer"
             }
           >
-            {player2.name}'s Cards
+            {player2.name}'s <br /> Cards
           </h1>
           <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
 
@@ -401,8 +401,10 @@ function Players() {
       </div>
 
       <div className="row">
-        {player1Battle.length > 0 && <Player1Battle battleStartingIndex={0} />}
-        {player2Battle.length > 0 && <Player2Battle battleStartingIndex={0} />}
+        {<Player1Battle battleStartingIndex={0} />}
+        {<Player2Battle battleStartingIndex={0} />}
+        {/* {player1Battle.length > 0 && <Player1Battle battleStartingIndex={0} />}
+        {player2Battle.length > 0 && <Player2Battle battleStartingIndex={0} />} */}
       </div>
       {/* <div className="row">
         <div className="column">
