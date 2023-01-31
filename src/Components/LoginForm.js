@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import { redirect } from "react-router-dom";
 import { loginUser } from "../store/user-slice";
 import userSlice from "../store/user-slice";
