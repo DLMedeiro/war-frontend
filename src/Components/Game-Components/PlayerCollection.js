@@ -16,7 +16,7 @@ function PlayerCollection({ player }) {
         <div className="inner-container">
           {player1Collection.length > 0 ? (
             <div
-              className="playerCard inner-container"
+              className="playerCard"
               style={{
                 backgroundImage: `url(${
                   player1Collection[player1Collection.length - 1].image_url
@@ -24,16 +24,14 @@ function PlayerCollection({ player }) {
               }}
             ></div>
           ) : (
-            <div className="inner-container">
-              <div className="playerCard inner-container card-placeholder"></div>
-            </div>
+            <div className="playerCard card-placeholder"></div>
           )}
         </div>
       ) : (
         <div className="inner-container">
           {player2Collection.length > 0 ? (
             <div
-              className="playerCard inner-container"
+              className="playerCard"
               style={{
                 backgroundImage: `url(${
                   player2Collection[player2Collection.length - 1].image_url
@@ -41,9 +39,7 @@ function PlayerCollection({ player }) {
               }}
             ></div>
           ) : (
-            <div className="inner-container">
-              <div className="playerCard inner-container card-placeholder"></div>
-            </div>
+            <div className="playerCard card-placeholder"></div>
           )}
         </div>
       )}

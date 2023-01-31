@@ -11,41 +11,31 @@ function PlayerWar({ player }) {
   const player2War = useSelector((state) => state.player2.war);
 
   return (
-    <div>
+    <div className="inlineBlock">
       {player === "Player1" ? (
-        <div className="inner-container">
+        <div>
           {player1War.length > 0 ? (
-            <div>
-              <div
-                className="playerCard"
-                style={{
-                  backgroundImage: `url(${player1War[0].image_url})`,
-                }}
-              ></div>
-            </div>
+            <div
+              className="playerCard"
+              style={{
+                backgroundImage: `url(${player1War[0].image_url})`,
+              }}
+            ></div>
           ) : (
-            <div>
-              <div></div>
-              <div className="playerCard card-placeholder"></div>
-            </div>
+            <div className="playerCard card-placeholder "></div>
           )}
         </div>
       ) : (
-        <div className="inner-container">
+        <div>
           {player2War.length > 0 ? (
-            <div>
-              <div
-                className="playerCard"
-                style={{
-                  backgroundImage: `url(${player2War[0].image_url})`,
-                }}
-              ></div>
-            </div>
+            <div
+              className="playerCard"
+              style={{
+                backgroundImage: `url(${player2War[0].image_url})`,
+              }}
+            ></div>
           ) : (
-            <div>
-              <div></div>
-              <div className="playerCard card-placeholder"></div>
-            </div>
+            <div className="playerCard card-placeholder "></div>
           )}
         </div>
       )}

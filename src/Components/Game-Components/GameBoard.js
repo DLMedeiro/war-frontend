@@ -25,7 +25,7 @@ function GameBoard() {
 
   return (
     <div className="outer-container gameboard">
-      <div className="row">
+      <div>
         <Players />
       </div>
     </div>

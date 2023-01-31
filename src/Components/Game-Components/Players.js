@@ -344,83 +344,79 @@ function Players() {
   };
 
   return (
-    <div>
-      <div className="column">
-        <h1>{player1.name}'s Cards</h1>
-        <h3>Player1Cards: {player1Cards.length}</h3>
-        <h3>Player1Collection: {player1Collection.length}</h3>
-        <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
+    <>
+      <div className="row">
+        <div className="column">
+          <h1>{player1.name}'s Cards</h1>
+          <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
 
-        <div className="inner-container">
-          <PlayerCollection player={"Player1"} />
-          <button
-            id="p1Btn"
-            onClick={p1War}
-            className="clickCard"
-            style={{
-              backgroundImage: `url(${cardBack})`,
-            }}
-          ></button>
-          <PlayerWar player={"Player1"} />
+          <div className="inner-container">
+            <PlayerCollection player={"Player1"} />
+            <button
+              id="p1Btn"
+              onClick={p1War}
+              className="clickCard"
+              style={{
+                backgroundImage: `url(${cardBack})`,
+              }}
+            ></button>
+          </div>
         </div>
-      </div>
-      <div className="column">
-        <h1>{player2.name}'s Cards</h1>
-        <h3>Player2Cards: {player2Cards.length}</h3>
-        <h3>Player2Collection: {player2Collection.length}</h3>
-        <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
-
-        <div className="inner-container">
-          <PlayerCollection player={"Player2"} />
-          <button
-            id="p2Btn"
-            onClick={p2War}
-            className="clickCard"
-            style={{
-              backgroundImage: `url(${cardBack})`,
-            }}
-          ></button>
+        <div className="column">
+          <PlayerWar player={"Player1"} />
           <PlayerWar player={"Player2"} />
         </div>
+        <div className="column">
+          <h1>{player2.name}'s Cards</h1>
+          <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
+
+          <div className="inner-container">
+            <PlayerCollection player={"Player2"} />
+            <button
+              id="p2Btn"
+              onClick={p2War}
+              className="clickCard"
+              style={{
+                backgroundImage: `url(${cardBack})`,
+              }}
+            ></button>
+          </div>
+        </div>
       </div>
 
-      <div className="column">
-        {player1Battle.length > 0 && (
-          <div className="row">
-            <Player1Battle battleStartingIndex={0} />
-          </div>
-        )}
-        {player2Battle.length > 0 && (
-          <div className="row">
-            <Player2Battle battleStartingIndex={0} />
-          </div>
-        )}
+      <div className="row">
+        {player1Battle.length > 0 && <Player1Battle battleStartingIndex={0} />}
+        {player2Battle.length > 0 && <Player2Battle battleStartingIndex={0} />}
       </div>
-      <div className="column">
-        {player1Battle.length > 3 && (
-          <div className="row">
-            <Player1Battle battleStartingIndex={3} />
-          </div>
-        )}
-        {player2Battle.length > 3 && (
-          <div className="row">
-            <Player2Battle battleStartingIndex={3} />
-          </div>
-        )}
+      {/* <div className="row">
+        <div className="column">
+          {player1Battle.length > 3 && (
+            <div className="row">
+              <Player1Battle battleStartingIndex={3} />
+            </div>
+          )}
+          {player2Battle.length > 3 && (
+            <div className="row">
+              <Player2Battle battleStartingIndex={3} />
+            </div>
+          )}
+        </div>
       </div>
-      <div className="column">
-        {player1Battle.length > 6 && (
-          <div className="row">
-            <Player1Battle battleStartingIndex={6} />
-          </div>
-        )}
-        {player2Battle.length > 6 && (
-          <div className="row">
-            <Player2Battle battleStartingIndex={6} />
-          </div>
-        )}
-      </div>
-    </div>
+      <div className="row">
+        <div className="column">
+          {player1Battle.length > 6 && (
+            <div className="row">
+              <Player1Battle battleStartingIndex={6} />
+            </div>
+          )}
+          {player2Battle.length > 6 && (
+            <div className="row">
+              <Player2Battle battleStartingIndex={6} />
+            </div>
+          )}
+        </div>
+      </div> */}
+    </>
   );
 }
 

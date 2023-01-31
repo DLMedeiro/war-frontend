@@ -11,16 +11,16 @@ function Player2Battle({ battleStartingIndex }) {
   const player2Battle = useSelector((state) => state.player2.battle);
 
   return (
-    <div className="column">
+    <div className="column-bottom">
       {/* Player 2 Portion */}
-      <div className="stacked-outer-container">
-        <div className="inner-container"></div>
+      <div>
+        <div></div>
 
         {player2Battle.length >= 1 ||
         player2Battle.length >= 4 ||
         player2Battle.length >= 7 ? (
           <div
-            className="playerCard card-1"
+            className="playerCard card-1-right inlineBlock-battle"
             style={{
               backgroundImage: `url(${player2Battle[battleStartingIndex].image_url})`,
             }}
@@ -32,7 +32,7 @@ function Player2Battle({ battleStartingIndex }) {
         player2Battle.length >= 5 ||
         player2Battle.length >= 8 ? (
           <div
-            className="playerCard card-2"
+            className="playerCard card-2-right inlineBlock-battle"
             style={{
               backgroundImage: `url(${
                 player2Battle[battleStartingIndex + 1].image_url
@@ -46,7 +46,7 @@ function Player2Battle({ battleStartingIndex }) {
         player2Battle.length >= 6 ||
         player2Battle.length >= 9 ? (
           <div
-            className="playerCard card-3"
+            className="playerCard card-3-right inlineBlock-battle"
             style={{
               backgroundImage: `url(${
                 player2Battle[battleStartingIndex + 2].image_url
@@ -58,7 +58,7 @@ function Player2Battle({ battleStartingIndex }) {
         )}
         {player2War[1] ? (
           <div
-            className="playerCard card-4"
+            className="playerCard card-4-right inlineBlock-battle"
             style={{
               backgroundImage: `url(${
                 player2War[player2War.length - 1].image_url
