@@ -3,13 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 const player1Slice = createSlice({
   name: "player1",
   initialState: {
+    player: [],
     cards: [],
     war: [],
     battle: [],
     collection: [],
-    playerTurn: false,
+    playerBtn: false,
   },
   reducers: {
+    addPlayer: (state, action) => {
+      state.player = action.payload;
+    },
+    removePlayer: (state, action) => {
+      state.player = [];
+    },
     addCard: (state, action) => {
       state.cards.push(action.payload);
     },
@@ -23,8 +30,7 @@ const player1Slice = createSlice({
       state.war = [];
     },
     addToBattle: (state, action) => {
-      // Change to unshift to add to beginning to fit in with UI format
-      state.battle.unshift(action.payload);
+      state.battle.push(action.payload);
     },
     removeFromBattle: (state, action) => {
       state.battle = [];
@@ -42,10 +48,10 @@ const player1Slice = createSlice({
       state.collection = [];
     },
     changeTurn: (state, action) => {
-      if (state.playerTurn) {
-        state.playerTurn = false;
+      if (state.playerBtn === true) {
+        state.playerBtn = false;
       } else {
-        state.playerTurn = true;
+        state.playerBtn = true;
       }
     },
   },

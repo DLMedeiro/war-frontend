@@ -24,7 +24,7 @@ function Instructions() {
         Each player places their stack of cards face down, in front of them.
       </p>
 
-      <h2>How To Play</h2>
+      <h2>Game Play</h2>
       <p>
         Players flip a single card from their hand, placing it face up in the
         center of the table.
@@ -35,7 +35,7 @@ function Instructions() {
       </p>
       <p>If players flip the same card, the war begins.</p>
 
-      <h2>War</h2>
+      <h2>Battle</h2>
       <p>
         During a war, each player places four more cards on the table. Whoever’s
         fourth card is the highest is the winner, they collect all the cards, 10

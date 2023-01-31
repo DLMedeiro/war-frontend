@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
-import { playersActions } from "../store/player-slice";
+import { playersActions } from "../store/players-slice";
+import { player1Actions } from "../store/player1-slice";
+import { player2Actions } from "../store/player2-slice";
 
 function WelcomeUser() {
   const dispatch = useDispatch();
+  const players = useSelector((state) => state.players.players);
 
   const setComputer = () => {
     dispatch(playersActions.addPlayer({ player1: "Computer" }));
@@ -13,6 +16,8 @@ function WelcomeUser() {
 
   const resetPlayers = () => {
     dispatch(playersActions.removePlayers());
+    dispatch(player1Actions.removePlayer());
+    dispatch(player2Actions.removePlayer());
   };
 
   return (
@@ -31,6 +36,7 @@ function WelcomeUser() {
         role="button"
         className="btn btn-lg btn-block"
         to="/newGame"
+        // Render GameSetup
         onClick={resetPlayers}
       >
         Play with a friend

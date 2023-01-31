@@ -2,21 +2,29 @@
     margin: 1rem;
     /* margin-right: 15%;
     margin-left: 15%; */
-    padding: 1rem 1rem;
+    padding: .5rem .5rem;
     text-align: center;
   }
 .inner-container {
     display: inline-block;
-    padding: 1rem 1rem;
+    padding: .5rem .5rem;
     /* vertical-align: middle; */
   }
 /* .push-left{
   align-items: right;
 } */
+.inlineBlock {
+  display: inline-block;
+  margin-top: 14rem;
+  padding: .5rem .5rem;
+}
+.inlineBlock-battle {
+  display: inline-block;
+}
 .stacked-outer-container{
   display: inline-block;
-  padding: 1rem 1rem;
-  margin-top: 10rem;
+  padding: .5rem .5rem;
+  /* margin-top: 10rem; */
 }
   .stacked{
     display: block;
@@ -24,8 +32,11 @@
 
   /* https://www.w3schools.com/howto/howto_css_three_columns.asp */
   .column {
-    float: left;
+    /* float: left; */
     width:33.3%
+  }
+  .column-bottom{
+    width: 50%;
   }
   /* Clear floats after the columns */
   .row:after {
@@ -38,6 +49,20 @@
   .gameboard{
     margin-right: 6%;
     margin-left: 6%
+  }
+
+  .currentPlayer{
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: .5rem;
+    transition: 1s;
+  }
+
+  .notCurrentPlayer{
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: .5rem;
+    transition: 1s;
   }
 
 /* .flip-card {
@@ -79,3 +104,9 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+.form-input{
+  margin: 25px 250px 25px 250px;
+  padding: 25px 50px 25px 50px;
+}
+

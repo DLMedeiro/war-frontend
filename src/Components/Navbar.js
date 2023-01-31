@@ -7,7 +7,7 @@ import { userActions } from "../store/user-slice";
 import { cardsActions, clearCards } from "../store/cards-slice";
 import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
-import { playersActions } from "../store/player-slice";
+import { playersActions } from "../store/players-slice";
 import InstructionModal from "./Game-Components/InstructionModal";
 
 function NavBar() {
@@ -26,9 +26,29 @@ function NavBar() {
     dispatch(cardsActions.endGame());
     dispatch(playersActions.removeWinner());
     dispatch(playersActions.removePlayers());
+    dispatch(playersActions.removeCurrentPlayer());
     dispatch(clearCards());
   };
 
+  function loggedOut() {
+    return (
+      <ul className="nav justify-content-center">
+        <li className="nav-item nav-link">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/instructions">How to Play</Link>
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/login">Login</Link>
+          {/* LoginForm */}
+        </li>
+        <li className="nav-item nav-link">
+          <Link to="/signup">Create Account</Link>
+        </li>
+      </ul>
+    );
+  }
   function loggedIn() {
     return (
       <ul className="nav justify-content-center">
@@ -65,29 +85,10 @@ function NavBar() {
     );
   }
 
-  function loggedOut() {
-    return (
-      <ul className="nav justify-content-center">
-        <li className="nav-item nav-link">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/instructions">How to Play</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/login">Login</Link>
-        </li>
-        <li className="nav-item nav-link">
-          <Link to="/signup">Create Account</Link>
-        </li>
-      </ul>
-    );
-  }
-
   return (
     <div>
       {players.length <= 1 ? (
-        <>{isLoggedIn ? loggedIn() : loggedOut()}</>
+        <>{isLoggedIn === true ? loggedIn() : loggedOut()}</>
       ) : (
         <>{gamePlay()}</>
       )}
