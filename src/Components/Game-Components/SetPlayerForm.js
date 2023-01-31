@@ -102,7 +102,7 @@ const SetPlayerForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-input">
       {player1.name === "Computer" ? (
         <div className="form-group">
           <label htmlFor="player1">Player 1</label>

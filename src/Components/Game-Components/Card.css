@@ -123,3 +123,75 @@ button:disabled{
           transition: 1s;
           background-color: var(--color1);
         }
+
+@media only screen and (max-width: 1400px) {
+  .card-placeholder-1{
+      height: 138px;
+      width: 100px;
+    }
+  .card-placeholder-2{
+      height: 138px;
+      width: 100px;
+    }
+    .card-placeholder-3{
+      height: 138px;
+      width: 100px;
+    }
+    
+    .card-placeholder-4{
+        height: 138px;
+        width: 100px;
+      }
+      .clickCard{
+        height: 138px;
+        width: 100px;
+      }
+      
+      .playerCard{
+          height: 138px;
+          width: 100px;
+      }
+      button:disabled{
+
+          height: 138px;
+          width: 100px;
+
+      
+      }
+        }
+
+@media only screen and (max-width: 400px) {
+          .card-placeholder-1{
+              height: 90px;
+              width: 50px;
+            }
+          .card-placeholder-2{
+              height: 90px;
+              width: 50px;
+            }
+            .card-placeholder-3{
+              height: 90px;
+              width: 50px;
+            }
+            
+            .card-placeholder-4{
+                height: 90px;
+                width: 50px;
+              }
+              .clickCard{
+                height: 90px;
+                width: 50px;
+              }
+              
+              .playerCard{
+                  height: 90px;
+                  width: 50px;
+              }
+              button:disabled{
+        
+                  height: 90px;
+                  width: 50px;
+        
+              
+              }
+                }
