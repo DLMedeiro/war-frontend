@@ -31,7 +31,16 @@ const SetPlayerForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "player1" && player1.name !== "Computer") {
-      setPlayer1Placeholder({ name: value });
+      if (value === "Computer" || value === "computer") {
+        new Toast({
+          message:
+            '"Computer" is not a valid player. To play against the computer, please select the play against computer option on the home screen',
+          type: "danger",
+        });
+        setPlayer1Placeholder({});
+      } else {
+        setPlayer1Placeholder({ name: value });
+      }
     }
     if (name === "player2") {
       setPlayer2Placeholder({ name: value });
@@ -41,18 +50,16 @@ const SetPlayerForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      player1Placeholder.name.length === 0 ||
-      player2Placeholder.name.length === 0
+      !player1Placeholder.name ||
+      !player2Placeholder.name ||
+      player1Placeholder.name === "Computer"
     ) {
       new Toast({
-        message: "Please enter a name for both players",
+        message: `Please enter a name for both players.  Please note "Computer" can not be used`,
         type: "danger",
       });
     }
-    if (
-      player1Placeholder.name === "Computer" &&
-      player2Placeholder.name.length > 0
-    ) {
+    if (player1Placeholder.name === "Computer" && player2Placeholder.name) {
       dispatch(player2Actions.addPlayer(player2Placeholder));
       dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
       // set current player to player 2
@@ -66,8 +73,8 @@ const SetPlayerForm = () => {
       return redirect("/newGame");
     } else if (
       player1Placeholder.name !== "Computer" &&
-      player1Placeholder.name.length > 0 &&
-      player2Placeholder.name.length > 0
+      player1Placeholder.name &&
+      player2Placeholder.name
     ) {
       dispatch(player1Actions.addPlayer(player1Placeholder));
       dispatch(playersActions.addPlayer({ player1: player1Placeholder.name }));
