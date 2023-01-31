@@ -34,7 +34,7 @@ const SetPlayerForm = () => {
       if (value === "Computer" || value === "computer") {
         new Toast({
           message:
-            '"Computer" is not a valid player. To play against the computer, please select the play against computer option on the home screen',
+            '"Computer" is not a valid player name. To play against the computer, please select the play against computer option on the home screen',
           type: "danger",
         });
         setPlayer1Placeholder({});
@@ -43,7 +43,16 @@ const SetPlayerForm = () => {
       }
     }
     if (name === "player2") {
-      setPlayer2Placeholder({ name: value });
+      if (value === "Computer" || value === "computer") {
+        new Toast({
+          message:
+            '"Computer" is not a valid player name. To play against the computer, please select the play against computer option on the home screen',
+          type: "danger",
+        });
+        setPlayer2Placeholder({});
+      } else {
+        setPlayer2Placeholder({ name: value });
+      }
     }
   };
 
@@ -52,10 +61,10 @@ const SetPlayerForm = () => {
     if (
       !player1Placeholder.name ||
       !player2Placeholder.name ||
-      player1Placeholder.name === "Computer"
+      (player1Placeholder.name === "Computer" && player1.name !== "Computer")
     ) {
       new Toast({
-        message: `Please enter a name for both players.  Please note "Computer" can not be used`,
+        message: `Please enter a valid name for both players.  "Computer" is not a valid name, unless the play against computer option has been chosen.`,
         type: "danger",
       });
     }

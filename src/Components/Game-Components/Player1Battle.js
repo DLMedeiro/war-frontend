@@ -23,7 +23,7 @@ function Player1Battle({ battleStartingIndex }) {
             }}
           ></div>
         ) : (
-          <div> </div>
+          <div className=" card-placeholder-1 inlineBlock-battle"></div>
         )}
         {player1Battle.length >= 2 ||
         player1Battle.length >= 5 ||
@@ -37,7 +37,7 @@ function Player1Battle({ battleStartingIndex }) {
             }}
           ></div>
         ) : (
-          <div> </div>
+          <div className=" card-placeholder-2 inlineBlock-battle"></div>
         )}
         {player1Battle.length >= 3 ||
         player1Battle.length >= 6 ||
@@ -51,7 +51,7 @@ function Player1Battle({ battleStartingIndex }) {
             }}
           ></div>
         ) : (
-          <div> </div>
+          <div className=" card-placeholder-3 inlineBlock-battle"></div>
         )}
         {player1War[1] ? (
           <div
@@ -63,7 +63,7 @@ function Player1Battle({ battleStartingIndex }) {
             }}
           ></div>
         ) : (
-          <div> </div>
+          <div className=" card-placeholder-4 inlineBlock-battle"></div>
         )}
       </div>
     </div>

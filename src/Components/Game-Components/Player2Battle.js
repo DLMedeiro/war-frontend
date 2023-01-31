@@ -14,8 +14,6 @@ function Player2Battle({ battleStartingIndex }) {
     <div className="column-bottom">
       {/* Player 2 Portion */}
       <div>
-        <div></div>
-
         {player2Battle.length >= 1 ||
         player2Battle.length >= 4 ||
         player2Battle.length >= 7 ? (
