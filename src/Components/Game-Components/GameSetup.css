@@ -49,6 +49,7 @@
 .modal-content{
   width: 50%;
   overflow:auto;
+  color: black;
   /* height: 100%; */
   background-color: #fff;
   /* overflow: hidden; */
@@ -66,4 +67,14 @@
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee
+}
+
+@media only screen and (max-width: 450px)  {
+  .modal-content{
+    width: 80%;
+    overflow:auto;
+    /* height: 100%; */
+    background-color: #fff;
+    /* overflow: hidden; */
+  }
 }
