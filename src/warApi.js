@@ -2,7 +2,7 @@ import axios from "axios";
 
 // https causes errors when running on local host
 const BASE_URL =
-  "https://warcardgame-frontend.onrender.com" || "http://localhost:3001";
+  "https://warcardgame-backend.onrender.com" || "http://localhost:3001";
 
 class WarApi {
   static async request(endpoint, data = {}, method = "get") {
