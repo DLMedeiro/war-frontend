@@ -1,13 +1,53 @@
-# Skyjo
-🚧👷🏽‍♀️ Under Construction 👷🏽‍♀️🚧
-
-Update ReadMe
-Change Game to War
-
-Add underline for player turn
+# WAR Card Game
 
 ## Game Details
+__Objective:__ 
+    
+    The objective of the game is to win all cards.
 
+__Number of Players:__ 
+
+    2 players
+
+__Number of Cards:__
+
+    Standard 52 card deck
+    
+__Card Ranking:__
+
+    The ranking for War the card game is Ace (high),
+    King, Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, and 2 (low).
+
+__The Deal__ 
+        
+    Each player receives 26 cards - dealing one at a time.
+    Each player places their stack of cards face down, in front of them.
+
+__Game Play__
+
+    Players flip a single card from their hand, placing it face up in the
+    center of the table.
+
+    The player with the higher card wins and collects both cards, returning
+    the cards to their personal deck.
+
+    If players flip the same card, the war begins.
+
+ __Battle__
+     
+    During a war, each player places four more cards on the table. Whoever’s
+    fourth card is the highest is the winner, they collect all the cards, 10
+    in total, and the next round begins. If the fourth cards are also the
+    same, repeat the previous instructions until there is a winner.
+
+    If a player does not have enough cards for the war, that player forfeits
+    their remaining cards to their opponent and the game is over.
+   
+
+   __Winning the Game__ 
+   
+   The player that collects all 52 cards into their deck wins the game.
+   
 ## Program Details
 
 ## Goals
