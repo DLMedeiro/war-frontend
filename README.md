@@ -1,106 +1,71 @@
 # WAR Card Game
 
+## Overview 
+The WAR Card Game is a two-player card game with the goal of collecting all 52 cards.  This application is intended to closely replicate game play through a website format, allowing two users to play against one another on a single device, or against a computer.
+
 ## Game Details
 __Objective:__ 
+    The objective of the game is to collect all cards.
     
-    The objective of the game is to win all cards.
+__Number of Players:__ 2 players
 
-__Number of Players:__ 
-
-    2 players
-
-__Number of Cards:__
-
-    Standard 52 card deck
+__Number of Cards:__ Standard 52 card deck
     
-__Card Ranking:__
+__Card Ranking:__ Ace (high), King, Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, and 2 (low).
 
-    The ranking for War the card game is Ace (high),
-    King, Queen, Jack, 10, 9, 8, 7, 6, 5, 4, 3, and 2 (low).
+__The Deal:__ Each player receives 26 cards, placed face down on their section of the board.
 
-__The Deal__ 
-        
-    Each player receives 26 cards - dealing one at a time.
-    Each player places their stack of cards face down, in front of them.
+__Game Play:__ Players flip a single card from their hand, placing it face up in the center of the table.  The player with the higher card wins and collects both cards, returning the cards to their personal deck.  If players flip the same card, the a battle begins.
 
-__Game Play__
-
-    Players flip a single card from their hand, placing it face up in the
-    center of the table.
-
-    The player with the higher card wins and collects both cards, returning
-    the cards to their personal deck.
-
-    If players flip the same card, the war begins.
-
- __Battle__
-     
-    During a war, each player places four more cards on the table. Whoever’s
-    fourth card is the highest is the winner, they collect all the cards, 10
-    in total, and the next round begins. If the fourth cards are also the
-    same, repeat the previous instructions until there is a winner.
-
-    If a player does not have enough cards for the war, that player forfeits
-    their remaining cards to their opponent and the game is over.
+ __Battle:__ During a battle, each player places four more cards on the table. Whoever’s fourth card is the highest is the winner, and they collect all the cards (10 in total), and the next round begins. If the fourth cards are also the same, repeat the previous instructions until there is a winner.  If a player does not have enough cards for the battle, that player forfeits their remaining cards to their opponent and the game is over.
    
-
-   __Winning the Game__ 
-   
-   The player that collects all 52 cards into their deck wins the game.
+__Winning the Game:__ The player that collects all 52 cards into their deck wins the game.
    
 ## Program Details
-
-## Goals
-
-## Proposal
-
-### Overview 
-
-Skyjo is a multi-player card game with the goal of getting rid of as many high cards as possible.  This application is intended to closely replicate game play through a website format, allowing two users to play against one another on a single device, or across multiple devices.
 
 ### Tech Stack
 
 Full-stack application with a heavy focus on front-end features.  
 
-Front-end: React, Bootstrap
+__Front-end:__ React, Redux, Bootstrap, CSS
 
-Back-end: Node JS, Express, PostgreSQL
+__Back-end:__ Node JS, Express, PostgreSQL
 
-Testing: Jest
+__Testing *In Process*:__ Jest
 
 ### Data
 
 The [Deck of Cards API](https://www.deckofcardsapi.com/) will generate all information regarding card data.
 
-To replicate the card game, three decks of card will be used for each game.
+Card values are based on the card face value:
+* Aces = 14
+* Kings = 13
+* Queens = 12
+* Jacks = 11
+* All remaining cards will keep their face value
 
-Card values are based on the card face value: **Aces = -2, Kings = -1, Queens and Jacks = 0, and all remaining cards will keep their face value**.
-
-A custom API will store Player personal data as well as any game statistics and details for that player.
+The backend database will hold __cards__ data for the deck of cards being used in a game, and __useraccounts__ information if they choose to create an account.  
 
 ### Sensitive Information
 
 If players choose to create an account, passwords will be secured through Bcrypt.  
 
-Logged in players will have access to game data related to their profile.
+Logged in players will have access to their profile information, where they can edit details regarding their account *In process*
 
-Access to game data will not be accessible across players or to non-registered users.
+Only users will have access their specific account information.
+
+User specific functionality will not be accessible to Non-registered users.
 
 ### User Story
 
 As a player I should be able to:
-1.	Play Skyjo with or without an Account
+1.	Play War with or without an Account
 1.  Have access to game instructions with or without an Account
-1.	Create, edit, and delete my account
-1.	Play with others on my device or across multiple devices
-1.	Execute game play based on instructions *See alterations to existing game play
-1.  View my game statistics if I have an account
+1.	Create and account
+1.	Edit or delete my account only after account creation *In process* 
+1.	Play with others on my device or against a computer
+1.	Execute game play based on instructions
 
-#### Alterations to existing game play
-
-Actual game runs over multiple rounds and ends when a player reaches 100.  Initial deployment of this application will end games after a single round and a winner is declared based on the lowest score between players.
-
-Actual game consists of a specialized deck of cards ranging from -2 to 12.  This application will achieve this through the manipulation of a standard deck of cards where __Aces = -2, Kings = -1, Queens and Jacks = 0, and all remaining cards will keep their face value.__
 
 #### Initial User Flow
 
@@ -114,128 +79,34 @@ Actual game consists of a specialized deck of cards ranging from -2 to 12.  This
 
 ![Initial Schema and Model Design](/Documents/ModelsSchema.png "Initial Schema and Model Design")
 
-#### player: 
-- Stores a player’s profile information.
+#### useraccounts: 
 
-#### participant: 
-- Connects a player with their board through **player_id** and **board_id**, and tracks a players score using their **board_id**.  
-- A **player_id** can have multiple **boards_id**s.
-- A **board_id** can only have one **player_id**.
-- A **board_id** may not have duplicate **player_id**s and a **player_id** may not have duplicate **board_id**s.
+Stores a player’s profile information. 
 
-#### board: 
-- Stores a board instance and score.
-- Board scores are summed together based on the values in the **card** table and their **position_id**.
-- Some **position_id**'s will prevent a card from being added to the score.  This occurs when a card is on a players board but has not been revealed yet.
+* username
+* password
+* first_name
+* last_name
+* email
 
-#### game: 
-- Stores a game instance.
-- Min/Max create regulation on number of players *undecided on if this is needed*
+#### cards:
 
-#### participant_game:
-- Connects a player to a game through **participant_id** and **game_id**.
-- A game can have multiple **participant_id**s (following min/max criteria *unsure on how to create this requirement*).
-- A **participant_id** can have multiple **game_id**s.
-- A **game_id** may not have duplicate **participant_id**s and a **participant_id** may not have duplicate **game_id**s.  
+Stores card instance.
 
-#### move:
-- Tracks data on each player’s move through **game_participants_id** and **card_id**.
-- Each player will generate two line items on each turn - one draw (**add_to_hand**) and one discard (**remove_from_hand**).
-- Multiple connections and duplicate records are allowed.
-- **new_card_position_id** will track the new location of where the card is placed, and generate an update to the **position_id** in the **card** table. *unsure on how to create this requirement*
-- **add_to_hand** and **remove_from_hand** identify if the card was removed or added to a player’s hand.
-- If **remove_from_hand** is true, the **board_id** is removed from that specific card in the **card** table. *unsure on how to create this requirement*
-- If **add_to_hand** is true, the **board_id** is added to that specific card in the **card** table. *unsure on how to create this requirement*
-- Both **add_to_hand** and **remove_from_hand** can be false during a players turn.  This occurs when a player draws a card and then chooses to discard that card instead of adding the card to their hand.  The player's second move will then flip over a card on their board, changing the position but adding and remove will be false since the card is already tied to the board.
+**code:** Represents the abbreviated code for the card value and suit (Example: 5 of Hearts = 5H)
 
-#### position:
-- Stores card position and if the value is active through the __state__ column.
-- If __state__ is true, the value is applicable to the score.
-- If the __state__ is false, the value is not applicable to the score.
-- *Question: Can the status of a face up card vs a face down card be manipulated on the front end?*
-- The **location** of a card will change with each move.
-- This table also eliminates duplication of data between move and card tables.   
+**card_value:** assigned value provided by the deck of cards API.  This data is used to create the **game_value** for each card.
 
-#### card:
-- Stores card instance.
-- Card __value__ is based on the card face value Aces = -2, Kings = -1, Queens and Jacks = 0, and all remaining cards will keep their face value.
-- **position_id** will track the **location** and __state__ of the card, if the __state__ is false, the value of the card is not applicable to the score, if __state__ is true, the value is added to the score in the **board** table.
+**image_url:** Provides the card image correlated to the code
 
+**player:** At the start of each game, players are dealt 26 cards at random.  The players identified in this column represent the initial state of the game and where cards are located.
 
-### Possible Issues / Questions
-- Accurate Schema and model design for functionality
-- Where/How to incorporate the Deck of cards API
+**game_value:** Based on the card face value Aces = 14, Kings = 13, Queens = 12, Jacks = 11, and all remaining cards will keep their face value.
 
-### Future Features
-1.	Additional Game animation
-1.	Increase number of players who can play at once	
-1.	Accessibility
-1.	Additional Game stats
-1.	Games with multiple rounds
-
-
-
-## Timeline
-
-| Activity                       |Time Est.|Expected Start|Actual Start|Expected Complete| Actual Complete|   Notes          |
-| :--------------------------:   |:-------:|:------------:|:----------:|:-------------:  |:-------------: |:----------------:|
-| Schema and Model Design        | 1       |Nov 14, 2022  |Nov 14, 2022|Nov 16, 2022     |Nov 16, 2022    |                  |
-| Component Structure            | 1       |Nov 14, 2022  |Nov 14, 2022|Nov 16, 2022     |Nov 16, 2022    |                  |
-| Skeleton Application           | 4       |Nov 14, 2022  |Nov 14, 2022|Nov 16, 2022     |Nov 16, 2022    |                  |
-| Proposal                       | 1       |Nov 16, 2022  |Nov 16, 2022|Nov 16, 2022     |Nov 16, 2022    |                  |
-| Instructions                   | 1       |Nov 17, 2022  |Nov 18, 2022|Nov 17, 2022     |Nov 18, 2022    |                  |
-| Page Layout                    | 1       |Nov 17, 2022  |Nov 17, 2022|Nov 21, 2022     |Nov 20, 2022    |Offline Nov 18-21 |
-| Game Layout                    | 2       |Nov 21, 2022  |Nov 21, 2022|Nov 23, 2022     |                |                  |
-| Updates to Proposal Data       | 1       |Nov 23, 2022  |            |Nov 23, 2022     |                |Offline Nov 24-26 |
-| *Backend Setup                 | 6       |              |Nov 27, 2022|Dec 2, 2022      |                |                  |
-| Profile Page                   | 1       |Nov 25, 2022  |            |Nov 25, 2022     |                |Offline Nov 14-26 |
-| Game Play V1 (Single Device)   | 4       |Nov 27, 2022  |            |Dec 1, 2022      |                |                  |
-| Game Play V2 (Multi Device)    | 4       |Dec 1, 2022   |            |Dec 6, 2022      |                |                  |
-| Final Styling /Animation       | 3       |Dec 6, 2022   |            |Dec 16, 2022     |                |Offline Dec 7-13  |
-| Clean Code                     | 2       |Dec 6, 2022   |            |Dec 16, 2022     |                |Offline Dec 7-13  |
-| Documentation                  | 2       |Dec 14, 2022  |            |Dec 16, 2022     |                |                  |
-
-
-## Progress and Notes
-### Schema and Model Design
-
-- Need to review __score__ execution and __move__ table.  Not sure if current solution will work as intended
-
-### Component Structure
-
-- Anticipating small changes during execution
-
-### Skeleton Application
-
-- Includes initial development of Back-end and Front-end servers
-- Login, Logout, Register functionality
-- Initial Database created with basic Model and Schema design
-
-### Proposal
-
-- Planning to update based on feedback during next mentor call
-
-### Instructions
-
-- Draft information included, styling not complete.  
-- Gathering feedback on clarity
-
-### Page Layout
-
-- Routing and page connections complete
-- Page information incomplete
-
-### Game Layout
-
-<!-- ### Game Play V1 (Single Device) -->
-<!-- ### Game Play V2 (Multi Device) -->
-<!-- ### Final Styling /Animation -->
-<!-- ### Clean Code -->
-<!-- ### Documentation -->
 
 ## Future Enhancements
-1.	Additional Game animation
-1.	Increase number of players who can play at once	
-1.	Responsiveness
+1.  Testing
+1.  Profile view and editing capabilities
+1.  Additional Game animation
+1.	Further updates to responsiveness / Formatting updates
 1.	Additional Game stats
-1.	Games with multiple rounds
