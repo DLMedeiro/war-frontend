@@ -5,7 +5,7 @@ import React from "react";
 function Instructions() {
   return (
     <div className="modal-body">
-      <h1>This is how you play the card game War!</h1>
+      <h1>How to play the game War!</h1>
       <p>
         <b>Objective: </b>The objective of the game is to win all cards.
       </p>

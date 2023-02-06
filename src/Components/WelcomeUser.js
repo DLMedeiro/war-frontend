@@ -21,7 +21,7 @@ function WelcomeUser() {
   };
 
   return (
-    <>
+    <div className="contain">
       <Link
         id="btn-main"
         role="button"
@@ -41,7 +41,7 @@ function WelcomeUser() {
       >
         Play with a friend
       </Link>
-    </>
+    </div>
   );
 }
 

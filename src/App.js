@@ -38,21 +38,6 @@ function App() {
           <Route path="/login" element={<LoginForm />}></Route>
         </Routes>
       )}
-
-      {/* {isLoggedIn ? (
-        <Routes>
-          <Route path="/" element={<WelcomeUser />}></Route>
-          <Route path="/instructions" element={<Instructions />}></Route>
-          <Route path="/newGame" element={<GameSetup />}></Route>
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/instructions" element={<Instructions />}></Route>
-          <Route path="/login" element={<LoginForm />}></Route>
-          <Route path="/newGame" element={<GameSetup />}></Route>
-        </Routes>
-      )} */}
     </div>
   );
 }
