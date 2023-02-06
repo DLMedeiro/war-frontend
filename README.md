@@ -67,21 +67,17 @@ As a player I should be able to:
 1.	Execute game play based on instructions
 
 
-#### Initial User Flow
+### User Flow
 
 ![User Flow Chart](/Documents/UserFlow.PNG "User Flow Chart")
 
-#### Initial Front-end Component Design
+### Front-end Component Design
 
 ![Component design structure](/Documents/ComponentDesign.PNG "Component design structure")
 
-### Initial Schema and Model Design
+### Schema and Model Design
 
-![Initial Schema and Model Design](/Documents/ModelsSchema.png "Initial Schema and Model Design")
-
-#### useraccounts: 
-
-Stores a player’s profile information. 
+#### useraccounts: Stores a player’s profile information. 
 
 * username
 * password
@@ -89,19 +85,17 @@ Stores a player’s profile information.
 * last_name
 * email
 
-#### cards:
+#### cards: Stores card instance.
 
-Stores card instance.
+* **code:** Represents the abbreviated code for the card value and suit (Example: 5 of Hearts = 5H)
 
-**code:** Represents the abbreviated code for the card value and suit (Example: 5 of Hearts = 5H)
+* **card_value:** assigned value provided by the deck of cards API.  This data is used to create the **game_value** for each card.
 
-**card_value:** assigned value provided by the deck of cards API.  This data is used to create the **game_value** for each card.
+* **image_url:** Provides the card image correlated to the code
 
-**image_url:** Provides the card image correlated to the code
+* **player:** At the start of each game, players are dealt 26 cards at random.  The players identified in this column represent the initial state of the game and where cards are located.
 
-**player:** At the start of each game, players are dealt 26 cards at random.  The players identified in this column represent the initial state of the game and where cards are located.
-
-**game_value:** Based on the card face value Aces = 14, Kings = 13, Queens = 12, Jacks = 11, and all remaining cards will keep their face value.
+* **game_value:** Based on the card face value Aces = 14, Kings = 13, Queens = 12, Jacks = 11, and all remaining cards will keep their face value.
 
 
 ## Future Enhancements
