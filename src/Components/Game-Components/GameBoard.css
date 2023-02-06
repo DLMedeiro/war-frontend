@@ -15,7 +15,7 @@
 } */
 .inlineBlock {
   display: inline-block;
-  margin-top: 14rem;
+  /* margin-top: 10rem; */
   padding: .5rem .5rem;
 }
 .inlineBlock-battle {
@@ -44,6 +44,9 @@
     content: "";
     display: table;
     clear: both;
+  }
+  .middle{
+    margin-top: 50px;
   }
 
   /* Adjust for responsivness later */
@@ -134,7 +137,7 @@
 @media only screen and (max-width: 450px)  {
   .inlineBlock {
     display: inline-block;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     padding: .5rem .5rem;
     transition: 1s;
   }
@@ -143,7 +146,7 @@
     padding: 8px 4px 8px 4px;
   }
   .currentPlayer{
-    border: 2px solid black;
+    border: 2px solid rgba(131, 43, 43, 0.5);
     border-radius: 25px;
     transition: 1s;
   }

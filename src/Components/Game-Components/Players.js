@@ -31,6 +31,7 @@ function Players() {
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
+  const [winnerOfHand, setWinnerOfHand] = useState("");
 
   const dispatch = useDispatch();
 
@@ -73,7 +74,6 @@ function Players() {
       shuffle([...player1Collection], "p1");
     }
 
-    console.log(player1War);
     if (player1War.length === 0) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
@@ -125,7 +125,6 @@ function Players() {
   };
   const p2War = () => {
     if (player2Cards.length <= 4 && player2Collection.length > 0) {
-      console.log([...player2Collection]);
       shuffle([...player2Collection], "p2");
     }
     if (player2War.length === 0) {
@@ -183,15 +182,16 @@ function Players() {
     if (p1Compare > 0 && p2Compare > 0) {
       if (player2War.length > 1) {
         // Set longer time for battle
-        setTimeout(compareCards, 6000);
+        setTimeout(compareCards, 4000);
       } else {
-        setTimeout(compareCards, 2000);
+        setTimeout(compareCards, 1000);
       }
     }
   }, [p2Compare, p1Compare]);
 
   const compareCards = () => {
     if (p1Compare > p2Compare) {
+      setWinnerOfHand(player1.name);
       // add all cards to p1 collection
       for (let card in player1War) {
         dispatch(player1Actions.addToCollection(player1War[card]));
@@ -217,6 +217,7 @@ function Players() {
       setP1Compare(0);
       setP2Compare(0);
     } else if (p1Compare < p2Compare) {
+      setWinnerOfHand(player2.name);
       // add all cards to p2 collection
       for (let card in player1War) {
         dispatch(player2Actions.addToCollection(player1War[card]));
@@ -325,8 +326,6 @@ function Players() {
     }
   };
 
-  console.log(player2War);
-
   const changeCurrentPlayer = () => {
     if (Object.keys(currentPlayer)[0] === "player1") {
       dispatch(playersActions.setCurrentPlayer(players[1]));
@@ -342,6 +341,12 @@ function Players() {
       }
     }
   };
+
+  useEffect(() => {
+    if (player1War.length !== player2War.length) {
+      setWinnerOfHand("");
+    }
+  }, [player1War, player2War]);
 
   return (
     <>
@@ -372,8 +377,13 @@ function Players() {
             ></button>
           </div>
         </div>
-        <div className="column">
+        <div className="column middle">
           <PlayerWar player={"Player1"} />
+          {winnerOfHand.length !== 0 ? (
+            <h6> {winnerOfHand} wins hand </h6>
+          ) : (
+            <h6></h6>
+          )}
           <PlayerWar player={"Player2"} />
         </div>
         <div
