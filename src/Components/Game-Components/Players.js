@@ -346,17 +346,19 @@ function Players() {
   return (
     <>
       <div className="row">
-        <div className="column">
-          <h1
-            className={
-              Object.keys(currentPlayer)[0] === "player1"
-                ? "currentPlayer"
-                : "notCurrentPlayer"
-            }
-          >
+        <div
+          className={
+            Object.keys(currentPlayer)[0] === "player1"
+              ? "column currentPlayer"
+              : "column notCurrentPlayer"
+          }
+        >
+          <h1>
             {player1.name}'s <br /> Cards
           </h1>
-          <h3>Card Total: {player1Cards.length + player1Collection.length}</h3>
+          <h3>
+            Cards in hand: {player1Cards.length + player1Collection.length}
+          </h3>
 
           <div className="inner-container">
             <PlayerCollection player={"Player1"} />
@@ -374,17 +376,19 @@ function Players() {
           <PlayerWar player={"Player1"} />
           <PlayerWar player={"Player2"} />
         </div>
-        <div className="column">
-          <h1
-            className={
-              Object.keys(currentPlayer)[0] === "player2"
-                ? "currentPlayer"
-                : "notCurrentPlayer"
-            }
-          >
+        <div
+          className={
+            Object.keys(currentPlayer)[0] === "player2"
+              ? "column currentPlayer"
+              : "column notCurrentPlayer"
+          }
+        >
+          <h1>
             {player2.name}'s <br /> Cards
           </h1>
-          <h3>Card Total: {player2Cards.length + player2Collection.length}</h3>
+          <h3>
+            Cards in hand: {player2Cards.length + player2Collection.length}
+          </h3>
 
           <div className="inner-container">
             <PlayerCollection player={"Player2"} />
