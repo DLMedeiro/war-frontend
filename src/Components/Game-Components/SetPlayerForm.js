@@ -8,6 +8,7 @@ import { playersActions } from "../../store/players-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import "./GameSetup.css";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
@@ -61,13 +62,27 @@ const SetPlayerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !player1Placeholder.name ||
-      !player2Placeholder.name ||
-      (player1Placeholder.name === "Computer" && player1.name !== "Computer")
-    ) {
+    if (!player1Placeholder.name && !player2Placeholder.name) {
       new Toast({
-        message: `Please enter a valid name for both players.  "Computer" is not a valid name, unless the play against computer option has been chosen.`,
+        message: `Please enter a name for Player 1 and Player 2.  Note: "Computer" is not a valid name, unless the play against computer option has been chosen.`,
+        type: "danger",
+      });
+    }
+    if (!player1Placeholder.name) {
+      new Toast({
+        message: `Please enter a name for Player 1.  Note: "Computer" is not a valid name, unless the play against computer option has been chosen.`,
+        type: "danger",
+      });
+    }
+    if (!player2Placeholder.name) {
+      new Toast({
+        message: `Please enter a name for Player 2.  Note: "Computer" is not a valid name.`,
+        type: "danger",
+      });
+    }
+    if (player1Placeholder.name === "Computer" && player1.name !== "Computer") {
+      new Toast({
+        message: `"Computer" is not a valid name for Player 1, unless the play against computer option has been chosen.`,
         type: "danger",
       });
     }
@@ -118,6 +133,13 @@ const SetPlayerForm = () => {
     },
   });
 
+  useEffect(() => {
+    if (loading) {
+      document.getElementById("btn-login").disabled = true;
+      // } else if (!loading) {
+      //   document.getElementById("btn-login").disabled = false;
+    }
+  }, [loading]);
   return (
     <>
       {loading ? (

@@ -39,8 +39,6 @@ button:disabled{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height: 208px;
-    width: 150px;
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: 1s;
@@ -73,56 +71,62 @@ button:disabled{
   }
   
   .card-placeholder-4{
-      margin-left: 4rem;
+      /* margin-left: 4rem; */
       transition: 1s;
       height: 208px;
       width: 150px;
+      margin-left: -2.5rem;
+      margin-bottom: -2rem;
     }
-.card-1{
-  margin-left:-4rem;
-    transition: 1s;
-    background-color: var(--color1);
-  }
-.card-2{
-    margin-left:-4rem;
-    transition: 1s;
-    background-color: var(--color1);
-  }
-  .card-3{
-    margin-left:-4rem;
-    transition: 1s;
-    background-color: var(--color1);
-  }
-  
-  .card-4{
-      margin-left: 4rem;
+    .card-1{
+      margin-left:-4.5rem;
+        transition: 1s;
+        background-color: var(--color1);
+      }
+    .card-2{
+        margin-left:-4.5rem;
+        transition: 1s;
+        background-color: var(--color1);
+      }
+      .card-3{
+        margin-left:-4.5rem;
+        transition: 1s;
+        background-color: var(--color1);
+      }
+
+    .card-4{
+      margin-left: -14rem;
+      margin-bottom: -2rem;
       transition: 1s;
       background-color: var(--color1);
     }
+
     .card-1-right{
-      margin-left:-4rem;
-      /* margin-right:-4rem; */
+      margin-left: 2rem;
+      margin-right: -4rem;                /* margin-right:-4rem; */
         transition: 1s;
         background-color: var(--color1);
       }
     .card-2-right{
-        margin-left:-4rem;
-        /* margin-right:-4rem; */
+      margin-left: 2rem;
+      margin-right: -4rem;                  /* margin-right:-4rem; */
         transition: 1s;
         background-color: var(--color1);
       }
       .card-3-right{
-        margin-left:-4rem;
-        margin-right:-14rem;
+        margin-left: 2rem;
+        margin-right: -4rem;                  /* margin-right:-8rem; */
         transition: 1s;
         background-color: var(--color1);
       }
-      
-      .card-4-right{
-          margin-left: -24rem;
-          transition: 1s;
-          background-color: var(--color1);
-        }
+
+    .card-4-right{
+      margin-left: -12rem;
+      margin-top: 0rem;
+      margin-bottom: -2rem;
+      transition: 1s;
+      background-color: var(--color1);
+    }
 
 @media only screen and (max-width: 1400px) {
   .card-placeholder-1{
@@ -141,6 +145,7 @@ button:disabled{
     .card-placeholder-4{
         height: 138px;
         width: 100px;
+        
       }
       .clickCard{
         height: 138px;
