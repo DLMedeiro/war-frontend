@@ -7,6 +7,7 @@ import "../../Components/Toast.css";
 import { playersActions } from "../../store/players-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ const SetPlayerForm = () => {
 
   const INITIAL_STATE = {};
   const [formData, setFormData] = useState(INITIAL_STATE);
+
+  const [loading, setLoading] = useState(false);
 
   // Computer is added into players when computer choice is chosen.  This checks if players has anything in it, and assigns player 1 to that player("Computer")
   useEffect(() => {
@@ -69,6 +72,7 @@ const SetPlayerForm = () => {
       });
     }
     if (player1Placeholder.name === "Computer" && player2Placeholder.name) {
+      setLoading(true);
       dispatch(player2Actions.addPlayer(player2Placeholder));
       dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
       // set current player to player 2
@@ -85,6 +89,7 @@ const SetPlayerForm = () => {
       player1Placeholder.name &&
       player2Placeholder.name
     ) {
+      setLoading(true);
       dispatch(player1Actions.addPlayer(player1Placeholder));
       dispatch(playersActions.addPlayer({ player1: player1Placeholder.name }));
       dispatch(player2Actions.addPlayer(player2Placeholder));
@@ -101,45 +106,66 @@ const SetPlayerForm = () => {
     }
   };
 
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+    },
+    horizontal: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: 10,
+    },
+  });
+
   return (
-    <form onSubmit={handleSubmit} className="form-input">
-      {player1.name === "Computer" ? (
-        <div className="form-group">
-          <label htmlFor="player1">Player 1</label>
-          <input
-            className="form-control"
-            onChange={handleChange}
-            name="player1"
-            value={player1.name}
-            disabled
-          />
-        </div>
+    <>
+      {loading ? (
+        <View style={[styles.container, styles.horizontal]}>
+          <ActivityIndicator size="large" color="#c19595" />
+        </View>
       ) : (
+        ""
+      )}
+      <form onSubmit={handleSubmit} className="form-input">
+        {player1.name === "Computer" ? (
+          <div className="form-group">
+            <label htmlFor="player1">Player 1</label>
+            <input
+              className="form-control"
+              onChange={handleChange}
+              name="player1"
+              value={player1.name}
+              disabled
+            />
+          </div>
+        ) : (
+          <div className="form-group">
+            <label htmlFor="player1">Player 1</label>
+            <input
+              className="form-control"
+              onChange={handleChange}
+              name="player1"
+            />
+          </div>
+        )}
         <div className="form-group">
-          <label htmlFor="player1">Player 1</label>
+          <label htmlFor="player2">Player 2</label>
           <input
             className="form-control"
             onChange={handleChange}
-            name="player1"
+            name="player2"
           />
         </div>
-      )}
-      <div className="form-group">
-        <label htmlFor="player2">Player 2</label>
-        <input
-          className="form-control"
-          onChange={handleChange}
-          name="player2"
-        />
-      </div>
-      <button
-        type="submit"
-        id="btn-login"
-        className="btn btn-primary btn-lg btn-block"
-      >
-        Let's Play!
-      </button>
-    </form>
+        <button
+          type="submit"
+          id="btn-login"
+          className="btn btn-primary btn-lg btn-block"
+        >
+          Let's Play!
+        </button>
+      </form>
+    </>
   );
 };
 
