@@ -1,5 +1,7 @@
 # WAR Card Game
 
+[PLAY NOW!](warcardgame-frontend.onrender.com)
+
 ## Overview 
 The WAR Card Game is a two-player card game with the goal of collecting all 52 cards.  This application is intended to closely replicate game play through a website format, allowing two users to play against one another on a single device, or against a computer.
 
