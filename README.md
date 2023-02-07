@@ -77,7 +77,9 @@ As a player I should be able to:
 
 ### Schema and Model Design
 
-#### useraccounts: Stores a player’s profile information. 
+#### useraccounts: 
+
+Stores a player’s profile information. 
 
 * username
 * password
@@ -85,7 +87,9 @@ As a player I should be able to:
 * last_name
 * email
 
-#### cards: Stores card instance.
+#### cards: 
+
+Stores card instance.
 
 * **code:** Represents the abbreviated code for the card value and suit (Example: 5 of Hearts = 5H)
 
