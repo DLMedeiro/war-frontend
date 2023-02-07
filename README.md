@@ -61,21 +61,10 @@ User specific functionality will not be accessible to Non-registered users.
 As a player I should be able to:
 1.	Play War with or without an Account
 1.  Have access to game instructions with or without an Account
-1.	Create and account
+1.	Create an account
 1.	Edit or delete my account only after account creation *In process* 
 1.	Play with others on my device or against a computer
 1.	Execute game play based on instructions
-
-
-### User Flow
-
-![User Flow Chart](/Docs/UserFlow.PNG "User Flow Chart")
-
-### Front-end Component Design
-
-![Component design structure](/Docs/ComponentDesign.PNG "Component design structure")
-
-### Schema and Model Design
 
 #### useraccounts: 
 
@@ -108,3 +97,4 @@ Stores card instance.
 1.  Additional Game animation
 1.	Further updates to responsiveness / Formatting updates
 1.	Additional Game stats
+1.  Front-end Component Structure
