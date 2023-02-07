@@ -11,6 +11,7 @@ import {
   Form,
 } from "reactstrap";
 import { registerUser } from "../store/user-slice";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function SignupForm() {
   };
   const [formData, setFormData] = useState(INITIAL_STATE);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +37,7 @@ function SignupForm() {
 
   const submit = (e) => {
     e.preventDefault();
+    setLoading(true);
     dispatch(registerUser(formData));
     setFormData(INITIAL_STATE);
   };
@@ -43,11 +46,38 @@ function SignupForm() {
       return redirect("/");
     }
   }, [isLoggedIn]);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: "center",
+    },
+    horizontal: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: 10,
+    },
+  });
+  useEffect(() => {
+    if (loading) {
+      document.getElementById("btn-login").disabled = true;
+      // } else if (!loading) {
+      //   document.getElementById("btn-login").disabled = false;
+    }
+  }, [loading]);
+
   return (
     <section>
       <h1>Create New Account</h1>
       <Card>
         <CardBody className="text-center">
+          {loading ? (
+            <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator size="large" color="#c19595" />
+            </View>
+          ) : (
+            ""
+          )}
           <Form onSubmit={submit}>
             <FormGroup>
               <Label htmlFor="username">Username</Label>
