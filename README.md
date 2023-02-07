@@ -69,11 +69,11 @@ As a player I should be able to:
 
 ### User Flow
 
-![User Flow Chart](/Documents/UserFlow.PNG "User Flow Chart")
+![User Flow Chart](/Docs/UserFlow.PNG "User Flow Chart")
 
 ### Front-end Component Design
 
-![Component design structure](/Documents/ComponentDesign.PNG "Component design structure")
+![Component design structure](/Docs/ComponentDesign.PNG "Component design structure")
 
 ### Schema and Model Design
 
