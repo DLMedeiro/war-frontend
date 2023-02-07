@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import "./Navbar.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { userActions } from "../store/user-slice";

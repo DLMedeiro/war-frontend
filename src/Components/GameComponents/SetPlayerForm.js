@@ -4,12 +4,10 @@ import { redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
 
 import Toast from "../Toast";
-// import "../Toast/Toast.css";
 import { gameActions } from "../../store/game-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-// import "./GameSetup.css";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();

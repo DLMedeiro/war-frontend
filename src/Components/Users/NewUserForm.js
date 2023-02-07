@@ -66,8 +66,8 @@ function SignupForm() {
 
   return (
     <section>
-      <h1>Create New Account</h1>
       <Card>
+        <h1>Create New Account</h1>
         <CardBody className="text-center">
           {loading ? (
             <View style={[styles.container, styles.horizontal]}>

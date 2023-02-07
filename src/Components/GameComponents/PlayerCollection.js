@@ -1,10 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// import "./Card.css";
-// import "./GameBoard.css";
-// import "./GameSetup.css";
-
 function PlayerCollection({ player }) {
   const player1Collection = useSelector((state) => state.player1.collection);
   const player2Collection = useSelector((state) => state.player2.collection);

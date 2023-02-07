@@ -87,47 +87,8 @@
   margin-left: 5rem;
 }
 
-/* Modal React Tutorial */
-.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  /* align-items: center; */
-  justify-content: center;
-  /* text-align: left; */
 
-}
 
-.modal-content{
-  width: 50%;
-  overflow:auto;
-  color: black;
-  /* height: 100%; */
-  background-color: #fff;
-  /* overflow: hidden; */
-}
-
-.modal-header, .modal-footer{
-  padding: 10px;
-}
-
-.modal-title{
-  margin: 0;
-}
-
-.modal-body{
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  text-align: left;
-  /* margin: 25px 500px 25px 500px; */
-}
 
   /* Adjust for responsivness later */
   .gameboard{
@@ -214,10 +175,7 @@
     padding: .5rem .5rem;
     transition: 1s;
   }
-  h1, h3{
-    font-size: medium;
-    padding: 8px 4px 8px 4px;
-  }
+  
   .currentPlayer{
     border: 2px solid rgba(131, 43, 43, 0.5);
     border-radius: 25px;

@@ -1,10 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// import "./Card.css";
-// import "./GameBoard.css";
-// import "./GameSetup.css";
-
 function Player1Battle({ battleStartingIndex }) {
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);

@@ -16,13 +16,17 @@ const InstructionModal = (props) => {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4>Instructions</h4>
+          <h4>How to play the game War!</h4>
         </div>
         {/* <div > */}
         <Instructions />
         {/* </div> */}
         <div className="modal-footer">
-          <button onClick={props.onClose} className="button">
+          <button
+            onClick={props.onClose}
+            id="btn-login"
+            className="btn btn-lg btn-block"
+          >
             Close
           </button>
         </div>

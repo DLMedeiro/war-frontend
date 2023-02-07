@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-// import "./Card.css";
-// import "./GameSetup.css";
 import "../../Styles/GameBoard.css";
 
 import Toast from "../Toast";
-// import "../Toast/Toast.css";
 import Players from "./Players";
 
 function GameBoard() {

@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
-// import "./GameSetup.css";
-// import "./Card.css";
 import GameBoard from "./GameBoard";
 import SetPlayerForm from "./SetPlayerForm";
 

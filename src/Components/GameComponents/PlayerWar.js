@@ -1,8 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import "./Card.css";
-// import "./GameBoard.css";
-// import "./GameSetup.css";
 
 function PlayerWar({ player }) {
   const player1War = useSelector((state) => state.player1.war);

@@ -3,6 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "react-router-dom";
 import { loginUser } from "../../store/user-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import {
+  Card,
+  CardBody,
+  Label,
+  Input,
+  Button,
+  FormGroup,
+  Form,
+} from "reactstrap";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -56,41 +65,51 @@ const LoginForm = () => {
   }, [loading]);
 
   return (
-    <div className="container">
-      <h1>Login</h1>
-      {loading ? (
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="#c19595" />
-        </View>
-      ) : (
-        ""
-      )}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            className="form-control"
-            type="text"
-            name="username"
-            id="username"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            className="form-control"
-            type="password"
-            name="password"
-            id="password"
-            onChange={handleChange}
-          />
-        </div>
-        <button id="btn-login" className="btn btn-lg btn-block" type="submit">
-          LogIn
-        </button>
-      </form>
-    </div>
+    <section>
+      <Card>
+        <h1>Login</h1>
+        <CardBody className="text-center">
+          {loading ? (
+            <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator size="large" color="#c19595" />
+            </View>
+          ) : (
+            ""
+          )}
+          <Form onSubmit={handleSubmit}>
+            <FormGroup>
+              <Label htmlFor="username">Username</Label>
+              <Input
+                className="form-control"
+                type="text"
+                name="username"
+                id="username"
+                onChange={handleChange}
+                value={formData.username}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                className="form-control"
+                type="password"
+                name="password"
+                id="password"
+                onChange={handleChange}
+                value={formData.password}
+              />
+            </FormGroup>
+            <Button
+              id="btn-login"
+              className="btn btn-lg btn-block"
+              type="submit"
+            >
+              LogIn
+            </Button>
+          </Form>
+        </CardBody>
+      </Card>
+    </section>
   );
 };
 

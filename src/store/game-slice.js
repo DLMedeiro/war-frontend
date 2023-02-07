@@ -5,7 +5,6 @@ const gameSlice = createSlice({
   initialState: { players: [], currentPlayer: [], winner: [] },
   reducers: {
     addPlayer: (state, action) => {
-      // console.log(action.payload);
       state.players.push(action.payload);
     },
     removePlayers: (state, action) => {
