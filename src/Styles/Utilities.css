@@ -138,11 +138,20 @@ button[type=submit]:disabled{
   #btn-main {
     margin: 25px 150px 25px 150px;
     padding: 25px 50px 25px 50px;
+    transition: 1s;
 }}
 
 @media only screen and (max-width: 800px)  {
   #btn-main {
   margin: 12px;
+  transition: 1s;
+}
+.modal-content{
+  min-width: 300px;
+  transition: 1s;
+}
+.instructions{
+  max-width: 90%;
   transition: 1s;
 }}
 @media only screen and (max-width: 450px)  {
@@ -151,11 +160,6 @@ h1, h2, h3, h4, h5, h6{
   padding: 8px 4px 8px 4px;
   transition: 1s;
 }
-.modal-content{
-  min-width: 300px;
-}
-.instructions{
-  max-width: 90%;
-}
+
 
 }
