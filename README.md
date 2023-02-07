@@ -31,7 +31,7 @@ __Front-end:__ React, Redux, Bootstrap, CSS
 
 __Back-end:__ Node JS, Express, PostgreSQL
 
-__Testing *In Process*:__ Jest
+__Testing:__ Jest *In Process*
 
 ### Data
 
@@ -44,7 +44,7 @@ Card values are based on the card face value:
 * Jacks = 11
 * All remaining cards will keep their face value
 
-The backend database will hold __cards__ data for the deck of cards being used in a game, and __useraccounts__ information if they choose to create an account.  
+The backend database will hold card data for the deck of cards being used in a game, and user information for those who create accounts.  
 
 ### Sensitive Information
 
@@ -52,20 +52,20 @@ If players choose to create an account, passwords will be secured through Bcrypt
 
 Logged in players will have access to their profile information, where they can edit details regarding their account *In process*
 
-Only users will have access their specific account information.
+Only users will have access to their specific account information.
 
 User specific functionality will not be accessible to Non-registered users.
 
 ### User Story
 
 As a player I should be able to:
-1.	Play War with or without an Account
+1.	Execute game play with or without an Account
 1.  Have access to game instructions with or without an Account
 1.	Create an account
 1.	Edit or delete my account only after account creation *In process* 
 1.	Play with others on my device or against a computer
-1.	Execute game play based on instructions
 
+###  Model Design
 #### useraccounts: 
 
 Stores a player’s profile information. 
