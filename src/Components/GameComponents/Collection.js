@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-function PlayerCollection({ player }) {
+function Collection({ player }) {
   const player1Collection = useSelector((state) => state.player1.collection);
   const player2Collection = useSelector((state) => state.player2.collection);
 
@@ -42,4 +42,4 @@ function PlayerCollection({ player }) {
   );
 }
 
-export default PlayerCollection;
+export default Collection;

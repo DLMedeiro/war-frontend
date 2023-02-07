@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "../../Styles/GameBoard.css";
 
 import Toast from "../Toast";
-import Players from "./Players";
+import GamePlay from "./GamePlay";
 
 function GameBoard() {
   const currentPlayer = useSelector((state) => state.game.currentPlayer);
@@ -24,7 +24,7 @@ function GameBoard() {
   return (
     <div className="outer-container gameboard">
       <div>
-        <Players />
+        <GamePlay />
       </div>
     </div>
   );

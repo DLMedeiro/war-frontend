@@ -6,7 +6,7 @@ import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
 import { Card, CardBody } from "reactstrap";
 
-function WelcomeUser() {
+function Home() {
   const dispatch = useDispatch();
 
   const setComputer = () => {
@@ -46,4 +46,4 @@ function WelcomeUser() {
   );
 }
 
-export default WelcomeUser;
+export default Home;

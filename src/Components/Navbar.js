@@ -8,7 +8,7 @@ import { player2Actions } from "../store/player2-slice";
 import { gameActions } from "../store/game-slice";
 import InstructionModal from "./Instructions/InstructionModal";
 
-function NavBar() {
+function Navbar() {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const players = useSelector((state) => state.game.players);
   const dispatch = useDispatch();
@@ -94,4 +94,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Navbar;

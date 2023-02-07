@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-function PlayerWar({ player }) {
+function War({ player }) {
   const player1War = useSelector((state) => state.player1.war);
 
   const player2War = useSelector((state) => state.player2.war);
@@ -39,4 +39,4 @@ function PlayerWar({ player }) {
   );
 }
 
-export default PlayerWar;
+export default War;

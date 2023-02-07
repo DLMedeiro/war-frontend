@@ -6,12 +6,12 @@ import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import cardBack from "./back.png";
 import Toast from "../Toast";
-import PlayerCollection from "./PlayerCollection";
-import PlayerWar from "./PlayerWar";
+import PlayerCollection from "./Collection";
+import PlayerWar from "./War";
 import Player1Battle from "./Player1Battle";
 import Player2Battle from "./Player2Battle";
 
-function Players() {
+function GamePlay() {
   const player1Cards = useSelector((state) => state.player1.cards);
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
@@ -413,39 +413,9 @@ function Players() {
       <div className="row">
         {<Player1Battle battleStartingIndex={0} />}
         {<Player2Battle battleStartingIndex={0} />}
-        {/* {player1Battle.length > 0 && <Player1Battle battleStartingIndex={0} />}
-        {player2Battle.length > 0 && <Player2Battle battleStartingIndex={0} />} */}
       </div>
-      {/* <div className="row">
-        <div className="column">
-          {player1Battle.length > 3 && (
-            <div className="row">
-              <Player1Battle battleStartingIndex={3} />
-            </div>
-          )}
-          {player2Battle.length > 3 && (
-            <div className="row">
-              <Player2Battle battleStartingIndex={3} />
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="row">
-        <div className="column">
-          {player1Battle.length > 6 && (
-            <div className="row">
-              <Player1Battle battleStartingIndex={6} />
-            </div>
-          )}
-          {player2Battle.length > 6 && (
-            <div className="row">
-              <Player2Battle battleStartingIndex={6} />
-            </div>
-          )}
-        </div>
-      </div> */}
     </>
   );
 }
 
-export default Players;
+export default GamePlay;

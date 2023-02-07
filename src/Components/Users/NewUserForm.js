@@ -13,7 +13,7 @@ import {
 import { registerUser } from "../../store/user-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-function SignupForm() {
+function NewUserForm() {
   const dispatch = useDispatch();
 
   const INITIAL_STATE = {
@@ -143,4 +143,4 @@ function SignupForm() {
   );
 }
 
-export default SignupForm;
+export default NewUserForm;

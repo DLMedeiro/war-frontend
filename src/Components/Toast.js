@@ -123,7 +123,7 @@ Toast.prototype._init = function () {
       return _this4._createElements();
     })
     .then(function () {
-      if (_this4.toastContainerEl.getAttribute("aria-hidden") == "false") {
+      if (_this4.toastContainerEl.getAttribute("aria-hidden") === "false") {
         return _this4._close();
       }
       return Promise.resolve();

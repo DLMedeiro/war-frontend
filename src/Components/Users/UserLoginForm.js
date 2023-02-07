@@ -13,7 +13,7 @@ import {
   Form,
 } from "reactstrap";
 
-const LoginForm = () => {
+const UserLoginForm = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const INITIAL_STATE = {
@@ -113,4 +113,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default UserLoginForm;
