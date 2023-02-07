@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cardsActions } from "../../store/cards-slice";
-import { playersActions } from "../../store/players-slice";
+import { gameActions } from "../../store/game-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import cardBack from "./back.png";
-import "./Card.css";
-import "./GameBoard.css";
-import "./GameSetup.css";
+// import "./Card.css";
+// import "./GameBoard.css";
+// import "./GameSetup.css";
 import Toast from "../Toast";
-import "../../Components/Toast.css";
+// import "../../Components/Toast/Toast.css";
 import PlayerCollection from "./PlayerCollection";
 import PlayerWar from "./PlayerWar";
 import Player1Battle from "./Player1Battle";
@@ -20,14 +20,14 @@ function Players() {
   const player1War = useSelector((state) => state.player1.war);
   const player1Battle = useSelector((state) => state.player1.battle);
   const player1Collection = useSelector((state) => state.player1.collection);
-  const players = useSelector((state) => state.players.players);
+  const players = useSelector((state) => state.game.players);
   const player2Cards = useSelector((state) => state.player2.cards);
   const player2War = useSelector((state) => state.player2.war);
   const player2Battle = useSelector((state) => state.player2.battle);
   const player2Collection = useSelector((state) => state.player2.collection);
   const player1 = useSelector((state) => state.player1.player);
   const player2 = useSelector((state) => state.player2.player);
-  const currentPlayer = useSelector((state) => state.players.currentPlayer);
+  const currentPlayer = useSelector((state) => state.game.currentPlayer);
   const [p1Compare, setP1Compare] = useState(0);
   const [p2Compare, setP2Compare] = useState(0);
   const gameStatus = useSelector((state) => state.cardDeck.gameReady);
@@ -116,7 +116,7 @@ function Players() {
     } else if (player1Battle.length > 6 && player1Battle.length < 9) {
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[1]));
+      dispatch(gameActions.setCurrentPlayer(players[1]));
     } else if (player1Battle.length === 9) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
@@ -153,7 +153,7 @@ function Players() {
     } else if (player2Battle.length > 3 && player2Battle.length < 6) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      dispatch(gameActions.setCurrentPlayer(players[0]));
     } else if (player2Battle.length === 6) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
@@ -162,7 +162,7 @@ function Players() {
     } else if (player2Battle.length > 6 && player2Battle.length < 9) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      dispatch(gameActions.setCurrentPlayer(players[0]));
     } else if (player2Battle.length === 9) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
@@ -304,7 +304,7 @@ function Players() {
       player1Cards.length + player1Collection.length < 4
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player2));
+      dispatch(gameActions.addWinner(players[0].player2));
     } else if (
       p1Compare > 0 &&
       p2Compare > 0 &&
@@ -312,27 +312,27 @@ function Players() {
       player2Cards.length + player2Collection.length < 4
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player1));
+      dispatch(gameActions.addWinner(players[0].player1));
     }
     if (gameStatus && player1Cards.length + player1Collection.length <= 0) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player1));
+      dispatch(gameActions.addWinner(players[0].player1));
     } else if (
       gameStatus &&
       player2Cards.length + player2Collection.length <= 0
     ) {
       dispatch(cardsActions.endGame());
-      dispatch(playersActions.addWinner(players[0].player2));
+      dispatch(gameActions.addWinner(players[0].player2));
     }
   };
 
   const changeCurrentPlayer = () => {
     if (Object.keys(currentPlayer)[0] === "player1") {
-      dispatch(playersActions.setCurrentPlayer(players[1]));
+      dispatch(gameActions.setCurrentPlayer(players[1]));
       document.getElementById("p2Btn").disabled = false;
       document.getElementById("p1Btn").disabled = true;
     } else if (Object.keys(currentPlayer)[0] === "player2") {
-      dispatch(playersActions.setCurrentPlayer(players[0]));
+      dispatch(gameActions.setCurrentPlayer(players[0]));
 
       document.getElementById("p2Btn").disabled = true;
 

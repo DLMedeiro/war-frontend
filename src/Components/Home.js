@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import "./NavBar.css";
-import { playersActions } from "../store/players-slice";
+import { useDispatch } from "react-redux";
+// import "../Components/Navbar/Navbar.css";
+import { gameActions } from "../store/game-slice";
 import { player1Actions } from "../store/player1-slice";
 import { player2Actions } from "../store/player2-slice";
 
 function WelcomeUser() {
   const dispatch = useDispatch();
-  const players = useSelector((state) => state.players.players);
 
   const setComputer = () => {
-    dispatch(playersActions.addPlayer({ player1: "Computer" }));
+    dispatch(gameActions.addPlayer({ player1: "Computer" }));
   };
 
   const resetPlayers = () => {
-    dispatch(playersActions.removePlayers());
+    dispatch(gameActions.removePlayers());
     dispatch(player1Actions.removePlayer());
     dispatch(player2Actions.removePlayer());
   };

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const playersSlice = createSlice({
-  name: "players",
+const gameSlice = createSlice({
+  name: "game",
   initialState: { players: [], currentPlayer: [], winner: [] },
   reducers: {
     addPlayer: (state, action) => {
@@ -26,6 +26,6 @@ const playersSlice = createSlice({
   },
 });
 
-export const playersActions = playersSlice.actions;
+export const gameActions = gameSlice.actions;
 
-export default playersSlice;
+export default gameSlice;

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { useSelector } from "react-redux";
-import SetPlayerForm from "./Game-Components/SetPlayerForm";
 
 function Profile() {
   const currentUser = useSelector((state) => state.user.currentUser);

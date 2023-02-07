@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { cardsActions } from "../../store/cards-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
-import "./GameSetup.css";
-import "./Card.css";
+// import "./GameSetup.css";
+// import "./Card.css";
 import GameBoard from "./GameBoard";
 import SetPlayerForm from "./SetPlayerForm";
 
@@ -16,7 +16,7 @@ function GameSetup() {
 
   const player2Cards = useSelector((state) => state.player2.cards);
 
-  const winner = useSelector((state) => state.players.winner);
+  const winner = useSelector((state) => state.game.winner);
 
   const dispatch = useDispatch();
 
@@ -24,9 +24,9 @@ function GameSetup() {
   useEffect(() => {
     if (cards.length > 0) {
       for (let card in cards[0]) {
-        if (cards[0][card].player == 1) {
+        if (cards[0][card].player === 1) {
           dispatch(player1Actions.addCard(cards[0][card]));
-        } else if (cards[0][card].player == 2) {
+        } else if (cards[0][card].player === 2) {
           dispatch(player2Actions.addCard(cards[0][card]));
         }
       }
@@ -43,7 +43,7 @@ function GameSetup() {
 
   return (
     <>
-      {gameStatus == true ? <GameBoard /> : <SetPlayerForm />}
+      {gameStatus === true ? <GameBoard /> : <SetPlayerForm />}
 
       {winner.length > 0 && (
         <div>

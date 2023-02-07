@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import WarApi from "../warApi";
 import Toast from "../Components/Toast";
-import "../Components/Toast.css";
 
 export const loginUser = createAsyncThunk(`auth/token`, async (data) => {
   const response = await WarApi.loginUser(data);

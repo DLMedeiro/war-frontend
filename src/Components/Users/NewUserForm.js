@@ -10,7 +10,7 @@ import {
   FormGroup,
   Form,
 } from "reactstrap";
-import { registerUser } from "../store/user-slice";
+import { registerUser } from "../../store/user-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 function SignupForm() {
@@ -61,8 +61,6 @@ function SignupForm() {
   useEffect(() => {
     if (loading) {
       document.getElementById("btn-login").disabled = true;
-      // } else if (!loading) {
-      //   document.getElementById("btn-login").disabled = false;
     }
   }, [loading]);
 

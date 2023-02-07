@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import "./Card.css";
-import "./GameBoard.css";
-import "./GameSetup.css";
-import Toast from "../../Components/Toast";
-import "../../Components/Toast.css";
+// import "./Card.css";
+// import "./GameSetup.css";
+import "../../Styles/GameBoard.css";
+
+import Toast from "../Toast";
+// import "../Toast/Toast.css";
 import Players from "./Players";
 
 function GameBoard() {
-  const currentPlayer = useSelector((state) => state.players.currentPlayer);
+  const currentPlayer = useSelector((state) => state.game.currentPlayer);
 
   useEffect(() => {
     if (Object.keys(currentPlayer)[0] === "player1") {

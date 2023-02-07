@@ -2,17 +2,18 @@ import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect } from "react-router-dom";
 import { fetchCards } from "../../store/cards-slice";
-import Toast from "../../Components/Toast";
-import "../../Components/Toast.css";
-import { playersActions } from "../../store/players-slice";
+
+import Toast from "../Toast";
+// import "../Toast/Toast.css";
+import { gameActions } from "../../store/game-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
-import "./GameSetup.css";
+// import "./GameSetup.css";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
-  const players = useSelector((state) => state.players.players);
+  const players = useSelector((state) => state.game.players);
   const player1 = useSelector((state) => state.player1.player);
   const [player1Placeholder, setPlayer1Placeholder] = useState({});
   const [player2Placeholder, setPlayer2Placeholder] = useState({});
@@ -89,10 +90,10 @@ const SetPlayerForm = () => {
     if (player1Placeholder.name === "Computer" && player2Placeholder.name) {
       setLoading(true);
       dispatch(player2Actions.addPlayer(player2Placeholder));
-      dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
+      dispatch(gameActions.addPlayer({ player2: player2Placeholder.name }));
       // set current player to player 2
       dispatch(
-        playersActions.setCurrentPlayer({ player2: player2Placeholder.name })
+        gameActions.setCurrentPlayer({ player2: player2Placeholder.name })
       );
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
@@ -106,12 +107,12 @@ const SetPlayerForm = () => {
     ) {
       setLoading(true);
       dispatch(player1Actions.addPlayer(player1Placeholder));
-      dispatch(playersActions.addPlayer({ player1: player1Placeholder.name }));
+      dispatch(gameActions.addPlayer({ player1: player1Placeholder.name }));
       dispatch(player2Actions.addPlayer(player2Placeholder));
-      dispatch(playersActions.addPlayer({ player2: player2Placeholder.name }));
+      dispatch(gameActions.addPlayer({ player2: player2Placeholder.name }));
       // Set current player to player 1
       dispatch(
-        playersActions.setCurrentPlayer({ player1: player1Placeholder.name })
+        gameActions.setCurrentPlayer({ player1: player1Placeholder.name })
       );
       dispatch(fetchCards());
       setFormData(INITIAL_STATE);
