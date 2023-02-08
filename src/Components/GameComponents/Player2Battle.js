@@ -9,9 +9,7 @@ function Player2Battle({ battleStartingIndex }) {
     <div className="column-bottom">
       {/* Player 2 Portion */}
       <div>
-        {player2Battle.length >= 1 ||
-        player2Battle.length >= 4 ||
-        player2Battle.length >= 7 ? (
+        {player2Battle.length >= battleStartingIndex + 1 ? (
           <div
             className="playerCard card-1-right inlineBlock-battle"
             style={{
@@ -21,9 +19,8 @@ function Player2Battle({ battleStartingIndex }) {
         ) : (
           <div className="card-placeholder-1 inlineBlock-battle"> </div>
         )}
-        {player2Battle.length >= 2 ||
-        player2Battle.length >= 5 ||
-        player2Battle.length >= 8 ? (
+
+        {player2Battle.length >= battleStartingIndex + 2 ? (
           <div
             className="playerCard card-2-right inlineBlock-battle"
             style={{
@@ -35,9 +32,7 @@ function Player2Battle({ battleStartingIndex }) {
         ) : (
           <div className="card-placeholder-2 inlineBlock-battle"></div>
         )}
-        {player2Battle.length >= 3 ||
-        player2Battle.length >= 6 ||
-        player2Battle.length >= 9 ? (
+        {player2Battle.length >= battleStartingIndex + 3 ? (
           <div
             className="playerCard card-3-right inlineBlock-battle"
             style={{
@@ -49,17 +44,62 @@ function Player2Battle({ battleStartingIndex }) {
         ) : (
           <div className="card-placeholder-3 inlineBlock-battle"></div>
         )}
-        {player2War[1] ? (
+        {player2War.length > 1 && player2Battle.length >= 3 ? (
           <div
             className="playerCard card-4-right inlineBlock-battle"
             style={{
-              backgroundImage: `url(${
-                player2War[player2War.length - 1].image_url
-              })`,
+              backgroundImage: `url(${player2War[1].image_url})`,
             }}
           ></div>
         ) : (
           <div className="card-placeholder-4 inlineBlock-battle"> </div>
+        )}
+
+        {player2Battle.length >= battleStartingIndex + 4 ? (
+          <div
+            className="playerCard card-1-right inlineBlock-battle"
+            style={{
+              backgroundImage: `url(${
+                player2Battle[battleStartingIndex + 3].image_url
+              })`,
+            }}
+          ></div>
+        ) : (
+          <div className=" card-placeholder-1 inlineBlock-battle"></div>
+        )}
+        {player2Battle.length >= battleStartingIndex + 5 ? (
+          <div
+            className="playerCard card-2-right inlineBlock-battle"
+            style={{
+              backgroundImage: `url(${
+                player2Battle[battleStartingIndex + 4].image_url
+              })`,
+            }}
+          ></div>
+        ) : (
+          <div className=" card-placeholder-2 inlineBlock-battle"></div>
+        )}
+        {player2Battle.length >= battleStartingIndex + 6 ? (
+          <div
+            className="playerCard card-3-right inlineBlock-battle"
+            style={{
+              backgroundImage: `url(${
+                player2Battle[battleStartingIndex + 5].image_url
+              })`,
+            }}
+          ></div>
+        ) : (
+          <div className=" card-placeholder-3 inlineBlock-battle"></div>
+        )}
+        {player2War.length > 2 && player2Battle.length >= 6 ? (
+          <div
+            className="playerCard card-4-right inlineBlock-battle"
+            style={{
+              backgroundImage: `url(${player2War[2].image_url})`,
+            }}
+          ></div>
+        ) : (
+          <div className=" card-placeholder-4 inlineBlock-battle"></div>
         )}
       </div>
     </div>

@@ -95,20 +95,26 @@ function GamePlay() {
         dispatch(player1Actions.addToBattle(player1Cards[0]));
         dispatch(player1Actions.removeCard());
       }
-    } else if (player1Battle.length === 3) {
+    } else if (player1War.length === 1 && player1Battle.length === 3) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
       document.getElementById("p1Btn").disabled = true;
       if (player2War.length < 2) {
         changeCurrentPlayer();
       }
-    } else if (player1Battle.length > 3 && player1Battle.length < 6) {
+    } else if (
+      (player1War.length === 2 && player1Battle.length === 3) ||
+      player1Battle.length < 6
+    ) {
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
-    } else if (player1Battle.length === 6) {
+    } else if (player1War.length === 2 && player1Battle.length === 6) {
       dispatch(player1Actions.addToWar(player1Cards[0]));
       dispatch(player1Actions.removeCard());
       document.getElementById("p1Btn").disabled = true;
+      if (player2War.length < 3) {
+        changeCurrentPlayer();
+      }
     } else if (player1Battle.length > 6 && player1Battle.length < 9) {
       dispatch(player1Actions.addToBattle(player1Cards[0]));
       dispatch(player1Actions.removeCard());
@@ -136,7 +142,7 @@ function GamePlay() {
     } else if (player2Battle.length > 0 && player2Battle.length < 3) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-    } else if (player2Battle.length === 3) {
+    } else if (player2War.length === 1 && player2Battle.length === 3) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       document.getElementById("p2Btn").disabled = true;
@@ -146,15 +152,23 @@ function GamePlay() {
           p1War();
         }
       }
-    } else if (player2Battle.length > 3 && player2Battle.length < 6) {
+    } else if (
+      (player2War.length === 2 && player2Battle.length === 3) ||
+      player2Battle.length < 6
+    ) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
-      dispatch(gameActions.setCurrentPlayer(players[0]));
-    } else if (player2Battle.length === 6) {
+      // dispatch(gameActions.setCurrentPlayer(players[0]));
+    } else if (player2War.length === 2 && player2Battle.length === 6) {
       dispatch(player2Actions.addToWar(player2Cards[0]));
       dispatch(player2Actions.removeCard());
       document.getElementById("p2Btn").disabled = true;
-      changeCurrentPlayer();
+      if (player1War.length < 3) {
+        changeCurrentPlayer();
+        if (players[0].player1 === "Computer") {
+          p1War();
+        }
+      }
     } else if (player2Battle.length > 6 && player2Battle.length < 9) {
       dispatch(player2Actions.addToBattle(player2Cards[0]));
       dispatch(player2Actions.removeCard());
@@ -414,6 +428,20 @@ function GamePlay() {
         {<Player1Battle battleStartingIndex={0} />}
         {<Player2Battle battleStartingIndex={0} />}
       </div>
+
+      {/* {player1Battle.length > 3 || player2Battle.length > 3 ? (
+        <div className="row">
+          <Player1Battle battleStartingIndex={3} />
+          <Player2Battle battleStartingIndex={3} />
+        </div>
+      ) : (
+        <div className="row"></div>
+      )} */}
+
+      {/* <div className="row">
+        {<Player1Battle battleStartingIndex={3} />}
+        {<Player2Battle battleStartingIndex={3} />}
+      </div> */}
     </>
   );
 }
