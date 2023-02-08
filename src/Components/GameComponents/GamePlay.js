@@ -31,8 +31,6 @@ function GamePlay() {
 
   const dispatch = useDispatch();
 
-  console.log(player2Cards);
-
   // Only for computer play
   useEffect(() => {
     if (player1.name === "Computer") {
