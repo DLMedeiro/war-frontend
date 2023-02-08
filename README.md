@@ -29,11 +29,11 @@ __Winning the Game:__ The player that collects all 52 cards into their deck wins
 
 Full-stack application with a heavy focus on front-end features.  
 
-__Front-end:__ React, Redux, Bootstrap, CSS
+__Front-end:__ React, Redux, Bootstrap, CSS (Run with ```npm start```)
 
-__Back-end:__ Node JS, Express, PostgreSQL
+__Back-end:__ Node JS, Express, PostgreSQL (Run with ```npm start```)
 
-__Testing:__ Jest *In Process*
+__Testing:__ React Testing Library (Run with ```npm test``` *add file name to run specific tests*) *In Process*
 
 ### Data
 
