@@ -5,3 +5,11 @@
 // it("renders without crashing", function () {
 //   render(<App />);
 // });
+// Placeholder
+test.skip("blank test", () => {
+  expect(gameSlice.reducer(undefined, { type: undefined })).toEqual({
+    players: [],
+    currentPlayer: [],
+    winner: [],
+  });
+});
