@@ -8,6 +8,15 @@ import { gameActions } from "../../store/game-slice";
 import { player1Actions } from "../../store/player1-slice";
 import { player2Actions } from "../../store/player2-slice";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
+import {
+  Card,
+  CardBody,
+  Label,
+  Input,
+  Button,
+  FormGroup,
+  Form,
+} from "reactstrap";
 
 const SetPlayerForm = () => {
   const dispatch = useDispatch();
@@ -140,53 +149,47 @@ const SetPlayerForm = () => {
     }
   }, [loading]);
   return (
-    <>
-      {loading ? (
-        <View style={[styles.container, styles.horizontal]}>
-          <ActivityIndicator size="large" color="#c19595" />
-        </View>
-      ) : (
-        ""
-      )}
-      <form onSubmit={handleSubmit} className="form-input">
-        {player1.name === "Computer" ? (
-          <div className="form-group">
-            <label htmlFor="player1">Player 1</label>
-            <input
-              className="form-control"
-              onChange={handleChange}
-              name="player1"
-              value={player1.name}
-              disabled
-            />
-          </div>
+    <Card>
+      <CardBody className="text-center">
+        {loading ? (
+          <View style={[styles.container, styles.horizontal]}>
+            <ActivityIndicator size="large" color="#c19595" />
+          </View>
         ) : (
-          <div className="form-group">
-            <label htmlFor="player1">Player 1</label>
-            <input
-              className="form-control"
-              onChange={handleChange}
-              name="player1"
-            />
-          </div>
+          ""
         )}
-        <div className="form-group">
-          <label htmlFor="player2">Player 2</label>
-          <input
-            className="form-control"
-            onChange={handleChange}
-            name="player2"
-          />
-        </div>
-        <button
-          type="submit"
-          id="btn-login"
-          className="btn btn-primary btn-lg btn-block"
-        >
-          Let's Play!
-        </button>
-      </form>
-    </>
+        <Form onSubmit={handleSubmit}>
+          {player1.name === "Computer" ? (
+            <FormGroup>
+              <Label htmlFor="player1">Player 1</Label>
+              <Input
+                className="form-control"
+                onChange={handleChange}
+                name="player1"
+                value={player1.name}
+                disabled
+              />
+            </FormGroup>
+          ) : (
+            <FormGroup>
+              <Label htmlFor="player1">Player 1</Label>
+              <Input onChange={handleChange} name="player1" />
+            </FormGroup>
+          )}
+          <FormGroup>
+            <Label htmlFor="player2">Player 2</Label>
+            <Input onChange={handleChange} name="player2" />
+          </FormGroup>
+          <Button
+            type="submit"
+            id="btn-login"
+            className="btn btn-primary btn-lg btn-block"
+          >
+            Let's Play!
+          </Button>
+        </Form>
+      </CardBody>
+    </Card>
   );
 };
 
