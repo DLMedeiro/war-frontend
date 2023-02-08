@@ -428,20 +428,6 @@ function GamePlay() {
         {<Player1Battle battleStartingIndex={0} />}
         {<Player2Battle battleStartingIndex={0} />}
       </div>
-
-      {/* {player1Battle.length > 3 || player2Battle.length > 3 ? (
-        <div className="row">
-          <Player1Battle battleStartingIndex={3} />
-          <Player2Battle battleStartingIndex={3} />
-        </div>
-      ) : (
-        <div className="row"></div>
-      )} */}
-
-      {/* <div className="row">
-        {<Player1Battle battleStartingIndex={3} />}
-        {<Player2Battle battleStartingIndex={3} />}
-      </div> */}
     </>
   );
 }
